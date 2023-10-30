@@ -80,6 +80,38 @@ class Face(object):
         else:
             return col
 
+    #Rotates face 90 degrees clockwise
+    def rotate_CW(self) -> None:
+        n = self.side_length
+
+        #Transpose face matrix
+        for i in range(n) :
+            for j in range(i + 1, n) :
+                self.cells[i][j], self.cells[j][i] = self.cells[j][i], self.cells[i][j]
+
+        #Reverse rows
+        for i in range(n // 2) :
+            top = 0
+            bot = n - 1
+            while (top < bot):
+                self.cells[i][top], self.cells[i][bot] = self.cells[i][bot], self.cells[i][top]
+                top += 1
+                bot -= 1
+
+    #Rotates face 90 degrees counter-clockwise
+    def rotate_CCW(self) -> None:
+        n = self.side_length
+
+        #Transpose face matrix
+        for i in range(n):
+            for j in range(i,n):
+                self.cells[i][j], self.cells[j][i] = self.cells[j][i], self.cells[i][j]
+
+        #Reverse columns
+        for i in range(n):
+            for j in range (int(n/2)):
+                self.cells[n-j-1][i], self.cells[j][i] = self.cells[j][i], self.cells[n-j-1][i]
+
 class Cube():
 
     def __init__(self):
@@ -218,19 +250,25 @@ class Cube():
 
 
     ##
-    # Column Operations #
+    # Row Operations #
     ##
 
     #top row rotations
-    def rotate_top_right():
+    def rotate_top_right(self):
 
         #Get top row of front, right, back, and left side
+        front_top = self.front.get_row(0)
+        right_top = self.right.get_row(0)
+        back_top = self.back.get_row(0)
+        left_top = self.left.get_row(0)
+
+        self.front.cells[0], self.right.cells[0], self.back.cells[0], self.left.cells[0] = right_top, back_top, left_top, front_top
 
         #Get bottom row of top, right column of top, top row of top, left column of top
         #Rotate top face 90 degrees counter clockwise
-        pass
+        self.top.rotate_CCW()
 
-    def rotate_top_left():
+    def rotate_top_left(self):
         #Get top row of front, right, back, and left side
 
         #Get bottom row of top, right column of top, top row of top, left column of top
@@ -238,25 +276,25 @@ class Cube():
         pass
 
     #middle row rotations
-    def rotate_mid_right():
+    def rotate_mid_right(self):
         #Get middle row of front, right, back, and left side
 
         pass
 
-    def rotate_mid_left():
+    def rotate_mid_left(self):
         #Get middle row of front, right, back, and left side
         pass
 
 
     #bottom row rotations
-    def rotate_bottom_right():
+    def rotate_bottom_right(self):
         #Get bottom (last) row of front, right, back, and left side
         #Swap to the right
 
         #Rotate bottom face right 90 degrees clockwise
         pass
 
-    def rotate_bottom_left():
+    def rotate_bottom_left(self):
         #Get bottom (last) row of front, right, back, and left side
         #Swap to the left
 
@@ -267,7 +305,7 @@ class Cube():
     # Column Operations #
     ##
     #left column rotations
-    def rotate_left_column_up():
+    def rotate_left_column_up(self):
 
         #Get left column of front, top faces
         #Get right column of back face
@@ -276,7 +314,7 @@ class Cube():
         #Rotate left face left (90 degrees counter clockwise)
         pass
 
-    def rotate_left_column_down():
+    def rotate_left_column_down(self):
 
         #Get left column of front, top faces
         #Get right column of back face
@@ -286,17 +324,17 @@ class Cube():
         pass
 
     #middle column rotations
-    def rotate_mid_column_up():
+    def rotate_mid_column_up(self):
         #Get middle column of front, top, back, and bottom face
         pass
 
-    def rotate_mid_column_down():
+    def rotate_mid_column_down(self):
         #Get middle column of front, top, back, and bottom face
         pass
 
 
     #right column rotations
-    def rotate_right_column_up():
+    def rotate_right_column_up(self):
         #Get right column of front, top face
         #Get left column of left
         #Get right column of bottom face
@@ -304,7 +342,7 @@ class Cube():
         #Rotate right face left (90 degrees clockwise)
         pass
 
-    def rotate_right_column_down():
+    def rotate_right_column_down(self):
         #Get right column of front, top face
         #Get left column of back face
         #Get right column of bottom face
@@ -316,16 +354,19 @@ class Cube():
 
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
-    def flip():
+    def flip(self):
         pass
 
 
 ##Test area
 my_cube = Cube()
-# my_cube.print_cube()
-my_cube.print_cube_by_cols()
-# my_cube.print_cube_by_rows()
 
+#my_cube.print_cube()
+# my_cube.print_cube_by_cols()
+# my_cube.print_cube_by_rows()
+my_cube.rotate_top_right()
+
+my_cube.print_cube()
 #Print list views to check
 # my_cube.front.print_list_view()
 # my_cube.back.print_list_view()
