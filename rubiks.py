@@ -447,16 +447,32 @@ class Cube():
 
         #Rotate left face left (90 degrees counter clockwise)
         self.left.rotate_CCW()
-        pass
 
     def rotate_left_column_down(self):
 
         #Get left column of front, top faces
         #Get right column of back face
         #Get left column of bottom face
+        front_left = self.front.get_column(0)
+        top_left = self.top.get_column(0)
+
+        back_right = self.back.get_column(2)
+        bottom_left = self.bottom.get_column(0)
+
+        #Swap columns
+        #Treat them all as individual calls
+        #This could return none if I wanted, but I'm not sure if I want to make that
+        #jump yet.
+        #Maybe I should have two separate methods, one returning, and one not returning
+        old_front = self.front.swap_col_with_col(top_left, 0, True)
+        old_top = self.top.swap_col_with_col(back_right, 0, False)
+        old_back = self.back.swap_col_with_col(bottom_left, 2, True)
+        old_bottom = self.bottom.swap_col_with_col(front_left, 0, True)
+
 
         #Rotate left face right (90 degrees clockwise)
-        pass
+        self.left.rotate_CW()
+
 
     #middle column rotations
     def rotate_mid_column_up(self):
@@ -498,7 +514,7 @@ my_cube = Cube()
 #my_cube.print_cube()
 # my_cube.print_cube_by_cols()
 # my_cube.print_cube_by_rows()
-my_cube.rotate_left_column_up()
+my_cube.rotate_left_column_down()
 
 my_cube.print_cube()
 #Print list views to check
