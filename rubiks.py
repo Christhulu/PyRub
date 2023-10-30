@@ -305,16 +305,29 @@ class Cube():
     #bottom row rotations
     def rotate_bottom_right(self):
         #Get bottom (last) row of front, right, back, and left side
-        #Swap to the right
+        front_bot = self.front.get_row(2)
+        right_bot = self.right.get_row(2)
+        back_bot = self.back.get_row(2)
+        left_bot = self.left.get_row(2)
+
+        #Swap all bottom row faces in order
+        self.front.cells[2], self.left.cells[2], self.back.cells[2], self.right.cells[2] = left_bot, back_bot, right_bot, front_bot
 
         #Rotate bottom face right 90 degrees clockwise
-        pass
+        self.bottom.rotate_CW()
 
     def rotate_bottom_left(self):
         #Get bottom (last) row of front, right, back, and left side
-        #Swap to the left
+        front_bot = self.front.get_row(2)
+        right_bot = self.right.get_row(2)
+        back_bot = self.back.get_row(2)
+        left_bot = self.left.get_row(2)
 
-        #Rotate bottom face right (90 degrees clockwise)
+        #Swap all bottom row faces in order
+        self.front.cells[2], self.left.cells[2], self.back.cells[2], self.right.cells[2] = right_bot, back_bot, left_bot, front_bot
+
+        #Rotate bottom face right (90 degrees counter-clockwise)
+        self.bottom.rotate_CCW()
         pass
 
     ##
