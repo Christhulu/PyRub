@@ -120,9 +120,9 @@ class Face(object):
     # True for ascending, False for descending
     # Use case: Rotating the front head on would also require the bottom row of the top face to swap with the innermost columns on the left or the right face and
     # require for the top row of the bottom face to swap with the inner most column on the left or right side
-    def swap_row_with_col(self, row: List[str], col: int, ascending: bool) -> List[str]:
+    def swap_row_with_col(self, row: list[str], col: int, ascending: bool) -> list[str]:
 
-        old_col:List[str] = []
+        old_col:list[str] = []
         i = 0
         if ascending:
             for i in range(self.side_length):
@@ -155,8 +155,8 @@ class Face(object):
     # True for ascending, False for descending
     # Use case: Rotating the front head on would also require the innermost columns on the left or the right face to swap with the bottom row of the top face
     # and the top row of the bottom face depending on the direction
-    def swap_col_with_row(self, col: List[str], row: int, ascending: bool) -> List[str]:
-        old_row:List[str] = []
+    def swap_col_with_row(self, col: list[str], row: int, ascending: bool) -> list[str]:
+        old_row:list[str] = []
 
         # 0 - 1 - 2 becomes 0 - 1 - 2
         if ascending:
@@ -176,29 +176,29 @@ class Face(object):
 
     # I think for these, they'll always be in the same orientation
     # The top of one column is also the top of another if we rotate
-    def swap_col_with_col(self, col: List[str], col: int, ascending: bool) -> List[str]:
+    def swap_col_with_col(self, col: list[str], col_index: int, ascending: bool) -> list[str]:
 
-        old_col:List[str] = []
+        old_col:list[str] = []
         i = 0
 
         if ascending:
             for row_index, row in enumerate(self.cells):
                 #get cell and add to list
-                old_cell = row[col]
+                old_cell = row[col_index]
                 old_col.append(old_cell)
 
                 #swap in place with list
-                self.cells[row_index][col], col[i] = col[i], self.cells[row_index][col]
+                self.cells[row_index][col_index], col[i] = col[i], self.cells[row_index][col_index]
 
                 i += 1
         else:
             for row_index, row in enumerate(self.cells):
                 #get cell and add to list
-                old_cell = row[col]
+                old_cell = row[col_index]
                 old_col.append(old_cell)
 
                 #swap in place with list
-                self.cells[row_index][col], col[self.side_length - i - 1] = col[self.side_length - i - 1], self.cells[row_index][col]
+                self.cells[row_index][col_index], col[self.side_length - i - 1] = col[self.side_length - i - 1], self.cells[row_index][col_index]
 
                 i += 1
 
@@ -434,24 +434,16 @@ class Cube():
         #Get left column of bottom face
         front_left = self.front.get_column(0)
         top_left = self.top.get_column(0)
-        back_left = self.left.get_column(0)
+
+        back_right = self.back.get_column(2)
         bottom_left = self.bottom.get_column(0)
 
         #Swap columns
-        #swap front with bottom
-
-        # Two Options:
-        # 1. Chaining results?
-        # old_front = self.front.swap_col_with_col(bottom_left, 0, True)
-        # old_top = self.top.swap_col_with_col(old_front, 0, True)
-        # old_back = self.back.swap_col_with_col(old_top, 0, True)
-        # old_bottom = self.bottom.swap_col_with_col(old_back, 0, True)
-
-        # 2. Treat them all as individual calls
-        # old_front = self.front.swap_col_with_col(bottom_left, 0, True)
-        # old_top = self.top.swap_col_with_col(front_left, 0, True)
-        # old_back = self.top.swap_col_with_col(old_top, 0, True)
-        # old_bottom = self.top.swap_col_with_col(old_back, 0, True)
+        #Treat them all as individual calls
+        old_front = self.front.swap_col_with_col(bottom_left, 0, True)
+        old_top = self.top.swap_col_with_col(front_left, 0, True)
+        old_back = self.back.swap_col_with_col(top_left, 2, False)
+        old_bottom = self.bottom.swap_col_with_col(back_right, 0, True)
 
         #Rotate left face left (90 degrees counter clockwise)
         self.left.rotate_CCW()
@@ -500,16 +492,13 @@ class Cube():
     def flip(self):
         pass
 
-    def swap_row
-
-
 ##Test area
 my_cube = Cube()
 
 #my_cube.print_cube()
 # my_cube.print_cube_by_cols()
 # my_cube.print_cube_by_rows()
-my_cube.rotate_top_left()
+my_cube.rotate_left_column_up()
 
 my_cube.print_cube()
 #Print list views to check
