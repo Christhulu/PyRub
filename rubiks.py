@@ -80,7 +80,7 @@ class Face(object):
         else:
             return col
 
-    #Rotates face 90 degrees clockwise
+    #Rotates face 90 degrees clockwise on the X axis
     def rotate_CW(self) -> None:
         n = self.side_length
 
@@ -98,7 +98,7 @@ class Face(object):
                 top += 1
                 bot -= 1
 
-    #Rotates face 90 degrees counter-clockwise
+    #Rotates face 90 degrees counter-clockwise on the X axis
     def rotate_CCW(self) -> None:
         n = self.side_length
 
@@ -255,7 +255,18 @@ class Cube():
 
     #top row rotations
     def rotate_top_right(self):
+        #Get top row of front, right, back, and left side
+        front_top = self.front.get_row(0)
+        right_top = self.right.get_row(0)
+        back_top = self.back.get_row(0)
+        left_top = self.left.get_row(0)
 
+        #Get bottom row of top, right column of top, top row of top, left column of top
+        #Rotate top face 90 degrees clockwise
+        self.front.cells[0], self.left.cells[0], self.back.cells[0], self.right.cells[0] = left_top, back_top, right_top, front_top
+        self.top.rotate_CCW()
+
+    def rotate_top_left(self):
         #Get top row of front, right, back, and left side
         front_top = self.front.get_row(0)
         right_top = self.right.get_row(0)
@@ -266,14 +277,7 @@ class Cube():
 
         #Get bottom row of top, right column of top, top row of top, left column of top
         #Rotate top face 90 degrees counter clockwise
-        self.top.rotate_CCW()
-
-    def rotate_top_left(self):
-        #Get top row of front, right, back, and left side
-
-        #Get bottom row of top, right column of top, top row of top, left column of top
-        #Rotate top face 90 degrees clockwise
-        pass
+        self.top.rotate_CW()
 
     #middle row rotations
     def rotate_mid_right(self):
