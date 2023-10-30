@@ -261,9 +261,10 @@ class Cube():
         back_top = self.back.get_row(0)
         left_top = self.left.get_row(0)
 
-        #Get bottom row of top, right column of top, top row of top, left column of top
-        #Rotate top face 90 degrees clockwise
+        #Swap all top row faces in order
         self.front.cells[0], self.left.cells[0], self.back.cells[0], self.right.cells[0] = left_top, back_top, right_top, front_top
+
+        #Rotate top face 90 degrees counter-clockwise
         self.top.rotate_CCW()
 
     def rotate_top_left(self):
@@ -273,21 +274,32 @@ class Cube():
         back_top = self.back.get_row(0)
         left_top = self.left.get_row(0)
 
+        #Swap all top row faces in order
         self.front.cells[0], self.right.cells[0], self.back.cells[0], self.left.cells[0] = right_top, back_top, left_top, front_top
 
-        #Get bottom row of top, right column of top, top row of top, left column of top
         #Rotate top face 90 degrees counter clockwise
         self.top.rotate_CW()
 
     #middle row rotations
     def rotate_mid_right(self):
         #Get middle row of front, right, back, and left side
+        front_mid = self.front.get_row(1)
+        right_mid = self.right.get_row(1)
+        back_mid = self.back.get_row(1)
+        left_mid = self.left.get_row(1)
 
-        pass
+        #Swap all middle row faces in order
+        self.front.cells[1], self.left.cells[1], self.back.cells[1], self.right.cells[1] = left_mid, back_mid, right_mid, front_mid
 
     def rotate_mid_left(self):
         #Get middle row of front, right, back, and left side
-        pass
+        front_mid = self.front.get_row(1)
+        right_mid = self.right.get_row(1)
+        back_mid = self.back.get_row(1)
+        left_mid = self.left.get_row(1)
+
+        #Swap all middle row faces in order
+        self.front.cells[1], self.left.cells[1], self.back.cells[1], self.right.cells[1] = right_mid, back_mid, left_mid, front_mid
 
 
     #bottom row rotations
@@ -368,7 +380,7 @@ my_cube = Cube()
 #my_cube.print_cube()
 # my_cube.print_cube_by_cols()
 # my_cube.print_cube_by_rows()
-my_cube.rotate_top_right()
+my_cube.rotate_top_left()
 
 my_cube.print_cube()
 #Print list views to check
