@@ -63,7 +63,7 @@ class Face(object):
     #Get row by index with 0 being the top and 2 being the bottom row
     def get_row(self, index:int) -> list[str]:
 
-            row:list[str] = []
+        row:list[str] = []
         try:
             row.extend(self.cells[index])
         except IndexError:
@@ -73,7 +73,8 @@ class Face(object):
 
     #Get column by index with 0 being the leftmost 2 being the rightmost column
     def get_column(self, index: int) -> list[str]:
-            col:list[str] = []
+
+        col:list[str] = []
         try:
             col.extend([i[index] for i in self.cells])
         except IndexError:
@@ -171,23 +172,23 @@ class Face(object):
         old_col:list[str] = []
 
         if ascending:
-            print(f"Ascending Loop:\n")
+            # print(f"Ascending Loop:\n")
             # for row_index, row in enumerate(self.cells):
             for i in range(self.side_length):
                 #get cell and add to list
                 old_col.append(self.cells[i][col_index])
 
-                print(f"Old Cell: [{i}, {col_index}]: {self.cells[i][col_index]}")
-                print(f"Col Value: [{i}]: {col[i]}")
+                # print(f"Old Cell: [{i}, {col_index}]: {self.cells[i][col_index]}")
+                # print(f"Col Value: [{i}]: {col[i]}")
 
                 #swap in place with list
                 self.cells[i][col_index] = col[i]
 
-                print(f"New Cell: [{i}, {col_index}]: {self.cells[i][col_index]}\n")
+                # print(f"New Cell: [{i}, {col_index}]: {self.cells[i][col_index]}\n")
                 self.front.print_face()
 
         else:
-            print(f"Descending Loop:\n")
+            # print(f"Descending Loop:\n")
             # for row_index, row in enumerate(self.cells):
             for i in range(self.side_length):
                 #get cell and add to list
@@ -204,7 +205,9 @@ class Face(object):
         return old_col
 
     def replace_col_with_row(self, row: list[str], col: int, ascending: bool) -> None:
+
         if ascending:
+            # print("Ascending")
             for i in range(self.side_length):
                 #Replace cell at [i][col] with cell at row[i]
                 self.cells[i][col] = row[i]
@@ -226,6 +229,16 @@ class Face(object):
 
 
     def replace_col_with_col(self, col: list[str], col_index: int, ascending: bool) -> None:
+        if ascending:
+            # print("Ascending")
+            for i in range(self.side_length):
+                #Replace cell at [i][col] with cell at col[i]
+                self.cells[i][col_index] = col[i]
+        else:
+            # print("Descending")
+            for i in range(self.side_length):
+                #Replace cell at [i][col] with cell at col[self.side_length - i - 1]
+                self.cells[i][col_index] = col[self.side_length - i - 1]
         pass
 
 class Cube():
@@ -464,10 +477,12 @@ class Cube():
 
         #Swap columns
         #Treat them all as individual calls
-        old_front = self.front.swap_col_with_col(bottom_left, 0, True)
-        old_top = self.top.swap_col_with_col(front_left, 0, True)
-        old_back = self.back.swap_col_with_col(top_left, 2, False)
-        old_bottom = self.bottom.swap_col_with_col(back_right, 0, False)
+
+        self.front.replace_col_with_col(bottom_left, 0, True)
+        self.top.replace_col_with_col(front_left, 0, True)
+        self.back.replace_col_with_col(top_left, 2, False)
+        self.bottom.replace_col_with_col(back_right, 0, False)
+
 
         #Rotate left face left (90 degrees counter clockwise)
         self.left.rotate_CCW()
@@ -488,10 +503,10 @@ class Cube():
         #This could return none if I wanted, but I'm not sure if I want to make that
         #jump yet.
         #Maybe I should have two separate methods, one returning, and one not returning
-        old_front = self.front.swap_col_with_col(top_left, 0, True)
-        old_top = self.top.swap_col_with_col(back_right, 0, False)
-        old_back = self.back.swap_col_with_col(bottom_left, 2, False)
-        old_bottom = self.bottom.swap_col_with_col(front_left, 0, True)
+        self.front.replace_col_with_col(top_left, 0, True)
+        self.top.replace_col_with_col(back_right, 0, False)
+        self.back.replace_col_with_col(bottom_left, 2, False)
+        self.bottom.replace_col_with_col(front_left, 0, True)
 
 
         #Rotate left face right (90 degrees clockwise)
@@ -507,11 +522,10 @@ class Cube():
         bottom_mid = self.bottom.get_column(1)
 
         #Note the orientations
-        old_front_mid = self.front.swap_col_with_col(bottom_mid, 1, True)
-        old_top_mid = self.top.swap_col_with_col(front_mid, 1, True)
-        old_back_mid = self.back.swap_col_with_col(top_mid, 1, False)
-        old_bottom_mid = self.bottom.swap_col_with_col(front_left, 1, False)
-        pass
+        self.front.replace_col_with_col(bottom_mid, 1, True)
+        self.top.replace_col_with_col(front_mid, 1, True)
+        self.back.replace_col_with_col(top_mid, 1, False)
+        self.bottom.replace_col_with_col(back_mid, 1, False)
 
     def rotate_mid_column_down(self):
         #Get middle column of front, top, back, and bottom face
@@ -521,31 +535,50 @@ class Cube():
         bottom_mid = self.bottom.get_column(1)
 
         #Note the orientations
-        old_front_mid = self.front.swap_col_with_col(top_left, 1, True)
-        old_top_mid = self.top.swap_col_with_col(back_right, 1, False)
-        old_back_mid = self.back.swap_col_with_col(bottom_left, 1, True)
-        old_bottom_mid = self.bottom.swap_col_with_col(front_left, 1, True)
-        pass
+        self.front.replace_col_with_col(top_mid, 1, True)
+        self.top.replace_col_with_col(back_mid, 1, False)
+        self.back.replace_col_with_col(bottom_mid, 1, False)
+        self.bottom.replace_col_with_col(front_mid, 1, True)
 
 
     #right column rotations
     def rotate_right_column_up(self):
         #Get right column of front, top face
-        #Get left column of left
+        #Get left column of back face
         #Get right column of bottom face
+        front_right = self.front.get_column(2)
+        top_right = self.top.get_column(2)
+        back_left = self.back.get_column(0)
+        bottom_right = self.bottom.get_column(2)
+
+
+        #Replace columns
+        self.front.replace_col_with_col(bottom_right, 2, True)
+        self.top.replace_col_with_col(front_right, 2, True)
+        self.back.replace_col_with_col(top_right, 0, False)
+        self.bottom.replace_col_with_col(back_left, 2, False)
 
         #Rotate right face left (90 degrees clockwise)
-        pass
+        self.right.rotate_CW()
 
     def rotate_right_column_down(self):
         #Get right column of front, top face
         #Get left column of back face
         #Get right column of bottom face
+        front_right = self.front.get_column(2)
+        top_right = self.top.get_column(2)
+        back_left = self.back.get_column(0)
+        bottom_right = self.bottom.get_column(2)
 
-         #Rotate right face left (90 degrees counter clockwise)
-        pass
 
+        #Replace columns
+        self.front.replace_col_with_col(top_right, 2, True)
+        self.top.replace_col_with_col(back_left, 2, False)
+        self.back.replace_col_with_col(bottom_right, 0, False)
+        self.bottom.replace_col_with_col(front_right, 2, True)
 
+        #Rotate right face left (90 degrees counter clockwise)
+        self.right.rotate_CCW()
 
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
@@ -563,8 +596,8 @@ my_cube = Cube()
 #Frequently used
 # my_cube.rotate_top_left()
 # my_cube.rotate_left_column_up()
-
-my_cube.rotate_left_column_up()
+my_cube.rotate_right_column_up()
+my_cube.rotate_right_column_down()
 
 
 
