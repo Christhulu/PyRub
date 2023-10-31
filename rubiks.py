@@ -63,8 +63,9 @@ class Face(object):
     #Get row by index with 0 being the top and 2 being the bottom row
     def get_row(self, index:int) -> list[str]:
 
+            row:list[str] = []
         try:
-            row = self.cells[index]
+            row.extend(self.cells[index])
         except IndexError:
             print("index: {index} out of range for face")
         else:
@@ -72,9 +73,9 @@ class Face(object):
 
     #Get column by index with 0 being the leftmost 2 being the rightmost column
     def get_column(self, index: int) -> list[str]:
-
+            col:list[str] = []
         try:
-            col = [i[index] for i in self.cells]
+            col.extend([i[index] for i in self.cells])
         except IndexError:
             print("index: {index} out of range for face")
         else:
