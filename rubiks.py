@@ -204,30 +204,43 @@ class Face(object):
 
         return old_col
 
-    def replace_col_with_row(self, row: list[str], col: int, ascending: bool) -> None:
+    #Replace row with passed row with front to back or back to front orientation
+    def replace_row_with_row(self, row: list[str], row_index: int, ascending: bool) -> None:
+        # 0 - 1 - 2 becomes 0 - 1 - 2
+        if ascending:
+            for i in range(self.side_length):
+                #Replace cell at [row][i] with cell at row[i]
+                self.cells[row_index][i] = row[i]
+        else:
+            for i in range(self.side_length):
+                self.cells[row_index][i] = row[self.side_length - i - 1]
+
+    #Replace row with passed column with top to bottom or bottom to top orientation
+    def replace_row_with_col(self, col: list[str], row_index: int, ascending: bool) -> None:
+        # 0 - 1 - 2 becomes 0 - 1 - 2
+        if ascending:
+            for i in range(self.side_length):
+                #Replace cell at [row][i] with cell at col[i]
+                self.cells[row_index][i] = col[i]
+        else:
+            for i in range(self.side_length):
+                self.cells[row_index][i] = col[self.side_length - i - 1]
+
+
+    #Replace column with passed row with front to back or back to front orientation
+    def replace_col_with_row(self, row: list[str], col_index: int, ascending: bool) -> None:
 
         if ascending:
             # print("Ascending")
             for i in range(self.side_length):
                 #Replace cell at [i][col] with cell at row[i]
-                self.cells[i][col] = row[i]
+                self.cells[i][col_index] = row[i]
         else:
             for i in range(self.side_length):
                 #Replace cell at [i][col] with cell at row[i]
-                self.cells[i][col] = row[self.side_length - i - 1]
+                self.cells[i][col_index] = row[self.side_length - i - 1]
 
-
-    def replace_row_with_col(self, col: list[str], row: int, ascending: bool) -> None:
-        # 0 - 1 - 2 becomes 0 - 1 - 2
-        if ascending:
-            for i in range(self.side_length):
-                #Replace cell at [row][i] with cell at col[i]
-                self.cells[row][i] = col[i]
-        else:
-            for i in range(self.side_length):
-                self.cells[row][i] = col[self.side_length - i - 1]
-
-
+    #Replace column with passed column with top to bottom or bottom to top orientation
     def replace_col_with_col(self, col: list[str], col_index: int, ascending: bool) -> None:
         if ascending:
             # print("Ascending")
@@ -239,7 +252,6 @@ class Face(object):
             for i in range(self.side_length):
                 #Replace cell at [i][col] with cell at col[self.side_length - i - 1]
                 self.cells[i][col_index] = col[self.side_length - i - 1]
-        pass
 
 class Cube():
 
@@ -391,7 +403,12 @@ class Cube():
         left_top = self.left.get_row(0)
 
         #Swap all top row faces in order
-        self.front.cells[0], self.left.cells[0], self.back.cells[0], self.right.cells[0] = left_top, back_top, right_top, front_top
+        # self.front.cells[0], self.left.cells[0], self.back.cells[0], self.right.cells[0] = left_top, back_top, right_top, front_top
+
+        self.front.replace_row_with_row(left_top, 0, True)   # self.front.cells[0] = left_top,
+        self.right.replace_row_with_row(front_top, 0, True)    # self.left.cells[0] = back_top,
+        self.back.replace_row_with_row(right_top, 0, True)    # self.back.cells[0] = right_top,
+        self.left.replace_row_with_row(back_top, 0, True)    # self.right.cells[0] = front_top
 
         #Rotate top face 90 degrees counter-clockwise
         self.top.rotate_CW()
@@ -404,7 +421,11 @@ class Cube():
         left_top = self.left.get_row(0)
 
         #Swap all top row faces in order
-        self.front.cells[0], self.right.cells[0], self.back.cells[0], self.left.cells[0] = right_top, back_top, left_top, front_top
+        # self.front.cells[0], self.right.cells[0], self.back.cells[0], self.left.cells[0] = right_top, back_top, left_top, front_top
+        self.front.replace_row_with_row(right_top, 0, True)   # self.front.cells[0] = left_top,
+        self.right.replace_row_with_row(back_top, 0, True)    # self.left.cells[0] = back_top,
+        self.back.replace_row_with_row(left_top, 0, True)    # self.back.cells[0] = right_top,
+        self.left.replace_row_with_row(front_top, 0, True)    # self.right.cells[0] = front_top
 
         #Rotate top face 90 degrees counter clockwise
         self.top.rotate_CCW()
@@ -418,7 +439,10 @@ class Cube():
         left_mid = self.left.get_row(1)
 
         #Swap all middle row faces in order
-        self.front.cells[1], self.left.cells[1], self.back.cells[1], self.right.cells[1] = left_mid, back_mid, right_mid, front_mid
+        self.front.replace_row_with_row(left_mid, 1, True)   # self.front.cells[1] = left_mid,
+        self.right.replace_row_with_row(front_mid, 1, True)    # self.left.cells[1] = back_mid,
+        self.back.replace_row_with_row(right_mid, 1, True)    # self.back.cells[1] = right_mid,
+        self.left.replace_row_with_row(back_mid, 1, True)    # self.right.cells[1] = front_mid
 
     def rotate_mid_left(self):
         #Get middle row of front, right, back, and left side
@@ -428,7 +452,10 @@ class Cube():
         left_mid = self.left.get_row(1)
 
         #Swap all middle row faces in order
-        self.front.cells[1], self.left.cells[1], self.back.cells[1], self.right.cells[1] = right_mid, back_mid, left_mid, front_mid
+        self.front.replace_row_with_row(right_mid, 1, True)   # self.front.cells[1] = right_mid,
+        self.right.replace_row_with_row(back_mid, 1, True)    # self.right.cells[1] = back_mid,
+        self.back.replace_row_with_row(left_mid, 1, True)    # self.back.cells[1] = left_mid,
+        self.left.replace_row_with_row(front_mid, 1, True)    # self.left.cells[1] = front_mid
 
 
     #bottom row rotations
@@ -440,7 +467,10 @@ class Cube():
         left_bot = self.left.get_row(2)
 
         #Swap all bottom row faces in order
-        self.front.cells[2], self.left.cells[2], self.back.cells[2], self.right.cells[2] = left_bot, back_bot, right_bot, front_bot
+        self.front.replace_row_with_row(left_bot, 2, True)   # self.front.cells[2] = left_bot
+        self.right.replace_row_with_row(front_bot, 2, True)    # self.right.cells[2] = front_bot
+        self.back.replace_row_with_row(right_bot, 2, True)    # self.back.cells[2] = right_bot
+        self.left.replace_row_with_row(back_bot, 2, True)    # self.left.cells[2] = back_bot
 
         #Rotate bottom face right 90 degrees clockwise
         self.bottom.rotate_CW()
@@ -453,11 +483,13 @@ class Cube():
         left_bot = self.left.get_row(2)
 
         #Swap all bottom row faces in order
-        self.front.cells[2], self.left.cells[2], self.back.cells[2], self.right.cells[2] = right_bot, back_bot, left_bot, front_bot
+        self.front.replace_row_with_row(right_bot, 2, True)   # self.front.cells[2] = right_bot
+        self.right.replace_row_with_row(back_bot, 2, True)    #  self.right.cells[2] = back_bot
+        self.back.replace_row_with_row(left_bot, 2, True)    # self.back.cells[2] = left_bot
+        self.left.replace_row_with_row(front_bot, 2, True)    #  self.left.cells[2] = front_bot
 
         #Rotate bottom face right (90 degrees counter-clockwise)
         self.bottom.rotate_CCW()
-        pass
 
     ##
     # Column Operations #
@@ -594,7 +626,7 @@ my_cube = Cube()
 
 
 #Frequently used
-# my_cube.rotate_top_left()
+my_cube.rotate_top_left()
 # my_cube.rotate_left_column_up()
 my_cube.rotate_right_column_up()
 my_cube.rotate_right_column_down()
