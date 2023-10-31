@@ -6,7 +6,13 @@ class Face(object):
         self.color = color
         self.opposite = opposite
         self.side_length = side_length
-        self.cells:list[list[str]] = [[color] * side_length] * side_length
+        self.cells:list[list[str]] = []
+
+        for i in range(self.side_length):
+            row = []
+            for j in range(self.side_length):
+                row.append(color)
+            self.cells.append(row)
 
         self.list_view:list[str] = []
         self.flatten_face()
@@ -185,7 +191,7 @@ class Face(object):
                 self.cells[i][col_index] = col[i]
 
                 # print(f"New Cell: [{i}, {col_index}]: {self.cells[i][col_index]}\n")
-                self.front.print_face()
+                self.front.print_rows()
 
         else:
             # print(f"Descending Loop:\n")
@@ -208,7 +214,7 @@ class Face(object):
     def replace_row_with_row(self, row: list[str], row_index: int, ascending: bool) -> None:
         # 0 - 1 - 2 becomes 0 - 1 - 2
         if ascending:
-            for i in range(self.side_length):
+            for i in range(len(self.cells[row_index])):
                 #Replace cell at [row][i] with cell at row[i]
                 self.cells[row_index][i] = row[i]
         else:
@@ -231,7 +237,6 @@ class Face(object):
     def replace_col_with_row(self, row: list[str], col_index: int, ascending: bool) -> None:
 
         if ascending:
-            # print("Ascending")
             for i in range(self.side_length):
                 #Replace cell at [i][col] with cell at row[i]
                 self.cells[i][col_index] = row[i]
@@ -411,7 +416,7 @@ class Cube():
         self.left.replace_row_with_row(back_top, 0, True)    # self.right.cells[0] = front_top
 
         #Rotate top face 90 degrees counter-clockwise
-        self.top.rotate_CW()
+        self.top.rotate_CCW()
 
     def rotate_top_left(self):
         #Get top row of front, right, back, and left side
@@ -428,7 +433,7 @@ class Cube():
         self.left.replace_row_with_row(front_top, 0, True)    # self.right.cells[0] = front_top
 
         #Rotate top face 90 degrees counter clockwise
-        self.top.rotate_CCW()
+        self.top.rotate_CW()
 
     #middle row rotations
     def rotate_mid_right(self):
