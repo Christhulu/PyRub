@@ -705,5 +705,44 @@ class Cube():
 
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
-    def flip(self):
+    def change_front(self, index: int):
+
+        match index:
+            case 0:
+                self.set_left_to_front()
+            case 1:
+                self.set_back_to_front()
+            case 2:
+                self.set_right_to_front()
+            case 3:
+                self.set_top_to_front()
+            case 4:
+                self.set_bottom_to_front()
+        
+
+
+    #These change these current face's to the front face
+    #They still need more testing but I think this is how they would work
+    def set_left_to_front(self):
+        self.front = self.left
+        self.left = self.back
+        self.back = self.right
+        self.right = self.front
+
+        #Rotate top and bottom so that they're relative to the new front
+        self.top.rotate_CW()
+        self.bottom.rotate_CW()
+
+    def set_back_to_front(self):
+
+        
+        pass
+
+    def set_right_to_front(self):
+        pass   
+
+    def set_top_to_front(self):
+        pass
+
+    def set_bottom_to_front(self):
         pass
