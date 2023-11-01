@@ -618,15 +618,67 @@ class Cube():
         self.right.rotate_CCW()
 
     def rotate_middle_face_left(self):
+
+        #Get top face's middle row
+        #Get left face's middle column
+        #Get bottom face's middle row
+        #Get right face's middle column
+        top_mid = self.top.get_row(1)
+        left_mid = self.left.get_column(1)
+        bottom_mid = self.bottom.get_row(1)
+        right_mid = self.right.get_column(1)
+
+        #Replace top middle with right middle column, ascending order
+        #Replace right middle column with bottom middle row, descending order
+        #Replace bottom middle row with left middle column, ascending order
+        #Replace left middle column  with top middle row, descending order
+
         pass
 
     def rotate_middle_face_right(self):
+        #Get top face's middle row
+        #Get right face's middle column
+        #Get bottom face's middle row
+        #Get left face's middle column
+        top_mid = self.top.get_row(1)
+        right_mid = self.right.get_column(1)
+        left_mid = self.left.get_column(1)
+        bottom_mid = self.bottom.get_row(1)
+
+
+        #Replace top middle row with left middle column, descending order
+        #Replace right middle column with top middle row, ascending order
+        #Replace bottom middle row with right middle column, descending order
+        #Replace left middle column with bottom middle row, ascending order
+
+
         pass
 
     def rotate_back_face_left(self):
+        #Get top face's top row
+        #Get right face's right column
+        #Get bottom face's bottom column
+        #Get left face's left column
+        top_top = self.top.get_row(0)
+
+        #
+
+
+        #Rotate back face counter clockwise
+        self.back.rotate_CCW()
         pass
 
     def rotate_back_face_right(self):
+        #Get top face's top row
+        #Get right face's right column
+        #Get bottom face's bottom column
+        #Get left face's left column
+
+        #
+
+        #Rotate back face clockwise
+        self.back.rotate_CW()
+
         pass
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
