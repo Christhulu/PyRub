@@ -628,12 +628,15 @@ class Cube():
         bottom_mid = self.bottom.get_row(1)
         right_mid = self.right.get_column(1)
 
-        #Replace top middle with right middle column, ascending order
+        #Replace top middle row with right middle column, ascending order
         #Replace right middle column with bottom middle row, descending order
         #Replace bottom middle row with left middle column, ascending order
         #Replace left middle column  with top middle row, descending order
+        self.top.replace_row_with_col(right_mid, 1, True)
+        self.right.replace_col_with_row(bottom_mid, 1, False)
+        self.bottom.replace_row_with_col(left_mid, 1, True)
+        self.left.replace_col_with_row(top_mid, 1, False)
 
-        pass
 
     def rotate_middle_face_right(self):
         #Get top face's middle row
@@ -650,36 +653,56 @@ class Cube():
         #Replace right middle column with top middle row, ascending order
         #Replace bottom middle row with right middle column, descending order
         #Replace left middle column with bottom middle row, ascending order
-
-
-        pass
+        self.top.replace_row_with_col(left_mid, 1, False)
+        self.right.replace_col_with_row(top_mid, 1, True)
+        self.bottom.replace_row_with_col(right_mid, 1, False)
+        self.left.replace_col_with_row(bottom_mid, 1, True)
 
     def rotate_back_face_left(self):
         #Get top face's top row
         #Get right face's right column
-        #Get bottom face's bottom column
+        #Get bottom face's bottom row
         #Get left face's left column
         top_top = self.top.get_row(0)
+        right_right = self.right.get_column(2)
+        bottom_bottom = self.bottom.get_row(2)
+        left_left = self.left.get_column(0)
 
-        #
 
+        #Replace top face's top row with right face's right column, ascending order
+        #Replace right face's right column with bottom face's bottom row, descending order
+        #Replace bottom face's bottom row with left face's left column, ascending order
+        #Replace left face's left column with top face's top row, descending order
+        self.top.replace_row_with_col(right_right, 0, True)
+        self.right.replace_col_with_row(bottom_bottom, 2, False)
+        self.bottom.replace_row_with_col(left_left, 2, True)
+        self.left.replace_col_with_row(top_top, 0, False)
 
         #Rotate back face counter clockwise
         self.back.rotate_CCW()
-        pass
 
     def rotate_back_face_right(self):
         #Get top face's top row
         #Get right face's right column
-        #Get bottom face's bottom column
+        #Get bottom face's bottom row
         #Get left face's left column
+        top_top = self.top.get_row(0)
+        right_right = self.right.get_column(2)
+        bottom_bottom = self.bottom.get_row(2)
+        left_left = self.left.get_column(0)
 
-        #
+        #Replace top face's top row with left face's left column, descending order
+        #Replace right face's right column with top face's top row, ascending order
+        #Replace bottom face's bottom row with right face's right column, descending order
+        #Replace left face's left column with bottom face's bottom row, ascending order
+        self.top.replace_row_with_col(left_left, 0, False)
+        self.right.replace_col_with_row(top_top, 2, True)
+        self.bottom.replace_row_with_col(right_right, 2, False)
+        self.left.replace_col_with_row(bottom_bottom, 0, True)
 
         #Rotate back face clockwise
         self.back.rotate_CW()
 
-        pass
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
     def flip(self):
