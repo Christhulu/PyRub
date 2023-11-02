@@ -10,8 +10,18 @@ class Game(object):
         self.cube:list[Cube] = []
         #index of current cube
         self.current_cube_index = 0
+        self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes")
+        home_options_menu = SelectionMenu(["Play", "Help"], "Options", "Select an option.",show_exit_option=True)
+        submenu_item = SubmenuItem(home_options_menu, self.home_menu)
+        self.home_menu.append_item(submenu_item)
 
+    
+    def play(self):
+        self.show_home_menu()
 
+    #Show home menu
+    def show_home_menu(self):
+        self.home_menu.show()
 
     #Cube Display (This is the visual display for the cube)
     # Print Current Cube (if Applicable)
@@ -19,14 +29,15 @@ class Game(object):
         pass
 
 
-    #Home/Operations Menu
+
+    #Operations Menu
     # Start a New Cube
     # Print Current Cube (if Applicable)
     # Rotate a row, column, or face
     # Randomize Cube
     # Instantly "Solve" Cube
     # Exit
-    def show_home(self):
+    def show_operations_menu(self):
         pass
 
     #Rotate Menu

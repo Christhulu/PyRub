@@ -6,20 +6,10 @@ from consolemenu.items import *
 
 def main():
 
-    my_cube = Cube()
+    cube_game = Game()
 
+    cube_game.play()
 
-
-    # Create the menu
-    home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes")
-    # A SelectionMenu constructs a menu from a list of strings
-    options_menu = SelectionMenu(["Play", "Help"], "Options", "Select an option.",show_exit_option=True)
-
-    submenu_item = SubmenuItem(options_menu, home_menu)
-
-    home_menu.append_item(submenu_item)
-
-    home_menu.show()
 
 
 
