@@ -493,20 +493,35 @@ class Cube():
 
     def set_top_to_front(self):
 
-        self.front = self.top
+        self.front, self.back, self.bottom, self.top = self.top, self.bottom, self.front, self.back
 
-        #self.left same but rotated
-        #self.right same bot rotated
+        #self.left same but rotated CCW
+        #self.right same bot rotated CW
+        self.left.rotate_CCW()
+        self.right.rotate_CW()
 
-        self.back = self.bottom
-        self.bottom = self.front
+        #top should also be upside down
+        self.top.rotate_CW()
+        self.top.rotate_CW()
 
         #back should be upside down
-        self.top = self.back
-
-        pass
+        self.back.rotate_CCW()
+        self.back.rotate_CCW()
 
     def set_bottom_to_front(self):
+        
+        self.front, self.top, self.back, self.bottom = self.bottom, self.front, self.top, self.back
 
+        # self.left needs to be rotated
+        self.left.rotate_CW()
 
-        pass
+        # self.right need to be rotated
+        self.right.rotate_CCW()
+
+        #bottom should be upside down
+        self.bottom.rotate_CW()
+        self.bottom.rotate_CW()
+
+        #back should be upside down
+        self.back.rotate_CW()
+        self.back.rotate_CW()
