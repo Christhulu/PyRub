@@ -466,10 +466,8 @@ class Cube():
     #These change these current face's to the front face
     #They still need more testing but I think this is how they would work
     def set_left_to_front(self):
-        self.front = self.left
-        self.left = self.back
-        self.back = self.right
-        self.right = self.front
+
+        self.front, self.left, self.back, self.right = self.left, self.back, self.right, self.front
 
         #Rotate top and bottom so that they're relative to the new front
         self.top.rotate_CW()
@@ -477,14 +475,38 @@ class Cube():
 
     def set_back_to_front(self):
 
+        self.front, self.left, self.right, self.back = self.back, self.right, self.left, self.front
+
+        self.top.rotate_CCW()
+        self.top.rotate_CCW()
+
+        self.bottom.rotate_CCW()
+        self.bottom.rotate_CCW()
         
-        pass
 
     def set_right_to_front(self):
-        pass   
+
+        self.front, self.left, self.right, self.back = self.right, self.front, self.back, self.left
+
+        self.top.rotate_CCW()
+        self.bottom.rotate_CCW()
 
     def set_top_to_front(self):
+
+        self.front = self.top
+
+        #self.left same but rotated
+        #self.right same bot rotated
+
+        self.back = self.bottom
+        self.bottom = self.front
+
+        #back should be upside down
+        self.top = self.back
+
         pass
 
     def set_bottom_to_front(self):
+
+
         pass
