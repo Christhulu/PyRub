@@ -2,7 +2,7 @@
 A Rubik's Cube Program built in Python 3.
 
 # How to run this game
-Using the terminal of your choosing, run ```python rubiks.py```
+Using the terminal of your choosing, run ```python pyrub```
 
 # Dependencies
 * Python3 (must also be added to your path)

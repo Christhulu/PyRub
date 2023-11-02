@@ -1,5 +1,5 @@
-from rubiks import Cube
-from rubiks import Face
+from cube import Cube
+from face import Face
 from consolemenu import *
 from consolemenu.items import *
 
