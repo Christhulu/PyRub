@@ -18,16 +18,18 @@ import sys
 class Game(object):
     #Thinking of not nesting any menus to be honest
     def __init__(self):
-        self.cubes:list[Cube] = []
+        self.cubes:list[Cube] = [Cube()]
         #index of current cube
         self.current_cube_index = 0
+        self.current_cube_string:str = self.cubes[self.current_cube_index].cube_to_string()
+        self.cube_front_string:str = ""
         self.current_screen = Screen()
 
         self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
         .set_prompt("SELECT>") \
         .set_title_align('center') \
         .set_subtitle_align('center') \
-        .set_prologue_text_align('left') \
+        .set_prologue_text_align('center') \
         .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER) \
         .set_left_margin(4) \
         .set_right_margin(4) \
@@ -50,12 +52,32 @@ class Game(object):
                             exit_option_text="Back",
                             screen=self.current_screen,
                             clear_screen=True,
+                            
                             formatter=self.menu_format
                         )
         
+        self.cube_menu = ConsoleMenu(
+                            title=f"Cube {self.current_cube_index}",
+                            subtitle="Front",
+                            prologue_text= self.current_cube_string,
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            formatter=self.menu_format,
+                        )
+        
+        self.cube_faces_menu = ConsoleMenu(
+                            title=f"Cube {self.current_cube_index}",
+                            subtitle="Current Face: Front (Choose a new face to view)",
+                            prologue_text= self.current_cube_string,
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            formatter=self.menu_format,
+                        )
+
 
         self.operations_menu = ConsoleMenu(
                             title="Operations",
+                            prologue_text= self.current_cube_string,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -162,18 +184,18 @@ class Game(object):
 
         
         argList = []
-        new_cube_item = FunctionItem("Start a New Cube (Under Construction)", function=self.add_new_cube, menu=self.operations_menu, should_exit=True)
+        new_cube_item = FunctionItem("Start a New Cube", function=self.add_new_cube, menu=self.operations_menu, should_exit=True)
         # 2nd
-        print_cube_item = FunctionItem(text="Print Current Cube (Under Construction)", function=self.display_current_cube, menu=self.operations_menu, should_exit=True)
-        # #3rd
 
+        view_cube_item = SubmenuItem(text="View Current Cube", menu=self.operations_menu, submenu=self.cube_menu)
+        # #3rd
         rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
         # #4th
         randomize_cube_item = FunctionItem(text="Randomize Cube (Under Construction)", function=self.randomize_cube, menu=self.operations_menu, should_exit=True)
 
         #Append operations to operations menu
         self.operations_menu.append_item(new_cube_item)
-        self.operations_menu.append_item(print_cube_item)
+        self.operations_menu.append_item(view_cube_item)
         self.operations_menu.append_item(rotate_submenu)
         self.operations_menu.append_item(randomize_cube_item)
 
@@ -218,7 +240,20 @@ class Game(object):
         self.face_rotation_menu.append_item(rotate_middle_face)
         self.face_rotation_menu.append_item(rotate_back_face)
 
-
+        #Append sections to view cube menu  
+        #self.front_face_item = ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=self.current_cube_string, formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        #self.back_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        # self.left_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        # self.right_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        # self.top_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        # self.bottom_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        
+        #self.cube_menu.append_item(self.front_face_item)
+        # self.cube_menu.append_item(self.back_face_item)
+        # self.cube_menu.append_item(self.left_face_item)
+        # self.cube_menu.append_item(self.right_face_item)
+        # self.cube_menu.append_item(self.top_face_item)
+        # self.cube_menu.append_item(self.bottom_face_item)
 
 
     def play(self):
@@ -253,12 +288,11 @@ class Game(object):
         else:
             #Display error message
             self.show_error_menu()
-
-    #Cube Display (This is the visual display for the cube)
-    # Print Current Cube (if Applicable)
-    def display_current_cube(self):
-        self.cubes[0].print_cube()
-
+    
+    def get_cube_string(self) ->str:
+        cube = self.cubes[self.current_cube_index].cube_to_string()
+        return cube
+    
     def randomize_cube(self) -> None:
         a = "We don't have randomize in yet"
 

@@ -44,7 +44,17 @@ class Face(object):
     #Print face
     def print_face(self) -> None:
         for i in self.cells:
-            print('\t'.join(map(str, i)))
+            print()
+
+    def face_to_string(self) -> str:
+        face_str:str = ''
+        for i in self.cells:
+            face_str += '\t'.join(map(str, i))
+            face_str += '\n'
+
+        face_str += '\n'
+
+        return face_str
 
     #Print face in flattened list view
     def print_list_view(self) -> None:

@@ -30,6 +30,28 @@ class Cube():
         print(f"Bottom:")
         self.bottom.print_face()
 
+    def cube_to_string(self) -> str:
+
+        cube = ""
+        cube += self.front.face_to_string()
+
+        # cube += "Back"
+        # cube += self.back.face_to_string()
+
+        # cube += "Left"
+        # cube += self.left.face_to_string()
+
+        # cube += "Right"
+        # cube == self.right.face_to_string()
+
+        # cube += "Top"
+        # cube += self.top.face_to_string()
+
+        # cube += "Bottom:"
+        # cube += self.bottom.face_to_string()
+
+        return cube
+
     def print_cube_by_rows(self) -> None:
         print(f"Front:")
         self.front.print_rows()
