@@ -82,7 +82,7 @@ class Game(object):
                         )
         
         self.row_rotation_direction_menu = ConsoleMenu(
-                    title="Which row would you like to rotate?",
+                    title="Which direction would you like to rotate the row?",
                     # strings=["Left","Right"],
                     show_exit_option=True,
                     exit_option_text="Back",
