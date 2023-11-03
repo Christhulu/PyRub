@@ -5,7 +5,6 @@ from face import Face
 from consolemenu import *
 from consolemenu.items import *
 from consolemenu.format import *
-from functions import *
 import sys
 
 # MIT LICENSE FOR CONSOLE-MENU
@@ -163,14 +162,14 @@ class Game(object):
 
         
         argList = []
-        new_cube_item = FunctionItem("Start a New Cube (Under Construction)", placeholder_function() , args=argList, menu=self.operations_menu, should_exit=True)
+        new_cube_item = FunctionItem("Start a New Cube (Under Construction)", function=self.add_new_cube, menu=self.operations_menu, should_exit=True)
         # 2nd
-        print_cube_item = ExternalItem(text="Print Current Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
+        print_cube_item = FunctionItem(text="Print Current Cube (Under Construction)", function=self.display_current_cube, menu=self.operations_menu, should_exit=True)
         # #3rd
 
         rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
         # #4th
-        randomize_cube_item = ExternalItem(text="Randomize Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
+        randomize_cube_item = FunctionItem(text="Randomize Cube (Under Construction)", function=self.randomize_cube, menu=self.operations_menu, should_exit=True)
 
         #Append operations to operations menu
         self.operations_menu.append_item(new_cube_item)
@@ -260,8 +259,8 @@ class Game(object):
     def display_current_cube(self):
         self.cubes[0].print_cube()
 
-    def placeholder_function(self) -> None:
-        a = "This is a placeholder function for our function items"
+    def randomize_cube(self) -> None:
+        a = "We don't have randomize in yet"
 
 
     # __ Add operations menu to game menu __
