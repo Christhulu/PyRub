@@ -14,7 +14,16 @@ class Game(object):
         #index of current cube
         self.current_cube_index = 0
         self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes")
-        self.home_options_menu = SelectionMenu(["Play", "Help"], subtitle="Options", prologue_text="Select an option.", show_exit_option=True, clear_screen=True)
+        self.home_options_menu = SelectionMenu(["Play", "Help"], subtitle="Options", prologue_text="Select an option.", exit_option_text="Quit", show_exit_option=True, clear_screen=True)
+        self.help_menu = ConsoleMenu(title="Help",
+                            prologue_text= "Welcome to PyRub, a Rubik's cube game built in Python 3. To select an option, type \
+                                the number corresponding to the option and press enter. \
+                                Have fun!",
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+        
 
         self.operations_menu = SelectionMenu(
                             title="Operations",
@@ -49,13 +58,47 @@ class Game(object):
                     clear_screen=True
                 )
         
-        self.column_rotation_menu = ""
+        self.column_rotation_menu = SelectionMenu(
+                            title="Which column would you like to rotate?",
+                            strings=["Left Column","Middle Column","Right Column"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
         
-        self.column_rotation_direction_menu = ""
+        self.column_rotation_direction_menu = SelectionMenu(
+                            title="Which direction would you like to rotate the column?",
+                            strings=["Up","Down"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
 
-        self.face_rotation_menu = ""
+        self.face_rotation_menu = SelectionMenu(
+                            title="Which face would you like to rotate?",
+                            strings=["Front Face","Middle Face","Back Face"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
 
-        self.face_rotation_direction_menu = ""
+        self.face_rotation_direction_menu = SelectionMenu(
+                            title="Which direction would you like to rotate the face? (relative to the front)",
+                            strings=["Left","Right"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+
+        self.reorient_menu = SelectionMenu(
+                            title="Choose a new Front relative to the current front of the cube:",
+                            strings=["Right", "Back", "Left", "Top", "Bottom"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+        
+        self.connect_menus()
 
 
         self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
@@ -67,8 +110,9 @@ class Game(object):
         .show_header_bottom_border(True)
 
 
-
-
+    #Connect relevant menus to each other
+    def connect_menus(self):
+        pass
     
     def play(self):
         self.show_home_menu()
@@ -78,6 +122,16 @@ class Game(object):
     #Show home menu
     def show_home_menu(self):
         self.home_menu.show()
+
+
+    def append_help_menu(self):
+        pass
+
+
+    #Show help menu
+    def show_help_menu(self):
+        self.help_menu.clear_screen_before_render = True
+        self.show_help_menu.show()
 
     #Cube Management
 
@@ -108,15 +162,8 @@ class Game(object):
     # Instantly "Solve" Cube
     # Exit
     def append_operations_menu(self):
-        #Create operations selection menu
-        operations_menu = SelectionMenu(
-                            title="Operations",
-                            strings=["Start a New Cube", "Print Current Cube (if Applicable)",
-                            "Rotate a row, column, or face","Randomize Cube"],
-                            show_exit_option=True,
-                            exit_option_text="Back",
-                            clear_screen=True
-                        )
+        #Not sure if I should add this to anything
+        pass
         
 
     
@@ -129,7 +176,8 @@ class Game(object):
     # Instantly "Solve" Cube
     # Exit
     def show_operations_menu(self):
-        pass
+        self.operations_menu.clear_screen_before_render = True
+        self.operations_menu.show()
 
     # __ Close operations menu __
     # _ Operations Menu _ 
@@ -140,7 +188,7 @@ class Game(object):
     # Instantly "Solve" Cube
     # Exit
     def close_operations_menu(self):
-        pass
+        self.operations_menu.exit()
 
 
     #__ Add rotation menu to game menu __
@@ -164,7 +212,9 @@ class Game(object):
     # 1. Rotate Column
     # 2. Rotate Face
     def show_rotation_menu(self):
-        pass
+        self.rotation_menu.clear_screen_before_render = True
+        self.rotation_menu.show()
+
     
     #__ Add row rotation menu to rotation menu __
     # _Row Rotation Menu_
@@ -173,14 +223,8 @@ class Game(object):
     # Row 2 (Middle Row)
     # Row 3 (Bottom Row)
     def append_row_rotation_menu(self):
-        #Create row rotation selection menu
-        row_rotation_menu = SelectionMenu(
-                            title="Which row would you like to rotate?",
-                            strings=["Top Row","Middle Row","Bottom Row"],
-                            show_exit_option=True,
-                            exit_option_text="Back",
-                            clear_screen=True
-                        )
+        self.rotation_menu.append_item(self.row_rotation_menu)
+
 
     #__ Show row rotation menu__
     # _Row Rotation Menu_
@@ -189,7 +233,8 @@ class Game(object):
     # 1. Row 1 (Middle Row)
     # 2. Row 2 (Bottom Row)
     def show_row_rotation_menu(self):
-        pass
+        self.row_rotation_menu.clear_screen_before_render = True
+        self.row_rotation_menu.show()
 
     #__ Add row rotation direction menu as submenu to ? menu __
     # Rotate Row Direction
@@ -291,10 +336,17 @@ class Game(object):
 
     #__ Add face rotation direction menu as submenu to face rotation menu __
     # _Face Rotation Direction Menu_
-    # Message: Which direction would you like to rotate the face?
+    # Message: Which direction would you like to rotate the face? (relative to the front)
     # 0 - Left (Counter-Clockwise relative to the front face, Clockwise relative to the back face)
     # 1 - Right (Clockwise relative to the front face, Counter-Clockwise relative to the back face) 
     def append_rotate_face_direction_menu(self):
+        face_rotation_direction_menu = SelectionMenu(
+                            title="Which direction would you like to rotate the face? (relative to the front)",
+                            strings=["Left","Right"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
         pass
 
     #__ Show face rotation direction menu __
@@ -316,6 +368,13 @@ class Game(object):
     # 4 - Top
     # 5 - Bottom
     def append_reorient_menu(self):
+        reorient_menu = SelectionMenu(
+                            title="Choose a new Front relative to the current front of the cube:",
+                            strings=["Right", "Back", "Left", "Top", "Bottom"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
         pass
 
     #__ Add reorient cube menu __
@@ -346,7 +405,7 @@ class Game(object):
             case 0:
                 error_mesage = "Invalid index: This is not a valid choice for a cube."
 
-        error_function = FunctionItem("Start a New Cube", Screen().printf("{error}: {error_message}"), should_exit=True)
+        # error_function = FunctionItem("Error", Screen().printf("{error}: {error_message}"), should_exit=True)
         # error_function.clean_up() I don't know if I need to call this directly
 
     # __ Export cube list __
