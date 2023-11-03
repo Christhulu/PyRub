@@ -13,8 +13,15 @@ class Game(object):
         self.cubes:list[Cube] = []
         #index of current cube
         self.current_cube_index = 0
-        self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes")
-        self.home_options_menu = SelectionMenu(["Play", "Help"], subtitle="Options", prologue_text="Select an option.", exit_option_text="Quit", show_exit_option=True, clear_screen=True)
+        self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, clear_screen=True)
+
+        self.about_menu = ConsoleMenu(title="About",
+                            prologue_text= "Created by Chris Alexander",
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+        
         self.help_menu = ConsoleMenu(title="Help",
                             prologue_text= "Welcome to PyRub, a Rubik's cube game built in Python 3. To select an option, type \
                                 the number corresponding to the option and press enter. \
@@ -112,7 +119,17 @@ class Game(object):
 
     #Connect relevant menus to each other
     def connect_menus(self):
-        pass
+
+        operations_sub_menu = SubmenuItem("Play", submenu=self.operations_menu, menu=self.home_menu)
+        help_sub_menu = SubmenuItem("Help", submenu=self.help_menu, menu=self.home_menu)
+        about_sub_menu = SubmenuItem("About", submenu=self.about_menu, menu=self.home_menu)
+
+        #Append main operations to home
+        self.home_menu.append_item(operations_sub_menu)
+        self.home_menu.append_item(help_sub_menu)
+        self.home_menu.append_item(about_sub_menu)
+
+
     
     def play(self):
         self.show_home_menu()
