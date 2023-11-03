@@ -21,6 +21,7 @@ class Game(object):
         self.cubes:list[Cube] = []
         #index of current cube
         self.current_cube_index = 0
+        self.current_screen = Screen()
 
         self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
         .set_prompt("SELECT>") \
@@ -31,12 +32,13 @@ class Game(object):
         .set_right_margin(4) \
         .show_header_bottom_border(True)
 
-        self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, clear_screen=True)
+        self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, screen=self.current_screen, clear_screen=True)
 
         self.about_menu = ConsoleMenu(title="About",
                             prologue_text= "Created by Chris Alexander\nSpecial Thanks to:\n\n* Aegir Hall (for their incredible work on the console-menu library)\n* Paul Barret (for their work on curses-menu)",
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
@@ -45,88 +47,95 @@ class Game(object):
                             prologue_text= "Welcome to PyRub, a Rubik's cube game built in Python 3. To select an option, type the number corresponding to the option and press enter. Have fun!",
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
         
 
-        self.operations_menu = SelectionMenu(
+        self.operations_menu = ConsoleMenu(
                             title="Operations",
-                            strings=["Start a New Cube", "Print Current Cube (if Applicable)", "Rotate a row, column, or face", "Randomize Cube", "Instantly \"Solve\" Cube"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True,
-                            formatter=self.menu_format
+                            formatter=self.menu_format,
                         )
 
-        self.rotation_menu = SelectionMenu(
+        self.rotation_menu = ConsoleMenu(
                             title="Rotation Types",
-                            strings=["Rotate Row","Rotate Column","Rotate Face"],
+                            # strings=["Rotate Row","Rotate Column","Rotate Face"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
 
-        self.row_rotation_menu = SelectionMenu(
+        self.row_rotation_menu = ConsoleMenu(
                             title="Which row would you like to rotate?",
-                            strings=["Top Row","Middle Row","Bottom Row"],
+                            # strings=["Top Row","Middle Row","Bottom Row"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
         
-        self.row_rotation_direction_menu = SelectionMenu(
+        self.row_rotation_direction_menu = ConsoleMenu(
                     title="Which row would you like to rotate?",
-                    strings=["Left","Right"],
+                    # strings=["Left","Right"],
                     show_exit_option=True,
                     exit_option_text="Back",
+                    screen=self.current_screen,
                     clear_screen=True,
                     formatter=self.menu_format
                 )
         
-        self.column_rotation_menu = SelectionMenu(
+        self.column_rotation_menu = ConsoleMenu(
                             title="Which column would you like to rotate?",
-                            strings=["Left Column","Middle Column","Right Column"],
+                            # strings=["Left Column","Middle Column","Right Column"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
         
-        self.column_rotation_direction_menu = SelectionMenu(
+        self.column_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the column?",
-                            strings=["Up","Down"],
+                            # strings=["Up","Down"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
 
-        self.face_rotation_menu = SelectionMenu(
+        self.face_rotation_menu = ConsoleMenu(
                             title="Which face would you like to rotate?",
-                            strings=["Front Face","Middle Face","Back Face"],
+                            # strings=["Front Face","Middle Face","Back Face"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
 
-        self.face_rotation_direction_menu = SelectionMenu(
+        self.face_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the face? (relative to the front)",
-                            strings=["Left","Right"],
+                            # strings=["Left","Right"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
 
-        self.reorient_menu = SelectionMenu(
+        self.reorient_menu = ConsoleMenu(
                             title="Choose a new Front relative to the current front of the cube:",
-                            strings=["Right", "Back", "Left", "Top", "Bottom"],
+                            # strings=["Right", "Back", "Left", "Top", "Bottom"],
                             show_exit_option=True,
                             exit_option_text="Back",
+                            screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
                         )
@@ -138,7 +147,7 @@ class Game(object):
 
     #Connect relevant menus to each other
     def connect_menus(self):
-
+        # Create and append operations submenu items to operations menu
         operations_sub_menu = SubmenuItem("Play", submenu=self.operations_menu, menu=self.home_menu)
 
         help_sub_menu = SubmenuItem("Help", submenu=self.help_menu, menu=self.home_menu)
@@ -150,14 +159,15 @@ class Game(object):
         self.home_menu.append_item(help_sub_menu)
         self.home_menu.append_item(about_sub_menu)
 
-        #Create and append operations submenu items to operations menu
-        new_cube_item = FunctionItem("Start a New Cube", function=Screen.printf("In Construction"),  menu=self.operations_menu, should_exit=True)
-        #2nd
-        print_cube_item = FunctionItem(text="Print Current Cube (if Applicable)", function=Screen.printf("In Construction"), menu=self.operations_menu, should_exit=True)
-        #3rd
+
+        new_cube_item = FunctionItem("Start a New Cube", function=self.placeholder_function(), should_exit=True)
+        # 2nd
+        print_cube_item = FunctionItem(text="Print Current Cube (if Applicable)", function=self.placeholder_function(), menu=self.operations_menu, should_exit=True)
+        # #3rd
         rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
-        #4th
-        randomize_cube_item = FunctionItem(text="Randomize Cube", function=Screen.printf("In Construction"), menu=self.operations_menu, should_exit=True)
+        # #4th
+        randomize_cube_item = FunctionItem(text="Randomize Cube", function=self.placeholder_function(), menu=self.operations_menu)
+
 
         self.operations_menu.append_item(new_cube_item)
         self.operations_menu.append_item(print_cube_item)
@@ -202,6 +212,9 @@ class Game(object):
     # Print Current Cube (if Applicable)
     def display_current_cube(self):
         self.cubes[0].print_cube()
+
+    def placeholder_function(self):
+        a = "This is a placeholder function for our function items"
 
 
     # __ Add operations menu to game menu __
