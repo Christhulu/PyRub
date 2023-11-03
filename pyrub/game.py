@@ -13,6 +13,15 @@ class Game(object):
         self.cubes:list[Cube] = []
         #index of current cube
         self.current_cube_index = 0
+
+        self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
+        .set_prompt("SELECT>") \
+        .set_title_align('center') \
+        .set_subtitle_align('center') \
+        .set_left_margin(4) \
+        .set_right_margin(4) \
+        .show_header_bottom_border(True)
+
         self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, clear_screen=True)
 
         self.about_menu = ConsoleMenu(title="About",
@@ -119,13 +128,6 @@ class Game(object):
         self.connect_menus()
 
 
-        self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
-        .set_prompt("SELECT>") \
-        .set_title_align('center') \
-        .set_subtitle_align('center') \
-        .set_left_margin(4) \
-        .set_right_margin(4) \
-        .show_header_bottom_border(True)
 
 
     #Connect relevant menus to each other
