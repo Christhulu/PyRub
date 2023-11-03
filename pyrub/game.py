@@ -8,13 +8,56 @@ import sys
 
 class Game(object):
 
+    #Thinking of not nesting any menus to be honest
     def __init__(self):
         self.cubes:list[Cube] = []
         #index of current cube
         self.current_cube_index = 0
         self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes")
         self.home_options_menu = SelectionMenu(["Play", "Help"], subtitle="Options", prologue_text="Select an option.", show_exit_option=True, clear_screen=True)
+
+        self.operations_menu = SelectionMenu(
+                            title="Operations",
+                            strings=["Start a New Cube", "Print Current Cube (if Applicable)",
+                            "Rotate a row, column, or face","Randomize Cube"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+
+        self.rotation_menu = SelectionMenu(
+                            title="Rotation Types",
+                            strings=["Rotate Row","Rotate Column","Rotate Face"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+
+        self.row_rotation_menu = SelectionMenu(
+                            title="Which row would you like to rotate?",
+                            strings=["Top Row","Middle Row","Bottom Row"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
         
+        self.row_rotation_direction_menu = SelectionMenu(
+                    title="Which row would you like to rotate?",
+                    strings=["Left","Right"],
+                    show_exit_option=True,
+                    exit_option_text="Back",
+                    clear_screen=True
+                )
+        
+        self.column_rotation_menu = ""
+        
+        self.column_rotation_direction_menu = ""
+
+        self.face_rotation_menu = ""
+
+        self.face_rotation_direction_menu = ""
+
+
         self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
         .set_prompt("SELECT>") \
         .set_title_align('center') \
@@ -22,6 +65,9 @@ class Game(object):
         .set_left_margin(4) \
         .set_right_margin(4) \
         .show_header_bottom_border(True)
+
+
+
 
     
     def play(self):
@@ -53,6 +99,14 @@ class Game(object):
         self.cubes[0].print_cube()
 
 
+    # __ Add operations menu to game menu __
+    # _ Operations Menu _ 
+    # Start a New Cube
+    # Print Current Cube (if Applicable)
+    # Rotate a row, column, or face
+    # Randomize Cube
+    # Instantly "Solve" Cube
+    # Exit
     def append_operations_menu(self):
         #Create operations selection menu
         operations_menu = SelectionMenu(
@@ -65,9 +119,9 @@ class Game(object):
                         )
         
 
-
-
-    #Operations Menu
+    
+    # __ Show operations menu __
+    # _ Operations Menu _ 
     # Start a New Cube
     # Print Current Cube (if Applicable)
     # Rotate a row, column, or face
@@ -77,6 +131,14 @@ class Game(object):
     def show_operations_menu(self):
         pass
 
+    # __ Close operations menu __
+    # _ Operations Menu _ 
+    # Start a New Cube
+    # Print Current Cube (if Applicable)
+    # Rotate a row, column, or face
+    # Randomize Cube
+    # Instantly "Solve" Cube
+    # Exit
     def close_operations_menu(self):
         pass
 
@@ -135,7 +197,13 @@ class Game(object):
     # 0. Left
     # 1. Right
     def append_row_rotation_direction_menu(self):
-        pass
+        row_rotation_direction_menu = SelectionMenu(
+                    title="Which row would you like to rotate?",
+                    strings=["Left","Right"],
+                    show_exit_option=True,
+                    exit_option_text="Back",
+                    clear_screen=True
+                )
 
     #__ Show row rotation direction menu __
     # Rotate Row Direction
@@ -181,7 +249,13 @@ class Game(object):
     # 0. Up
     # 1. Down
     def append_rotate_column_direction_menu(self):
-        pass
+        column_rotation_direction_menu = SelectionMenu(
+                            title="Which direction would you like to rotate the column?",
+                            strings=["Up","Down"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
 
     #__ Show column rotation direction menu__
     # _Column Rotation Direction Menu_
@@ -191,21 +265,62 @@ class Game(object):
     def show_rotate_column_direction_menu(self):
         pass
 
-    # Rotate Face Menu
-    # 0. Front
-    # 1. Middle
-    # 2. Back
+    #__ Add face rotation menu as submenu to rotation menu __
+    # _Face Rotation Menu_
+    # Message: Which face would you like to rotate? (relative to the front)
+    # 0. Front Face
+    # 1. Middle Face
+    # 2. Back Face
+    def append_rotate_face_menu(self):
+        face_rotation_menu = SelectionMenu(
+                            title="Which face would you like to rotate?",
+                            strings=["Front Face","Middle Face","Back Face"],
+                            show_exit_option=True,
+                            exit_option_text="Back",
+                            clear_screen=True
+                        )
+        
+    #__ Show face rotation menu __
+    # _ Face Rotation Menu_
+    # Message: Which face would you like to rotate? (relative to the front)
+    # 0. Front Face
+    # 1. Middle Face
+    # 2. Back Face
     def show_rotate_face_menu(self):
         pass
 
-    # Rotate Face Direction
-    # Subtitle: *Face*
+    #__ Add face rotation direction menu as submenu to face rotation menu __
+    # _Face Rotation Direction Menu_
+    # Message: Which direction would you like to rotate the face?
+    # 0 - Left (Counter-Clockwise relative to the front face, Clockwise relative to the back face)
+    # 1 - Right (Clockwise relative to the front face, Counter-Clockwise relative to the back face) 
+    def append_rotate_face_direction_menu(self):
+        pass
+
+    #__ Show face rotation direction menu __
+    # _Face Rotation Direction Menu_
+    # Which direction would you like to rotate the face?
     # 0 - Clockwise
-    # 1 - Counter Clockwise
+    # 1 - Counter-Clockwise
     def show_rotate_face_direction_menu(self):
         pass
 
-    # Choose a new Front relative to the current front of the cube:
+
+    #__ Add reorient cube menu __
+    # _ Reorient Cube _
+    # Message: Choose a new Front relative to the current front of the cube:
+    # 0 - Front
+    # 1 - Right
+    # 2 - Back
+    # 3 - Left
+    # 4 - Top
+    # 5 - Bottom
+    def append_reorient_menu(self):
+        pass
+
+    #__ Add reorient cube menu __
+    # _ Reorient Cube _
+    # Message: Choose a new Front relative to the current front of the cube:
     # 0 - Front
     # 1 - Right
     # 2 - Back
@@ -215,8 +330,15 @@ class Game(object):
     def show_reorient_menu(self):
         pass
 
+    # __ Add error menu __
+    # _ Error Menu _ 
+    # 
+    def append_error_menu(self):
+        pass
 
-    #Error Message Menu
+    # __ Show error menu __
+    # _ Error Menu _ 
+    # 
     def show_error_menu(self, error: int):
 
         error_mesage: str = ""
@@ -225,4 +347,16 @@ class Game(object):
                 error_mesage = "Invalid index: This is not a valid choice for a cube."
 
         error_function = FunctionItem("Start a New Cube", Screen().printf("{error}: {error_message}"), should_exit=True)
-        error_function.clean_up()
+        # error_function.clean_up() I don't know if I need to call this directly
+
+    # __ Export cube list __
+    # _ Export Cubes Menu _ 
+    # TBD: Decide how to export cube list
+    def export_cubes(self):
+        pass
+
+    # __ Import cube list __
+    # _ Import Cubes Menu _ 
+    # TBD: Decide how to import cubes
+    def import_cubes(self):
+        pass
