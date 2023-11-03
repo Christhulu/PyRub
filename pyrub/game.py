@@ -1,9 +1,11 @@
+from typing import Any, Sequence
 from cube import Cube
 from face import Face
 
 from consolemenu import *
 from consolemenu.items import *
 from consolemenu.format import *
+from functions import *
 import sys
 
 # MIT LICENSE FOR CONSOLE-MENU
@@ -15,7 +17,6 @@ import sys
 
 
 class Game(object):
-
     #Thinking of not nesting any menus to be honest
     def __init__(self):
         self.cubes:list[Cube] = []
@@ -160,8 +161,9 @@ class Game(object):
         self.home_menu.append_item(help_sub_menu)
         self.home_menu.append_item(about_sub_menu)
 
-
-        new_cube_item = ExternalItem("Start a New Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
+        
+        argList = []
+        new_cube_item = FunctionItem("Start a New Cube (Under Construction)", placeholder_function() , args=argList, menu=self.operations_menu, should_exit=True)
         # 2nd
         print_cube_item = ExternalItem(text="Print Current Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
         # #3rd
@@ -258,9 +260,8 @@ class Game(object):
     def display_current_cube(self):
         self.cubes[0].print_cube()
 
-    def placeholder_function(self):
+    def placeholder_function(self) -> None:
         a = "This is a placeholder function for our function items"
-        return a
 
 
     # __ Add operations menu to game menu __
