@@ -52,8 +52,7 @@ class Game(object):
 
         self.operations_menu = SelectionMenu(
                             title="Operations",
-                            strings=[],
-                            # "Rotate a row, column, or face","Randomize Cube"],
+                            strings=["Start a New Cube", "Print Current Cube (if Applicable)", "Rotate a row, column, or face", "Randomize Cube", "Instantly \"Solve\" Cube"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             clear_screen=True,
@@ -140,13 +139,10 @@ class Game(object):
     #Connect relevant menus to each other
     def connect_menus(self):
 
-        self.operations_menu.clear_screen_before_render = True
         operations_sub_menu = SubmenuItem("Play", submenu=self.operations_menu, menu=self.home_menu)
 
-        self.help_menu.clear_screen_before_render = True
         help_sub_menu = SubmenuItem("Help", submenu=self.help_menu, menu=self.home_menu)
 
-        self.about_menu.clear_screen_before_render = True
         about_sub_menu = SubmenuItem("About", submenu=self.about_menu, menu=self.home_menu)
 
         #Append main operations to home
