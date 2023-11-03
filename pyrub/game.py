@@ -19,7 +19,8 @@ class Game(object):
                             prologue_text= "Created by Chris Alexander",
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
         
         self.help_menu = ConsoleMenu(title="Help",
@@ -28,7 +29,8 @@ class Game(object):
                                 Have fun!",
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
         
 
@@ -38,7 +40,8 @@ class Game(object):
                             "Rotate a row, column, or face","Randomize Cube"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
 
         self.rotation_menu = SelectionMenu(
@@ -46,7 +49,8 @@ class Game(object):
                             strings=["Rotate Row","Rotate Column","Rotate Face"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
 
         self.row_rotation_menu = SelectionMenu(
@@ -54,7 +58,8 @@ class Game(object):
                             strings=["Top Row","Middle Row","Bottom Row"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
         
         self.row_rotation_direction_menu = SelectionMenu(
@@ -62,7 +67,8 @@ class Game(object):
                     strings=["Left","Right"],
                     show_exit_option=True,
                     exit_option_text="Back",
-                    clear_screen=True
+                    clear_screen=True,
+                    formatter=self.menu_format
                 )
         
         self.column_rotation_menu = SelectionMenu(
@@ -70,7 +76,8 @@ class Game(object):
                             strings=["Left Column","Middle Column","Right Column"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
         
         self.column_rotation_direction_menu = SelectionMenu(
@@ -78,7 +85,8 @@ class Game(object):
                             strings=["Up","Down"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
 
         self.face_rotation_menu = SelectionMenu(
@@ -86,7 +94,8 @@ class Game(object):
                             strings=["Front Face","Middle Face","Back Face"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
 
         self.face_rotation_direction_menu = SelectionMenu(
@@ -94,7 +103,8 @@ class Game(object):
                             strings=["Left","Right"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
 
         self.reorient_menu = SelectionMenu(
@@ -102,7 +112,8 @@ class Game(object):
                             strings=["Right", "Back", "Left", "Top", "Bottom"],
                             show_exit_option=True,
                             exit_option_text="Back",
-                            clear_screen=True
+                            clear_screen=True,
+                            formatter=self.menu_format
                         )
         
         self.connect_menus()
