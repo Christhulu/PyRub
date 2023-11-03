@@ -28,6 +28,7 @@ class Game(object):
         .set_title_align('center') \
         .set_subtitle_align('center') \
         .set_prologue_text_align('left') \
+        .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER) \
         .set_left_margin(4) \
         .set_right_margin(4) \
         .show_header_bottom_border(True)
@@ -160,19 +161,24 @@ class Game(object):
         self.home_menu.append_item(about_sub_menu)
 
 
-        new_cube_item = FunctionItem("Start a New Cube", function=self.placeholder_function(), should_exit=True)
+        new_cube_item = ExternalItem("Start a New Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
         # 2nd
-        print_cube_item = FunctionItem(text="Print Current Cube (if Applicable)", function=self.placeholder_function(), menu=self.operations_menu, should_exit=True)
+        print_cube_item = ExternalItem(text="Print Current Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
         # #3rd
         rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
         # #4th
-        randomize_cube_item = FunctionItem(text="Randomize Cube", function=self.placeholder_function(), menu=self.operations_menu)
+        randomize_cube_item = ExternalItem(text="Randomize Cube (Under Construction)", menu=self.operations_menu)
 
 
         self.operations_menu.append_item(new_cube_item)
         self.operations_menu.append_item(print_cube_item)
         self.operations_menu.append_item(rotate_submenu)
         self.operations_menu.append_item(randomize_cube_item)
+
+
+
+
+
 
 
     def play(self):
@@ -215,6 +221,7 @@ class Game(object):
 
     def placeholder_function(self):
         a = "This is a placeholder function for our function items"
+        return a
 
 
     # __ Add operations menu to game menu __
