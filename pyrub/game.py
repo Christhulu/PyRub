@@ -6,6 +6,14 @@ from consolemenu.items import *
 from consolemenu.format import *
 import sys
 
+# MIT LICENSE FOR CONSOLE-MENU
+# The MIT License (MIT)
+# Copyright (c) Paul Barrett, Aegir Hall
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
 class Game(object):
 
     #Thinking of not nesting any menus to be honest
@@ -18,6 +26,7 @@ class Game(object):
         .set_prompt("SELECT>") \
         .set_title_align('center') \
         .set_subtitle_align('center') \
+        .set_prologue_text_align('left') \
         .set_left_margin(4) \
         .set_right_margin(4) \
         .show_header_bottom_border(True)
@@ -25,7 +34,7 @@ class Game(object):
         self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, clear_screen=True)
 
         self.about_menu = ConsoleMenu(title="About",
-                            prologue_text= "Created by Chris Alexander",
+                            prologue_text= "Created by Chris Alexander\nSpecial Thanks to:\n\n* Aegir Hall (for their incredible work on the console-menu library)\n* Paul Barret (for their work on curses-menu)",
                             show_exit_option=True,
                             exit_option_text="Back",
                             clear_screen=True,
@@ -33,9 +42,7 @@ class Game(object):
                         )
         
         self.help_menu = ConsoleMenu(title="Help",
-                            prologue_text= "Welcome to PyRub, a Rubik's cube game built in Python 3. To select an option, type \
-                                the number corresponding to the option and press enter. \
-                                Have fun!",
+                            prologue_text= "Welcome to PyRub, a Rubik's cube game built in Python 3. To select an option, type the number corresponding to the option and press enter. Have fun!",
                             show_exit_option=True,
                             exit_option_text="Back",
                             clear_screen=True,
