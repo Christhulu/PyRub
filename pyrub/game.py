@@ -165,18 +165,57 @@ class Game(object):
         # 2nd
         print_cube_item = ExternalItem(text="Print Current Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
         # #3rd
+
         rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
         # #4th
-        randomize_cube_item = ExternalItem(text="Randomize Cube (Under Construction)", menu=self.operations_menu)
+        randomize_cube_item = ExternalItem(text="Randomize Cube (Under Construction)", menu=self.operations_menu, should_exit=True)
 
-
+        #Append operations to operations menu
         self.operations_menu.append_item(new_cube_item)
         self.operations_menu.append_item(print_cube_item)
         self.operations_menu.append_item(rotate_submenu)
         self.operations_menu.append_item(randomize_cube_item)
 
+        #Append row operations to rotate menu
+        rotate_row_item = SubmenuItem(text="Rotate Row", submenu=self.row_rotation_menu, menu=self.rotation_menu)
+        rotate_column_item = SubmenuItem(text="Rotate Column", submenu=self.column_rotation_menu, menu=self.rotation_menu)
+        rotate_face_item = SubmenuItem(text="Rotate Face", submenu=self.face_rotation_menu, menu=self.rotation_menu)
 
+        self.rotation_menu.append_item(rotate_row_item)
+        self.rotation_menu.append_item(rotate_column_item)
+        self.rotation_menu.append_item(rotate_face_item)
 
+        #Add rows to row rotation menu
+        # strings=["Top Row","Middle Row","Bottom Row"]
+        rotate_top_row = SubmenuItem(text="Top Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_row = SubmenuItem(text="Middle Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_bottom_row = SubmenuItem(text="Bottom Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+
+        self.row_rotation_menu.append_item(rotate_top_row)
+        self.row_rotation_menu.append_item(rotate_middle_row)
+        self.row_rotation_menu.append_item(rotate_bottom_row)
+
+        #Add columns to column rotation menu
+        rotate_left_column = SubmenuItem(text="Left Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_column = SubmenuItem(text="Middle Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_right_column = SubmenuItem(text="Right Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+
+        self.column_rotation_menu.append_item(rotate_left_column)
+        self.column_rotation_menu.append_item(rotate_middle_column)
+        self.column_rotation_menu.append_item(rotate_right_column)
+
+        #Add faces to face rotation menu
+        rotate_left_face = SubmenuItem(text="Left Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_right_face = SubmenuItem(text="Right Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_front_face = SubmenuItem(text="Front Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_face = SubmenuItem(text="Middle Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_back_face = SubmenuItem(text="Back Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_bottom_face = SubmenuItem(text="Bottom Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_top_face = SubmenuItem(text="Top Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+
+        self.face_rotation_menu.append_item(rotate_front_face)
+        self.face_rotation_menu.append_item(rotate_middle_face)
+        self.face_rotation_menu.append_item(rotate_back_face)
 
 
 
