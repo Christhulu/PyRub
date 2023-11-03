@@ -52,8 +52,8 @@ class Game(object):
 
         self.operations_menu = SelectionMenu(
                             title="Operations",
-                            strings=["Start a New Cube", "Print Current Cube (if Applicable)",
-                            "Rotate a row, column, or face","Randomize Cube"],
+                            strings=[],
+                            # "Rotate a row, column, or face","Randomize Cube"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             clear_screen=True,
@@ -140,8 +140,13 @@ class Game(object):
     #Connect relevant menus to each other
     def connect_menus(self):
 
+        self.operations_menu.clear_screen_before_render = True
         operations_sub_menu = SubmenuItem("Play", submenu=self.operations_menu, menu=self.home_menu)
+
+        self.help_menu.clear_screen_before_render = True
         help_sub_menu = SubmenuItem("Help", submenu=self.help_menu, menu=self.home_menu)
+
+        self.about_menu.clear_screen_before_render = True
         about_sub_menu = SubmenuItem("About", submenu=self.about_menu, menu=self.home_menu)
 
         #Append main operations to home
@@ -149,8 +154,21 @@ class Game(object):
         self.home_menu.append_item(help_sub_menu)
         self.home_menu.append_item(about_sub_menu)
 
+        #Create and append operations submenu items to operations menu
+        new_cube_item = FunctionItem("Start a New Cube", function=Screen.printf("In Construction"),  menu=self.operations_menu, should_exit=True)
+        #2nd
+        print_cube_item = FunctionItem(text="Print Current Cube (if Applicable)", function=Screen.printf("In Construction"), menu=self.operations_menu, should_exit=True)
+        #3rd
+        rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
+        #4th
+        randomize_cube_item = FunctionItem(text="Randomize Cube", function=Screen.printf("In Construction"), menu=self.operations_menu, should_exit=True)
 
-    
+        self.operations_menu.append_item(new_cube_item)
+        self.operations_menu.append_item(print_cube_item)
+        self.operations_menu.append_item(rotate_submenu)
+        self.operations_menu.append_item(randomize_cube_item)
+
+
     def play(self):
         self.show_home_menu()
 
