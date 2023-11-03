@@ -1,5 +1,5 @@
 # PyRub
-A Rubik's Cube Program built in Python 3.
+A Rubik's Cube Program built in Python 3. (Work in Progress)
 
 # How to run this game
 Using the terminal of your choosing, run ```python pyrub```
