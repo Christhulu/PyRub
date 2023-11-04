@@ -22,7 +22,7 @@ class Game(object):
         #index of current cube
         self.current_cube_index = 0
         self.current_cube_string:str = self.cubes[self.current_cube_index].cube_to_string()
-        self.cube_front_string:str = ""
+        self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
         self.current_screen = Screen()
 
         self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
@@ -59,7 +59,7 @@ class Game(object):
         self.cube_menu = ConsoleMenu(
                             title=f"Cube {self.current_cube_index}",
                             subtitle="Front",
-                            prologue_text= self.current_cube_string,
+                            prologue_text= self.cube_front_string,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -68,7 +68,7 @@ class Game(object):
         self.cube_faces_menu = ConsoleMenu(
                             title=f"Cube {self.current_cube_index}",
                             subtitle="Current Face: Front (Choose a new face to view)",
-                            prologue_text= self.current_cube_string,
+                            prologue_text= self.cube_front_string,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -77,7 +77,7 @@ class Game(object):
 
         self.operations_menu = ConsoleMenu(
                             title="Operations",
-                            prologue_text= self.current_cube_string,
+                            prologue_text= self.cube_front_string,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -85,7 +85,6 @@ class Game(object):
 
         self.rotation_menu = ConsoleMenu(
                             title="Rotation Types",
-                            # strings=["Rotate Row","Rotate Column","Rotate Face"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -95,7 +94,6 @@ class Game(object):
 
         self.row_rotation_menu = ConsoleMenu(
                             title="Which row would you like to rotate?",
-                            # strings=["Top Row","Middle Row","Bottom Row"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -105,7 +103,6 @@ class Game(object):
         
         self.row_rotation_direction_menu = ConsoleMenu(
                     title="Which direction would you like to rotate the row?",
-                    # strings=["Left","Right"],
                     show_exit_option=True,
                     exit_option_text="Back",
                     screen=self.current_screen,
@@ -115,7 +112,6 @@ class Game(object):
         
         self.column_rotation_menu = ConsoleMenu(
                             title="Which column would you like to rotate?",
-                            # strings=["Left Column","Middle Column","Right Column"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -125,7 +121,6 @@ class Game(object):
         
         self.column_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the column?",
-                            # strings=["Up","Down"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -135,7 +130,6 @@ class Game(object):
 
         self.face_rotation_menu = ConsoleMenu(
                             title="Which face would you like to rotate?",
-                            # strings=["Front Face","Middle Face","Back Face"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -145,7 +139,6 @@ class Game(object):
 
         self.face_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the face? (relative to the front)",
-                            # strings=["Left","Right"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -155,7 +148,6 @@ class Game(object):
 
         self.reorient_menu = ConsoleMenu(
                             title="Choose a new Front relative to the current front of the cube:",
-                            # strings=["Right", "Back", "Left", "Top", "Bottom"],
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -258,7 +250,7 @@ class Game(object):
     def connect_menus(self):
 
         self.attach_base_menus()
-        self.attach_operations()
+        self.attach_operation_items()
         self.attach_rotate_menus()
         self.attach_cube_menus()
 
@@ -281,6 +273,9 @@ class Game(object):
     def get_cube_string(self) ->str:
         cube = self.cubes[self.current_cube_index].cube_to_string()
         return cube
+    
+    def get_face_string(self) ->str:
+        pass
     
     def randomize_cube(self) -> None:
         a = "We don't have randomize in yet"

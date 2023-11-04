@@ -34,23 +34,44 @@ class Cube():
 
         cube = ""
         cube += self.front.face_to_string()
+        cube += "\n"
 
-        # cube += "Back"
-        # cube += self.back.face_to_string()
+        cube += self.back.face_to_string()
+        cube += "\n"
 
-        # cube += "Left"
-        # cube += self.left.face_to_string()
+        cube += self.left.face_to_string()
+        cube += "\n"
 
-        # cube += "Right"
-        # cube == self.right.face_to_string()
+        cube += self.right.face_to_string()
+        cube += "\n"
 
-        # cube += "Top"
-        # cube += self.top.face_to_string()
+        cube += self.top.face_to_string()
+        cube += "\n"
 
-        # cube += "Bottom:"
-        # cube += self.bottom.face_to_string()
-
+        cube += self.bottom.face_to_string()
+        cube += "\n"
+        
         return cube
+
+    #Faces: Front: 0, Right: 1, Back: 2, Left: 3, Top: 4, Bottom: 5
+    def face_to_string(self, face:int) -> str:
+        
+        face = ""
+        match face:
+            case 0:
+                face += self.front.face_to_string()
+            case 1:
+                face += self.right.face_to_string()
+            case 2:
+                face += self.back.face_to_string()
+            case 3:
+                face += self.left.face_to_string()
+            case 4:
+                face += self.top.face_to_string()
+            case 5:
+                face += self.bottom.face_to_string()
+        
+        return face
 
     def print_cube_by_rows(self) -> None:
         print(f"Front:")
