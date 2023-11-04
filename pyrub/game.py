@@ -230,20 +230,34 @@ class Game(object):
         self.face_rotation_menu.append_item(rotate_back_face)
 
     def attach_cube_menus(self):
-        #Append sections to view cube menu  
-        #self.front_face_item = ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=self.current_cube_string, formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
-        #self.back_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
-        # self.left_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
-        # self.right_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
-        # self.top_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
-        # self.bottom_face_item = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"Cube: {cube_str} \n Face: {self.face_str}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back")
+        #Append sections to view cube menu
+
+        #Update front face if it's not up to date
+        self.cube_front_string = self.cubes[self.current_cube_index].face_to_string(0)
+
+        self.front_face_menu = ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=f"{self.cube_front_string}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.back_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(2)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.left_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(3)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.right_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(1)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.top_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(4)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.bottom_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(5)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+
+        self.front_face_submenu = SubmenuItem(text="Front Face", submenu=self.front_face_menu, menu=self.cube_menu)
+        self.back_face_submenu = SubmenuItem(text="Back Face", submenu=self.back_face_menu, menu=self.cube_menu)
+        self.left_face_submenu = SubmenuItem(text="Left Face", submenu=self.left_face_menu, menu=self.cube_menu)
+        self.right_face_submenu = SubmenuItem(text="Right Face", submenu=self.right_face_menu, menu=self.cube_menu)
+        self.top_face_submenu = SubmenuItem(text="Top Face", submenu=self.top_face_menu, menu=self.cube_menu)
+        self.bottom_face_submenu = SubmenuItem(text="Bottom Face", submenu=self.bottom_face_menu, menu=self.cube_menu)
         
-        #self.cube_menu.append_item(self.front_face_item)
-        # self.cube_menu.append_item(self.back_face_item)
-        # self.cube_menu.append_item(self.left_face_item)
-        # self.cube_menu.append_item(self.right_face_item)
-        # self.cube_menu.append_item(self.top_face_item)
-        # self.cube_menu.append_item(self.bottom_face_item)
+        self.cube_menu.append_item(self.front_face_submenu)
+        self.cube_menu.append_item(self.back_face_submenu)
+        self.cube_menu.append_item(self.left_face_submenu)
+        self.cube_menu.append_item(self.right_face_submenu)
+        self.cube_menu.append_item(self.top_face_submenu)
+        self.cube_menu.append_item(self.bottom_face_submenu)
+
+    #Attach the menus for changing which face is the front
+    def attach_orientation_menus(self):
         pass
 
     #Connect relevant menus to each other
