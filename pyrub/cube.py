@@ -399,7 +399,77 @@ class Cube():
         #Rotate right face left (90 degrees counter clockwise)
         self.right.rotate_CCW()
 
-    def rotate_middle_face_left(self):
+
+    def rotate_front_face_CCW(self):
+        """
+        This method rotates the front face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
+
+        
+        pass
+
+    def rotate_front_face_CW(self):
+        """
+        This method rotates the front face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
+        pass
+
+
+    def rotate_left_face_CCW(self):
+        """
+        This method rotates the left face of the cube counter-clockwise.
+        (It's replicated from a different section, but for readability, it's named like this here)
+        Args:
+            self - The current face instance
+        """
+        self.rotate_left_column_up()
+
+    def rotate_left_face_CW(self):
+        """
+        This method rotates the left face of the cube clockwise.
+        (It's replicated from a different section, but for readability, it's named like this here)
+        Args:
+            self - The current face instance
+        """
+        self.rotate_left_column_down()
+
+    def rotate_right_face_CCW(self):
+        """
+        This method rotates the right face of the cube counter-clockwise.
+        (It's replicated from a different section, but for readability, it's named like this here)
+        Args:
+            self - The current face instance
+        """
+        self.rotate_right_column_down()
+
+    def rotate_right_face_CW(self):
+        """
+        This method rotates the right face of the cube clockwise.
+        (It's replicated from a different section, but for readability, it's named like this here)
+        Args:
+            self - The current face instance
+        """
+        self.rotate_right_column_up()
+
+    def rotate_top_face_CW(self):
+        pass
+
+    def rotate_top_face_CCW(self):
+        pass
+
+    def rotate_bottom_face_CW(self):
+        pass
+
+    def rotate_bottom_face_CCW(self):
+        pass
+
+
+
+    def rotate_middle_face_CCW(self):
 
         #Get top face's middle row
         #Get left face's middle column
@@ -420,7 +490,7 @@ class Cube():
         self.left.replace_col_with_row(top_mid, 1, False)
 
 
-    def rotate_middle_face_right(self):
+    def rotate_middle_face_CW(self):
         #Get top face's middle row
         #Get right face's middle column
         #Get bottom face's middle row
@@ -440,7 +510,7 @@ class Cube():
         self.bottom.replace_row_with_col(right_mid, 1, False)
         self.left.replace_col_with_row(bottom_mid, 1, True)
 
-    def rotate_back_face_left(self):
+    def rotate_back_face_CCW(self):
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
@@ -463,7 +533,7 @@ class Cube():
         #Rotate back face counter clockwise
         self.back.rotate_CCW()
 
-    def rotate_back_face_right(self):
+    def rotate_back_face_CW(self):
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row

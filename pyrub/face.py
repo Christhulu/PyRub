@@ -1,10 +1,18 @@
 class Face(object):
+    """
+    This class is responsible for handling all of the details involved with a single face of the Rubik's cube.
+    Args:
+        color (str): This is the color this side is initialized to.
+        side_length (int): This is the length of the side, and is used to set the dimensions of the face. (The face is a square)
+        cells (list[list[str]]): This is what stores the face's matrix. It has side_length x side_length cells. (Right now, that's 3x3)
+        all_uniform (bool): This is a variable that is updated to keep track of if all of the cells on a side are the same.
+    """
+
 
     #Default constructor
-    def __init__(self, color:str, opposite:str, side_length: int):
-        self.color = color
-        self.opposite = opposite
-        self.side_length = side_length
+    def __init__(self, color:str, side_length: int):
+        self.color:str = color
+        self.side_length:int = side_length
         self.cells:list[list[str]] = []
 
         for i in range(self.side_length):
@@ -23,12 +31,12 @@ class Face(object):
     #String representation of face
     def __str__(self):
         #represent all of face object's fields out in a human readable format
-        return f'Color: {self.color}, Opposite Color: {self.opposite}, Cells: {self.cells}'
+        return f'Cells: {self.cells}'
 
     #Function representation of face
     def __repr__(self):
         #represent face in a human readable format
-        return f'Face(Color: {self.color}, Opposite Color: {self.opposite}, All cells the same: {self.all_uniform})'
+        return f'Cells: {self.cells}, Face complete: {self.validate_cell_uniformity()})'
 
     #Flatten face into list
     def flatten_face(self) -> None:
