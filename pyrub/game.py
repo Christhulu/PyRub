@@ -85,6 +85,7 @@ class Game(object):
 
         self.rotation_menu = ConsoleMenu(
                             title="Rotation Types",
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -94,6 +95,7 @@ class Game(object):
 
         self.row_rotation_menu = ConsoleMenu(
                             title="Which row would you like to rotate?",
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -103,6 +105,7 @@ class Game(object):
         
         self.row_rotation_direction_menu = ConsoleMenu(
                     title="Which direction would you like to rotate the row?",
+                    prologue_text= f"{self.cube_front_string}",
                     show_exit_option=True,
                     exit_option_text="Back",
                     screen=self.current_screen,
@@ -112,6 +115,7 @@ class Game(object):
         
         self.column_rotation_menu = ConsoleMenu(
                             title="Which column would you like to rotate?",
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -121,6 +125,7 @@ class Game(object):
         
         self.column_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the column?",
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -189,45 +194,72 @@ class Game(object):
 
     def attach_rotate_menus(self):
         #Append row operations to rotate menu
-        rotate_row_item = SubmenuItem(text="Rotate Row", submenu=self.row_rotation_menu, menu=self.rotation_menu)
-        rotate_column_item = SubmenuItem(text="Rotate Column", submenu=self.column_rotation_menu, menu=self.rotation_menu)
-        rotate_face_item = SubmenuItem(text="Rotate Face", submenu=self.face_rotation_menu, menu=self.rotation_menu)
 
-        self.rotation_menu.append_item(rotate_row_item)
-        self.rotation_menu.append_item(rotate_column_item)
-        self.rotation_menu.append_item(rotate_face_item)
+
+        rotate_row_submenu = SubmenuItem(text="Rotate Row", submenu=self.row_rotation_menu, menu=self.rotation_menu)
+        rotate_column_submenu = SubmenuItem(text="Rotate Column", submenu=self.column_rotation_menu, menu=self.rotation_menu)
+        rotate_face_submenu = SubmenuItem(text="Rotate Face", submenu=self.face_rotation_menu, menu=self.rotation_menu)
+
+        self.rotation_menu.append_item(rotate_row_submenu)
+        self.rotation_menu.append_item(rotate_column_submenu)
+        self.rotation_menu.append_item(rotate_face_submenu)
 
         #Add rows to row rotation menu
-        # strings=["Top Row","Middle Row","Bottom Row"]
-        rotate_top_row = SubmenuItem(text="Top Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_middle_row = SubmenuItem(text="Middle Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_bottom_row = SubmenuItem(text="Bottom Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_top_row_submenu = SubmenuItem(text="Top Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_row_submenu = SubmenuItem(text="Middle Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_bottom_row_submenu = SubmenuItem(text="Bottom Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
 
-        self.row_rotation_menu.append_item(rotate_top_row)
-        self.row_rotation_menu.append_item(rotate_middle_row)
-        self.row_rotation_menu.append_item(rotate_bottom_row)
+        self.row_rotation_menu.append_item(rotate_top_row_submenu)
+        self.row_rotation_menu.append_item(rotate_middle_row_submenu)
+        self.row_rotation_menu.append_item(rotate_bottom_row_submenu)
+
+        #Add direction functions to row rotation direction menu
+        rotate_row_left_function_item = FunctionItem(text="Left",function=self.rotate_row, menu=self.row_rotation_direction_menu, should_exit=True)
+        rotate_row_right_function_item = FunctionItem(text="Right", function=self.rotate_row, menu=self.row_rotation_direction_menu, should_exit=True)
+
+        self.row_rotation_direction_menu.append_item(rotate_row_left_function_item)
+        self.row_rotation_direction_menu.append_item(rotate_row_right_function_item)
 
         #Add columns to column rotation menu
-        rotate_left_column = SubmenuItem(text="Left Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_middle_column = SubmenuItem(text="Middle Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_right_column = SubmenuItem(text="Right Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_left_column_submenu = SubmenuItem(text="Left Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_column_submenu = SubmenuItem(text="Middle Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_right_column_submenu = SubmenuItem(text="Right Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
 
-        self.column_rotation_menu.append_item(rotate_left_column)
-        self.column_rotation_menu.append_item(rotate_middle_column)
-        self.column_rotation_menu.append_item(rotate_right_column)
+        self.column_rotation_menu.append_item(rotate_left_column_submenu)
+        self.column_rotation_menu.append_item(rotate_middle_column_submenu)
+        self.column_rotation_menu.append_item(rotate_right_column_submenu)
+
+        #Add direction functions to column rotation direction menu
+        rotate_column_up_function_item = FunctionItem(text="Up",function=self.rotate_column, menu=self.column_rotation_direction_menu, should_exit=True)
+        rotate_column_down_function_item = FunctionItem(text="Down", function=self.rotate_column, menu=self.column_rotation_direction_menu, should_exit=True)
+
+        self.column_rotation_direction_menu.append_item(rotate_column_up_function_item)
+        self.column_rotation_direction_menu.append_item(rotate_column_down_function_item)
 
         #Add faces to face rotation menu
-        rotate_left_face = SubmenuItem(text="Left Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_right_face = SubmenuItem(text="Right Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_front_face = SubmenuItem(text="Front Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_middle_face = SubmenuItem(text="Middle Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_back_face = SubmenuItem(text="Back Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_bottom_face = SubmenuItem(text="Bottom Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_top_face = SubmenuItem(text="Top Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_left_face_submenu = SubmenuItem(text="Left Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_right_face_submenu = SubmenuItem(text="Right Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_front_face_submenu = SubmenuItem(text="Front Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_face_submenu = SubmenuItem(text="Middle Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_back_face_submenu = SubmenuItem(text="Back Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_top_face_submenu = SubmenuItem(text="Top Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_bottom_face_submenu = SubmenuItem(text="Bottom Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
 
-        self.face_rotation_menu.append_item(rotate_front_face)
-        self.face_rotation_menu.append_item(rotate_middle_face)
-        self.face_rotation_menu.append_item(rotate_back_face)
+        
+        self.face_rotation_menu.append_item(rotate_front_face_submenu)
+        self.face_rotation_menu.append_item(rotate_middle_face_submenu)
+        self.face_rotation_menu.append_item(rotate_back_face_submenu)
+        self.face_rotation_menu.append_item(rotate_left_face_submenu)
+        self.face_rotation_menu.append_item(rotate_right_face_submenu)
+        self.face_rotation_menu.append_item(rotate_top_face_submenu)
+        self.face_rotation_menu.append_item(rotate_bottom_face_submenu)
+
+        #Add direction functions to face rotation direction menu
+        rotate_face_CW_function_item = FunctionItem(text="Left (Counter-Clockwise)",function=self.rotate_face, menu=self.face_rotation_direction_menu, should_exit=True)
+        rotate_face_CCW_function_item = FunctionItem(text="Right (Clock-Wise)", function=self.rotate_face, menu=self.face_rotation_direction_menu, should_exit=True)
+
+        self.face_rotation_direction_menu.append_item(rotate_face_CW_function_item)
+        self.face_rotation_direction_menu.append_item(rotate_face_CCW_function_item)
 
     def attach_cube_menus(self):
         #Append sections to view cube menu
@@ -290,9 +322,69 @@ class Game(object):
     
     def get_face_string(self) ->str:
         pass
+
+    def update_front_face_string(self) -> None:
+        self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
     
     def randomize_cube(self) -> None:
         a = "We don't have randomize in yet"
+
+
+    #Rotations
+    #Rows
+    def rotate_row(self):
+        
+        #Get previous menu
+        row_name = self.row_rotation_menu.currently_active_menu.get_title()
+        row_direction = self.row_rotation_direction_menu.currently_active_menu.get_title()
+
+        #Define these explicitly in case row name or row direction aren't defined yet
+        if row_name == "Top Row":
+            self.cubes[self.current_cube_index].rotate_top_row_left() if row_direction == "Left" else self.cubes[self.current_cube_index].rotate_top_row_right()
+        elif row_name == "Middle Row":
+            self.cubes[self.current_cube_index].rotate_middle_row_left() if row_direction == "Left" else self.cubes[self.current_cube_index].rotate_middle_row_right()
+        elif row_name == "Bottom Row":
+            self.cubes[self.current_cube_index].rotate_bottom_row_left() if row_direction == "Left" else self.cubes[self.current_cube_index].rotate_bottom_row_right()
+
+        self.update_front_face_string()
+        self.row_rotation_menu.prologue_text = f"{self.cube_front_string}"
+        self.row_rotation_direction_menu.prologue_text = f"{self.cube_front_string}"
+
+    def rotate_column(self):
+        #Get previous menu
+        column_name = self.row_rotation_menu.currently_active_menu.get_title()
+        column_direction = self.row_rotation_direction_menu.currently_active_menu.get_title()
+
+        #Define these explicitly in case column name or column direction aren't defined yet
+        if column_name == "Left Column":
+            self.cubes[self.current_cube_index].rotate_left_column_up() if column_direction == "Up" else self.cubes[self.current_cube_index].rotate_left_column_down()
+        elif column_name == "Middle Column":
+            self.cubes[self.current_cube_index].rotate_middle_column_up() if column_direction == "Up" else self.cubes[self.current_cube_index].rotate_middle_column_down()
+        elif column_name == "Right Column":
+            self.cubes[self.current_cube_index].rotate_right_column_up() if column_direction == "Up" else self.cubes[self.current_cube_index].rotate_right_column_down()
+
+        self.update_front_face_string()
+
+    def rotate_face(self):
+        #Get previous menu
+        face_name = self.face_rotation_menu.currently_active_menu.get_title()
+        face_direction = self.face_rotation_direction_menu.currently_active_menu.get_title()
+
+        #There are some more things I need to do in terms of being able to rotate any face
+        # if face_name == "Front Face":
+        #     self.cubes[self.current_cube_index] if face_direction == "Left" else self.cubes[self.current_cube_index]
+        # elif face_name == "Back Face":
+        #     self.cubes[self.current_cube_index] if face_direction == "Left" else self.cubes[self.current_cube_index]
+        # elif face_name == "Left Face":
+        #     self.cubes[self.current_cube_index] if face_direction == "Left" else self.cubes[self.current_cube_index]
+        # elif face_name == "Right Face":
+        #     self.cubes[self.current_cube_index] if face_direction == "Left" else self.cubes[self.current_cube_index]
+        # elif face_name == "Top Face":
+        #     self.cubes[self.current_cube_index] if face_direction == "Left" else self.cubes[self.current_cube_index]
+        # else:
+        #     self.cubes[self.current_cube_index] if face_direction == "Left" else self.cubes[self.current_cube_index]
+        #     #Bottom Face
+        self.update_front_face_string()
 
 
     #__ Add reorient cube menu __

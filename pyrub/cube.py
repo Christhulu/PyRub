@@ -182,7 +182,7 @@ class Cube():
     ##
 
     #top row rotations
-    def rotate_top_right(self):
+    def rotate_top_row_right(self):
         #Get top row of front, right, back, and left side
         front_top = self.front.get_row(0)
         right_top = self.right.get_row(0)
@@ -200,7 +200,7 @@ class Cube():
         #Rotate top face 90 degrees counter-clockwise
         self.top.rotate_CCW()
 
-    def rotate_top_left(self):
+    def rotate_top_row_left(self):
         #Get top row of front, right, back, and left side
         front_top = self.front.get_row(0)
         right_top = self.right.get_row(0)
@@ -218,7 +218,7 @@ class Cube():
         self.top.rotate_CW()
 
     #middle row rotations
-    def rotate_mid_right(self):
+    def rotate_middle_row_right(self):
         #Get middle row of front, right, back, and left side
         front_mid = self.front.get_row(1)
         right_mid = self.right.get_row(1)
@@ -231,7 +231,7 @@ class Cube():
         self.back.replace_row_with_row(right_mid, 1, True)    # self.back.cells[1] = right_mid,
         self.left.replace_row_with_row(back_mid, 1, True)    # self.right.cells[1] = front_mid
 
-    def rotate_mid_left(self):
+    def rotate_middle_row_left(self):
         #Get middle row of front, right, back, and left side
         front_mid = self.front.get_row(1)
         right_mid = self.right.get_row(1)
@@ -246,7 +246,7 @@ class Cube():
 
 
     #bottom row rotations
-    def rotate_bottom_right(self):
+    def rotate_bottom_row_right(self):
         #Get bottom (last) row of front, right, back, and left side
         front_bot = self.front.get_row(2)
         right_bot = self.right.get_row(2)
@@ -262,7 +262,7 @@ class Cube():
         #Rotate bottom face right 90 degrees clockwise
         self.bottom.rotate_CW()
 
-    def rotate_bottom_left(self):
+    def rotate_bottom_row_left(self):
         #Get bottom (last) row of front, right, back, and left side
         front_bot = self.front.get_row(2)
         right_bot = self.right.get_row(2)
@@ -333,7 +333,7 @@ class Cube():
 
 
     #middle column rotations
-    def rotate_mid_column_up(self):
+    def rotate_middle_column_up(self):
         #Get middle column of front, top, back, and bottom face
         front_mid = self.front.get_column(1)
         top_mid = self.top.get_column(1)
@@ -346,7 +346,7 @@ class Cube():
         self.back.replace_col_with_col(top_mid, 1, False)
         self.bottom.replace_col_with_col(back_mid, 1, False)
 
-    def rotate_mid_column_down(self):
+    def rotate_middle_column_down(self):
         #Get middle column of front, top, back, and bottom face
         front_mid = self.front.get_column(1)
         top_mid = self.top.get_column(1)
