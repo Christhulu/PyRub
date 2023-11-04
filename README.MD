@@ -11,9 +11,17 @@ Using the terminal of your choosing, run ```python pyrub```
 * six==1.16.0
 * textwrap3==0.9.2
 
-# Roadmap of features that would be cool to add in the future
+# Roadmap
+Near Term:
+* A rigorous QA testing cycle
+* An improved graphical view of faces, and dynamically updated menus with visuals of relevant faces/columns
+* More graceful error handling
+* More UI restructuring
+* Hotkeys for quicker navigation based on frequently navigated options
+
+Long Term:
 * A random cube generator
 * Saving your cube progress
-* A graphical interface
+* Improvements to the how the cube and its faces area displayed (possibly with color)
 * Tracking turns taken
 * A leaderboard An optional account system
