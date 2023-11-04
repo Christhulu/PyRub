@@ -59,7 +59,7 @@ class Game(object):
         self.cube_menu = ConsoleMenu(
                             title=f"Cube {self.current_cube_index}",
                             subtitle="Front",
-                            prologue_text= self.cube_front_string,
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -68,7 +68,7 @@ class Game(object):
         self.cube_faces_menu = ConsoleMenu(
                             title=f"Cube {self.current_cube_index}",
                             subtitle="Current Face: Front (Choose a new face to view)",
-                            prologue_text= self.cube_front_string,
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -77,7 +77,7 @@ class Game(object):
 
         self.operations_menu = ConsoleMenu(
                             title="Operations",
-                            prologue_text= self.cube_front_string,
+                            prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,

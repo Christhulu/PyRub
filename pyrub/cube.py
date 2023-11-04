@@ -55,23 +55,20 @@ class Cube():
 
     #Faces: Front: 0, Right: 1, Back: 2, Left: 3, Top: 4, Bottom: 5
     def face_to_string(self, face:int) -> str:
-        
-        face = ""
-        match face:
-            case 0:
-                face += self.front.face_to_string()
-            case 1:
-                face += self.right.face_to_string()
-            case 2:
-                face += self.back.face_to_string()
-            case 3:
-                face += self.left.face_to_string()
-            case 4:
-                face += self.top.face_to_string()
-            case 5:
-                face += self.bottom.face_to_string()
-        
-        return face
+
+        if face == 0:
+            return self.front.face_to_string()
+        elif face == 1:
+            return self.right.face_to_string()
+        elif face == 2:
+            return self.back.face_to_string()
+        elif face == 3:
+            return self.left.face_to_string()
+        elif face == 4:
+            return self.top.face_to_string()
+        else:
+            return self.bottom.face_to_string()
+
 
     def print_cube_by_rows(self) -> None:
         print(f"Front:")
