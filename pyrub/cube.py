@@ -55,7 +55,17 @@ class Cube():
 
     #Faces: Front: 0, Right: 1, Back: 2, Left: 3, Top: 4, Bottom: 5
     def face_to_string(self, face:int) -> str:
+        """
+            Purpose:
+                This method returns a string corresponding to the face int that is passed
 
+            Args:
+                self (Cube) - The instance of cube that is calling this method
+                face (int) - An integer variable corresponding to the face that we want
+                
+            Return Type:
+                str
+        """
         if face == 0:
             return self.front.face_to_string()
         elif face == 1:
@@ -71,6 +81,17 @@ class Cube():
 
 
     def print_cube_by_rows(self) -> None:
+        """
+            Purpose:
+            This method prints the cube in row order.
+
+            Args:
+                self (Cube) - The instance of cube that is calling this method
+            
+            Return Type:
+                None
+        """
+
         print(f"Front:")
         self.front.print_rows()
 
@@ -90,6 +111,12 @@ class Cube():
         self.bottom.print_rows()
 
     def print_cube_by_cols(self) -> None:
+        """
+            This method prints the cube in column order
+            Args:
+                self (Cube) - The instance of cube that is calling this method
+        """
+
         print(f"Front:")
         self.front.print_columns()
 
@@ -110,7 +137,12 @@ class Cube():
 
     #Check if all are solved
     def check_solved(self) -> bool:
+        """
+            This method checks if all sides are solved.
 
+            Args:
+                self - The instance of cube that is calling this method
+        """
         front_is_solved = self.front.validate_cell_uniformity()
         back_is_solved = self.back.validate_cell_uniformity()
         top_is_solved = self.top.validate_cell_uniformity()
@@ -120,14 +152,18 @@ class Cube():
 
         return front_is_solved and back_is_solved and top_is_solved and bottom_is_solved and left_is_solved and right_is_solved
 
-    #Check a specific side for if it's solved
-    #Front: 0
-    #Back: 1
-    #Top: 2
-    #Bottom: 3
-    #Left: 4
-    #Right: 5
+
+
     def check_side(self, side: int) -> bool:
+        """
+            This method takes in an int parameter called side, that checks a specific side for if it's solved (homogeneous)
+
+            Args:
+                self (Cube) - The instance of cube that is calling this method
+                side(int) - Corresponds to a side and is the range [0,5]
+                Front: 0, Back: 1, Top: 2, Bottom: 3, Left: 4, Right: 5
+        """
+
         solved = False
         match side:
             case 0:
@@ -146,8 +182,14 @@ class Cube():
         return solved
 
 
-    #print which sides are solved
+
     def print_solved_sides(self) -> None:
+        """
+            This method prints which sides are solved
+            Args:
+                self (Cube) - The instance of cube that is calling this method
+        """
+
         solved_sides = []
 
         for i in range(0, 7):
@@ -177,11 +219,10 @@ class Cube():
                         solved = self.right.print_face()
 
 
-    ##
-    # Row Operations #
-    ##
+    #region Rotations
 
-    #top row rotations
+    #region Row Operations
+    #region Top Row Rotations
     def rotate_top_row_right(self):
         #Get top row of front, right, back, and left side
         front_top = self.front.get_row(0)
@@ -216,8 +257,9 @@ class Cube():
 
         #Rotate top face 90 degrees counter clockwise
         self.top.rotate_CW()
+    #endregion Top Row Rotations
 
-    #middle row rotations
+    #region Middle Row Rotations
     def rotate_middle_row_right(self):
         #Get middle row of front, right, back, and left side
         front_mid = self.front.get_row(1)
@@ -243,9 +285,10 @@ class Cube():
         self.right.replace_row_with_row(back_mid, 1, True)    # self.right.cells[1] = back_mid,
         self.back.replace_row_with_row(left_mid, 1, True)    # self.back.cells[1] = left_mid,
         self.left.replace_row_with_row(front_mid, 1, True)    # self.left.cells[1] = front_mid
+    
+    #endregion Middle Row Rotations
 
-
-    #bottom row rotations
+    #region Bottom Row Rotations
     def rotate_bottom_row_right(self):
         #Get bottom (last) row of front, right, back, and left side
         front_bot = self.front.get_row(2)
@@ -277,11 +320,12 @@ class Cube():
 
         #Rotate bottom face right (90 degrees counter-clockwise)
         self.bottom.rotate_CCW()
+    #endregion Bottom Row Rotations
+    #endregion Row Operations
 
-    ##
-    # Column Operations #
-    ##
-    #left column rotations
+    #region Column Operations
+
+    #region Left Column Rotations
     def rotate_left_column_up(self):
 
         #Get left column of front, top faces
@@ -330,9 +374,9 @@ class Cube():
 
         #Rotate left face right (90 degrees clockwise)
         self.left.rotate_CW()
+    #endregion Left Column Rotations
 
-
-    #middle column rotations
+    #region Middle Column Rotations
     def rotate_middle_column_up(self):
         #Get middle column of front, top, back, and bottom face
         front_mid = self.front.get_column(1)
@@ -359,8 +403,9 @@ class Cube():
         self.back.replace_col_with_col(bottom_mid, 1, False)
         self.bottom.replace_col_with_col(front_mid, 1, True)
 
+    #endregion Middle Column Rotations
 
-    #right column rotations
+    #region Right Column Rotations
     def rotate_right_column_up(self):
         #Get right column of front, top face
         #Get left column of back face
@@ -399,7 +444,12 @@ class Cube():
         #Rotate right face left (90 degrees counter clockwise)
         self.right.rotate_CCW()
 
+    #endregion Right Column Rotations
+    #endregion Column Operations
 
+    #region Face Operations
+
+    #region Front Face Operations
     def rotate_front_face_CCW(self):
         """
         This method rotates the front face of the cube counter-clockwise.
@@ -418,7 +468,9 @@ class Cube():
         """
         pass
 
+    #endregion Front Face Operations
 
+    #region Left Face Operations
     def rotate_left_face_CCW(self):
         """
         This method rotates the left face of the cube counter-clockwise.
@@ -437,6 +489,9 @@ class Cube():
         """
         self.rotate_left_column_down()
 
+    #endregion Left Face Operations
+
+    #region Right Face Operations
     def rotate_right_face_CCW(self):
         """
         This method rotates the right face of the cube counter-clockwise.
@@ -455,22 +510,53 @@ class Cube():
         """
         self.rotate_right_column_up()
 
+    #endregion Right Face Operations
+    
+    #region Top Face Operations
     def rotate_top_face_CW(self):
+        """
+        This method rotates the top face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
     def rotate_top_face_CCW(self):
+        """
+        This method rotates the top face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
+    
+    #endregion Top Face Operations
 
+    #region Bottom Face Operations
     def rotate_bottom_face_CW(self):
+        """
+        This method rotates the top face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
     def rotate_bottom_face_CCW(self):
+        """
+        This method rotates the top face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
+    #endregion Bottom Face Operations
 
-
+    #region Middle Face Operations
     def rotate_middle_face_CCW(self):
-
+        """
+        This method rotates the middle face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's middle row
         #Get left face's middle column
         #Get bottom face's middle row
@@ -491,6 +577,11 @@ class Cube():
 
 
     def rotate_middle_face_CW(self):
+        """
+        This method rotates the middle face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's middle row
         #Get right face's middle column
         #Get bottom face's middle row
@@ -510,7 +601,15 @@ class Cube():
         self.bottom.replace_row_with_col(right_mid, 1, False)
         self.left.replace_col_with_row(bottom_mid, 1, True)
 
+    #endregion Middle Face Operations
+    
+    #region Back Face Operations
     def rotate_back_face_CCW(self):
+        """
+        This method rotates the back face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
@@ -534,6 +633,11 @@ class Cube():
         self.back.rotate_CCW()
 
     def rotate_back_face_CW(self):
+        """
+        This method rotates the back face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
@@ -555,10 +659,25 @@ class Cube():
         #Rotate back face clockwise
         self.back.rotate_CW()
 
+    #endregion Back Face Operations
+
+    #endregion Face Operations
+
+    #endregion Rotations
+
+
+    #region Shift Cube Orientation Operations
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
     def change_front(self, index: int):
-
+        """
+        This method selects a method to update the front face based on the index parameter that is passed
+        Args:
+            self - The current face instance
+            index (int) - The index corresponding to the new face (not including front itself)
+            
+            What each index means: Left - 0, Back - 1, Right - 2, Top - 3, Bottom - 4
+        """
         match index:
             case 0:
                 self.set_left_to_front()
@@ -572,9 +691,6 @@ class Cube():
                 self.set_bottom_to_front()
         
 
-
-    #These change these current face's to the front face
-    #They still need more testing but I think this is how they would work
     def set_left_to_front(self):
 
         self.front, self.left, self.back, self.right = self.left, self.back, self.right, self.front
@@ -635,3 +751,5 @@ class Cube():
         #back should be upside down
         self.back.rotate_CW()
         self.back.rotate_CW()
+
+    #endregion Shift Cube Orientation Operations
