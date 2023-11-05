@@ -456,21 +456,45 @@ class Cube():
         self.rotate_right_column_up()
 
     def rotate_top_face_CW(self):
+        """
+        This method rotates the top face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
     def rotate_top_face_CCW(self):
+        """
+        This method rotates the top face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
     def rotate_bottom_face_CW(self):
+        """
+        This method rotates the top face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
     def rotate_bottom_face_CCW(self):
+        """
+        This method rotates the top face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         pass
 
 
 
     def rotate_middle_face_CCW(self):
-
+        """
+        This method rotates the middle face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's middle row
         #Get left face's middle column
         #Get bottom face's middle row
@@ -491,6 +515,11 @@ class Cube():
 
 
     def rotate_middle_face_CW(self):
+        """
+        This method rotates the middle face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's middle row
         #Get right face's middle column
         #Get bottom face's middle row
@@ -511,6 +540,11 @@ class Cube():
         self.left.replace_col_with_row(bottom_mid, 1, True)
 
     def rotate_back_face_CCW(self):
+        """
+        This method rotates the back face of the cube counter-clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
@@ -534,6 +568,11 @@ class Cube():
         self.back.rotate_CCW()
 
     def rotate_back_face_CW(self):
+        """
+        This method rotates the back face of the cube clockwise.
+        Args:
+            self - The current face instance
+        """
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
@@ -558,7 +597,14 @@ class Cube():
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
     def change_front(self, index: int):
-
+        """
+        This method selects a method to update the front face based on the index parameter that is passed
+        Args:
+            self - The current face instance
+            index (int) - The index corresponding to the new face (not including front itself)
+            
+            What each index means: Left - 0, Back - 1, Right - 2, Top - 3, Bottom - 4
+        """
         match index:
             case 0:
                 self.set_left_to_front()
