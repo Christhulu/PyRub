@@ -1,17 +1,35 @@
 from face import Face
 
-class Cube():
+class Cube(object):
+    """
+        The base cube class for a 3x3 Rubik's cube.
+        This extends the object class.
 
+        Attributes:
+            front - The Front face of the cube
+    """
+
+    #region Cube Constructor
+    
     def __init__(self):
-        self.front =  Face("o", "r", 3)
-        self.back = Face("r", "o", 3)
-        self.left = Face("g", "b", 3)
-        self.right = Face("b", "g", 3)
-        self.top = Face("y", "w", 3)
-        self.bottom = Face("w", "y", 3)
+        self.opposites:dict[str, str] = {'o': 'r', 'r':'o', 'g': 'b', 'b':'g', 'y':'w', 'w':'y'}
+        
+        self.front =  Face("o", 3)
+        self.back = Face("r", 3)
+        self.left = Face("g", 3)
+        self.right = Face("b", 3)
+        self.top = Face("y", 3)
+        self.bottom = Face("w", 3)
 
+    #endregion Cube Constructor
+
+    #region Cube Display Methods
+   
     def print_cube(self) -> None:
+        """
+            Prints each face with labels
 
+        """
         print(f"Front:")
         self.front.print_face()
 
@@ -31,7 +49,9 @@ class Cube():
         self.bottom.print_face()
 
     def cube_to_string(self) -> str:
-
+        """
+        
+        """
         cube = ""
         cube += self.front.face_to_string()
         cube += "\n"
@@ -135,6 +155,10 @@ class Cube():
         print(f"Bottom:")
         self.bottom.print_columns()
 
+     #endregion Cube Display Methods
+
+    #region Cube Completeness Checks
+    
     #Check if all are solved
     def check_solved(self) -> bool:
         """
@@ -218,6 +242,7 @@ class Cube():
                         print(f"Right:")
                         solved = self.right.print_face()
 
+    #endregion Cube Completeness Checks
 
     #region Rotations
 
