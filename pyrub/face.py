@@ -1,6 +1,7 @@
 class Face(object):
     """
-    This class is responsible for handling all of the details involved with a single face of the Rubik's cube.
+    Purpose: This class is responsible for handling all of the details involved with a single face of the Rubik's cube.
+
     Args:
         color (str): This is the color this side is initialized to.
         side_length (int): This is the length of the side, and is used to set the dimensions of the face. (The face is a square)
@@ -11,6 +12,11 @@ class Face(object):
 
     #Default constructor
     def __init__(self, color:str, side_length: int):
+        """
+           Purpose: Default Constructor:
+            Initialize default variables and create matrix for cells
+            Also create list view for checking if this face is solved
+        """
         self.color:str = color
         self.side_length:int = side_length
         self.cells:list[list[str]] = []
@@ -28,33 +34,56 @@ class Face(object):
         #I don't want to keep this updated constantly, I think I'll have a button or something that they can use to check uniformity that will update this
         self.all_uniform = True
 
-    #String representation of face
     def __str__(self):
-        #represent all of face object's fields out in a human readable format
+        """
+        Purpose: This method represents all of this face object's fields in a human readable format
+
+        Args:
+            self (Face)
+        """
+
         return f'Cells: {self.cells}'
 
-    #Function representation of face
     def __repr__(self):
-        #represent face in a human readable format
+        """
+        Purpose: This method also represents all of this face object's fields in a human readable format
+        To be honest, I can't tell the difference between this and __str__, but I've added in a check for if the face is complete.
+        
+        Args:
+            self (Face)
+        """
         return f'Cells: {self.cells}, Face complete: {self.validate_cell_uniformity()})'
 
-    #Flatten face into list
     def flatten_face(self) -> None:
+        """
+        Purpose: This method flattens the face down into a single list so that we can more easily convert it to a set
+        or just display it as a list if we want. We're using a list comprehension here.
+
+        Args:
+            self (Face)
+        """
         self.list_view = [item for rowlist in self.cells for item in rowlist]
 
-    #Check if face is all one color by checking list version of face as a set
     def validate_cell_uniformity(self) -> bool:
+        """
+        Purpose: This method flattens the face down into a single list and then converts it to a set to make sure the cells all have the same color.
+        If they all have the same color, the set should only have one element, and the face is solved for some color. (Doesn't have to be the original)
+
+        Args:
+            self (Face)
+        """
         self.flatten_face()
         set_view = set(self.list_view)
         self.all_uniform = len(set_view) == 1
         return self.all_uniform
 
-    #Print face
-    def print_face(self) -> None:
-        for i in self.cells:
-            print()
-
     def face_to_string(self) -> str:
+        """
+        Purpose: This method converts the cells in the face into a string that is easy to display in the interface.
+
+        Args:
+            self (Face)
+        """
         face_str:str = ''
         for i in self.cells:
             face_str += '\t'.join(map(str, i))
@@ -72,7 +101,6 @@ class Face(object):
     def print_rows(self) -> None:
         for row in self.cells:
             print(f"\t {row}")
-        pass
 
     #Print in column order
     def print_columns(self) -> None:
@@ -80,7 +108,6 @@ class Face(object):
         for index in range(0, self.side_length):
             col = self.get_column(index)
             print(f"\t {col}")
-        pass
 
     #Used in print row and also for when we need to rotate something
     #Get row by index with 0 being the top and 2 being the bottom row
@@ -227,9 +254,16 @@ class Face(object):
 
         return old_col
 
-    #Replace row with passed row with front to back or back to front orientation
+
     def replace_row_with_row(self, row: list[str], row_index: int, ascending: bool) -> None:
-        # 0 - 1 - 2 becomes 0 - 1 - 2
+        """
+        Purpose: Replace row with passed row with left to right or right to left orientation
+
+        Args:
+            row (list[str]): The row that is replacing the row at row_index
+            row_index (int): The index of the row that we are modifying
+            ascending (bool): The direction we use to read the passed row
+        """
         if ascending:
             for i in range(len(self.cells[row_index])):
                 #Replace cell at [row][i] with cell at row[i]
@@ -238,9 +272,16 @@ class Face(object):
             for i in range(self.side_length):
                 self.cells[row_index][i] = row[self.side_length - i - 1]
 
-    #Replace row with passed column with top to bottom or bottom to top orientation
+
     def replace_row_with_col(self, col: list[str], row_index: int, ascending: bool) -> None:
-        # 0 - 1 - 2 becomes 0 - 1 - 2
+        """
+        Purpose: Replace row with passed column with top to bottom or bottom to top orientation
+
+        Args:
+            col (list[str]): The column that is replacing the row at row_index
+            row_index (int): The index of the row that we are modifying
+            ascending (bool): The direction we use to read the passed column
+        """
         if ascending:
             for i in range(self.side_length):
                 #Replace cell at [row][i] with cell at col[i]
@@ -250,9 +291,15 @@ class Face(object):
                 self.cells[row_index][i] = col[self.side_length - i - 1]
 
 
-    #Replace column with passed row with front to back or back to front orientation
     def replace_col_with_row(self, row: list[str], col_index: int, ascending: bool) -> None:
+        """
+        Purpose: Replace column with passed row with left to right or right to left orientation
 
+        Args:
+            row (list[str]): The row that is replacing the column at col_index
+            col_index (int): The index of the column that we are modifying
+            ascending (bool): The direction we use to read the passed row
+        """
         if ascending:
             for i in range(self.side_length):
                 #Replace cell at [i][col] with cell at row[i]
@@ -262,8 +309,17 @@ class Face(object):
                 #Replace cell at [i][col] with cell at row[i]
                 self.cells[i][col_index] = row[self.side_length - i - 1]
 
-    #Replace column with passed column with top to bottom or bottom to top orientation
+    
     def replace_col_with_col(self, col: list[str], col_index: int, ascending: bool) -> None:
+        """
+        Purpose: Replace column with passed column with top to bottom or bottom to top orientation
+        
+        Args:
+            col (list[str]): The column that is replacing the column at col_index
+            col_index (int): The index of the column that we are modifying
+            ascending (bool): The direction we use to read the passed column
+
+        """
         if ascending:
             # print("Ascending")
             for i in range(self.side_length):
