@@ -1,4 +1,6 @@
 from face import Face
+from types import FunctionType
+import random
 
 class Cube(object):
     """
@@ -690,18 +692,44 @@ class Cube(object):
 
     #endregion Rotations
 
+    #region Cube Helper Methods
+
+    def randomize_cube(self):
+        """
+        Purpose:\n
+        This method gets the list of methods for the cube face, selects a random set of them, and enacts them on the cube.\n
+        I can probably exclude certain methods with a pattern or just make a list with the method names. I'll play around with it
+        Args:\n
+            * self: The current face instance\n
+        """
+        methods = [x for x, y in self.__dict__.items() if type(y) == FunctionType and (x.startswith('rot') and not x.startswith('_'))]
+
+        #I want there to be at least 10 operations
+        min_operations = 10
+        num_operations = int(random() * 30) + min_operations
+
+        #This works because we're just rotating, which shouldn't require any parameters
+        for i in range(num_operations):
+            func = random.choice(methods)
+            getattr(self, func)()
+
+        pass
+
+
+    #endregion Cube Helper Methods
 
     #region Shift Cube Orientation Operations
     #These move faces as a whole, so that the user is viewing a different face
     #Will address these later after I get the base rotations down
     def change_front(self, index: int):
         """
-        This method selects a method to update the front face based on the index parameter that is passed
-        Args:
-            self - The current face instance
-            index (int) - The index corresponding to the new face (not including front itself)
-            
-            What each index means: Left - 0, Back - 1, Right - 2, Top - 3, Bottom - 4
+        Purpose:\n
+        This method selects a method to update the front face based on the index parameter that is passed.\n
+        Args:\n
+            * self: The current face instance\n
+            * index (int): The index corresponding to the new face (not including front itself)\n\n
+         
+            Notes: What each index means: Left - 0, Back - 1, Right - 2, Top - 3, Bottom - 4\n
         """
         match index:
             case 0:
