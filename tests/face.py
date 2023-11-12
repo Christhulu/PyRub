@@ -4,8 +4,11 @@ from pyrub.face import Face
 
 class TestFace(unittest.TestCase):
     """
-    Subclass for testing our methods
+    Test Case Subclass for testing our Face methods
     """ 
+
+    def setUp(self) -> None:
+        return super().setUp()
 
     #region Constructor Tests
     def test_face_side_length(self):
@@ -51,8 +54,12 @@ class TestFace(unittest.TestCase):
 
         self.assertNotEqual(to_string_result, "")
 
+    
     def test_flatten_face(self):
-        pass
+        face = Face('r', 3)
+
+        expected_result = ["r", "r", "r", "r", "r", "r", "r", "r", "r"]
+        self.assertListEqual(expected_result, face.list_view)
 
 
     #endregion To String Tests
@@ -68,7 +75,7 @@ class TestFace(unittest.TestCase):
     def test_face_incomplete(self):
         face = Face('r', 3)
 
-        face.cells[0][1] = "*"
+        face.cells[0][0] = "*"
 
         complete = face.validate_cell_uniformity()
         self.assertFalse(complete)
@@ -124,6 +131,17 @@ class TestFace(unittest.TestCase):
     #endregion Get Methods
 
     #region Rotate Methods
+    def test_rotate_CW(self):
+        
+        face = Face('r', 3)
+        face.cells[0][0] = "*"
+        face.cells[0][1] = "*"
+        face.cells[0][2] = "*"
+        
+        face.rotate_CW()
+
+
+
 
     #endregion Rotate Methods
 
