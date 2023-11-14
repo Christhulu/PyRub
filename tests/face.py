@@ -147,28 +147,145 @@ class TestFace(unittest.TestCase):
     #endregion Rotate Methods
 
     #region Replace Methods
-    def test_replace_row_with_row(self):
-        pass
+    def test_replace_top_row_with_row(self):
 
-    def test_replace_row_with_row_descending(self):
-        pass
+        replacement_row = ["1", "2", "3"]
+        self.face.replace_row_with_row(replacement_row, 0, True)
 
-    def test_replace_row_with_col(self):
-        pass
+        expected_result = ["1", "2", "3"]
+        actual_result = self.face.get_row(0)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_middle_row_with_row(self):
+
+        replacement_row = ["1", "2", "3"]
+        self.face.replace_row_with_row(replacement_row, 1, True)
+
+        expected_result = ["1", "2", "3"]
+        actual_result = self.face.get_row(1)
+
+        self.assertListEqual(expected_result, actual_result)
+
+    def test_replace_bottom_row_with_row(self):
+
+        replacement_row = ["1", "2", "3"]
+        self.face.replace_row_with_row(replacement_row, 2, True)
+
+        expected_result = ["1", "2", "3"]
+        actual_result = self.face.get_row(2)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_top_row_with_row_descending(self):
+        replacement_row = ["1", "2", "3"]
+        self.face.replace_row_with_row(replacement_row, 0, False)
+
+
+        expected_result = ["3", "2", "1"]
+        actual_result = self.face.get_row(0)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_middle_row_with_row_descending(self):
+        replacement_row = ["1", "2", "3"]
+        self.face.replace_row_with_row(replacement_row, 1, False)
+
+        expected_result = ["3", "2", "1"]
+        actual_result = self.face.get_row(1)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_bottom_row_with_row_descending(self):
+        replacement_row = ["1", "2", "3"]
+        self.face.replace_row_with_row(replacement_row, 2, False)
+
+        expected_result = ["3", "2", "1"]
+        actual_result = self.face.get_row(2)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_top_row_with_col(self):
+        replacement_column = ["1", "2", "3"]
+        self.face.replace_row_with_col(replacement_column, 0, True)
+
+
+        expected_result = ["1", "2", "3"]
+        actual_result = self.face.get_row(0)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_middle_row_with_col(self):
+        replacement_column = ["1", "2", "3"]
+        self.face.replace_row_with_col(replacement_column, 1, True)
+
+
+        expected_result = ["1", "2", "3"]
+        actual_result = self.face.get_row(1)
+
+        self.assertListEqual(expected_result, actual_result)
+
+
+    def test_replace_bottom_row_with_col(self):
+        replacement_column = ["1", "2", "3"]
+        self.face.replace_row_with_col(replacement_column, 2, True)
+
+
+        expected_result = ["1", "2", "3"]
+        actual_result = self.face.get_row(2)
+
+        self.assertListEqual(expected_result, actual_result)
+
 
     def test_replace_row_with_col_descending(self):
-        pass
+        replacement_column = ["1", "2", "3"]
+        self.face.replace_row_with_col(replacement_column, 0, False)
+
+        expected_result = ["3", "2", "1"]
+        actual_result = self.face.get_row(0)
+
+        self.assertListEqual(expected_result, actual_result)
+
+    def test_replace_middle_row_with_col_descending(self):
+        replacement_column = ["1", "2", "3"]
+        self.face.replace_row_with_col(replacement_column, 1, False)
+
+        expected_result = ["3", "2", "1"]
+        actual_result = self.face.get_row(1)
+
+        self.assertListEqual(expected_result, actual_result)
+
+    def test_replace_bottom_row_with_col_descending(self):
+        replacement_column = ["1", "2", "3"]
+        self.face.replace_row_with_col(replacement_column, 2, False)
+
+        expected_result = ["3", "2", "1"]
+        actual_result = self.face.get_row(2)
+
+        self.assertListEqual(expected_result, actual_result)
+
 
     def test_replace_col_with_col(self):
+        replacement_column = ["1", "2", "3"]
+        
         pass
 
     def test_replace_col_with_col_descending(self):
+        replacement_column = ["1", "2", "3"]
         pass
 
     def test_replace_col_with_row(self):
+        replacement_row = ["1", "2", "3"]
         pass
 
     def test_replace_col_with_row_descending(self):
+        replacement_row = ["1", "2", "3"]
         pass
 
     #endregion Replace methods
