@@ -6,9 +6,13 @@ class TestFace(unittest.TestCase):
     """
     Test Case Subclass for testing our Face methods
     """ 
-
+    @classmethod
     def setUp(self) -> None:
         self.face = Face('r', 3)
+
+    @classmethod
+    def tearDown(self) -> None:
+        self.face = None
 
     #region Constructor Tests
     def test_face_side_length(self):
