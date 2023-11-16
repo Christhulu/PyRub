@@ -2,13 +2,9 @@
 import unittest
 from unittest import getTestCaseNames
 
-import cube
-import face
-import game
-
-from face import TestFace
-from cube import TestCube
-from game import TestGame
+import test_face
+import test_cube
+import test_game
 
 # initialize the test suite
 loader = unittest.TestLoader()
