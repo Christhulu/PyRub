@@ -1,4 +1,4 @@
-from face import Face
+from pyrub.face import Face
 from types import FunctionType
 import random
 

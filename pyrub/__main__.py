@@ -1,10 +1,11 @@
+import sys
 from cube import Cube
 from face import Face
 from game import Game
-from consolemenu import *
-from consolemenu.items import *
-from consolemenu.format import *
-import sys
+
+import importlib
+consolemenu = importlib.import_module("console-menu")
+
 
 # MIT LICENSE FOR CONSOLE-MENU
 # The MIT License (MIT)
