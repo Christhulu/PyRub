@@ -172,19 +172,7 @@ class Face(object):
         """
         n = self.side_length
 
-        #Transpose face matrix
-        for i in range(n) :
-            for j in range(i + 1, n) :
-                self.cells[i][j], self.cells[j][i] = self.cells[j][i], self.cells[i][j]
-
-        #Reverse rows
-        for i in range(n // 2) :
-            top = 0
-            bot = n - 1
-            while (top < bot):
-                self.cells[i][top], self.cells[i][bot] = self.cells[i][bot], self.cells[i][top]
-                top += 1
-                bot -= 1
+        self.cells = [list(reversed(col)) for col in zip(*self.cells)]
 
 
     def rotate_CCW(self) -> None:
