@@ -19,12 +19,44 @@ class TestCube(unittest.TestCase):
     @classmethod
     def tearDown(self) -> None:
         self.cube = None
+        del self.cube
 
     #endregion Setup for Testing
 
 
     #region Constructor Tests
+    def test_cube_created(self):
+        pass
 
+    def test_cube_dimensions(self):
+        pass
+
+    def test_cube_opposites_set(self):
+        pass
+
+    def test_cube_front_set(self):
+        pass
+
+    def test_cube_back_set(self):
+        pass
+
+    def test_cube_left_set(self):
+        pass
+
+    def test_cube_right_set(self):
+        pass
+
+    def test_cube_top_set(self):
+        pass
+
+    def test_cube_bottom_set(self):
+        pass
+
+    def test_cube_front_back_opposites(self):
+        pass
+
+    def test_cube_left_right_opposites(self):
+        pass
 
 
     #endregion Constructor Tests

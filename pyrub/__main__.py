@@ -3,9 +3,6 @@ from cube import Cube
 from face import Face
 from game import Game
 
-import importlib
-consolemenu = importlib.import_module("console-menu")
-
 
 # MIT LICENSE FOR CONSOLE-MENU
 # The MIT License (MIT)

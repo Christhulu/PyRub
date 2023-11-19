@@ -4,8 +4,6 @@ from typing import Any, Sequence
 from pyrub.cube import Cube
 from pyrub.face import Face
 
-# import importlib
-# consolemenu = importlib.import_module('console_menu', 'consolemenu')
 from consolemenu import ConsoleMenu
 from consolemenu import SelectionMenu
 from consolemenu import Screen
@@ -16,7 +14,7 @@ from consolemenu.format import MenuBorderStyleType
 
 from consolemenu.items import SubmenuItem
 from consolemenu.items import FunctionItem
-# from consolemenu.items import function_item
+
 
 
 
