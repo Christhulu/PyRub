@@ -4,8 +4,21 @@ from typing import Any, Sequence
 from pyrub.cube import Cube
 from pyrub.face import Face
 
-import importlib
-consolemenu = importlib.import_module("console-menu")
+# import importlib
+# consolemenu = importlib.import_module('console_menu', 'consolemenu')
+from consolemenu import ConsoleMenu
+from consolemenu import SelectionMenu
+from consolemenu import Screen
+from consolemenu import MenuFormatBuilder
+
+from consolemenu.format import MenuBorderStyle
+from consolemenu.format import MenuBorderStyleType
+
+from consolemenu.items import SubmenuItem
+from consolemenu.items import FunctionItem
+# from consolemenu.items import function_item
+
+
 
 # MIT LICENSE FOR CONSOLE-MENU
 # The MIT License (MIT)
@@ -23,21 +36,21 @@ class Game(object):
         self.current_cube_index = 0
         self.current_cube_string:str = self.cubes[self.current_cube_index].cube_to_string()
         self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
-        self.current_screen = consolemenu.Screen()
+        self.current_screen = Screen()
 
-        self.menu_format = consolemenu.MenuFormatBuilder().set_border_style_type(consolemenu.MenuBorderStyleType.HEAVY_BORDER) \
+        self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
         .set_prompt("SELECT>") \
         .set_title_align('center') \
         .set_subtitle_align('center') \
         .set_prologue_text_align('center') \
-        .set_border_style_type(consolemenu.MenuBorderStyleType.DOUBLE_LINE_BORDER) \
+        .set_border_style_type(MenuBorderStyleType.DOUBLE_LINE_BORDER) \
         .set_left_margin(4) \
         .set_right_margin(4) \
         .show_header_bottom_border(True)
 
-        self.home_menu = consolemenu.ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, screen=self.current_screen, clear_screen=True)
+        self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, screen=self.current_screen, clear_screen=True)
 
-        self.about_menu = consolemenu.ConsoleMenu(title="About",
+        self.about_menu = ConsoleMenu(title="About",
                             prologue_text= "Created by Chris Alexander\nSpecial Thanks to:\n\n* Aegir Hall (for their incredible work on the console-menu library)\n* Paul Barret (for their work on curses-menu)",
                             show_exit_option=True,
                             exit_option_text="Back",
@@ -46,7 +59,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
         
-        self.help_menu = consolemenu.ConsoleMenu(title="Help",
+        self.help_menu = ConsoleMenu(title="Help",
                             prologue_text= "Welcome to PyRub, a Rubik's cube game built in Python 3. To select an option, type the number corresponding to the option and press enter. Have fun!",
                             show_exit_option=True,
                             exit_option_text="Back",
@@ -56,7 +69,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
         
-        self.cube_menu = consolemenu.ConsoleMenu(
+        self.cube_menu = ConsoleMenu(
                             title=f"Cube {self.current_cube_index}",
                             subtitle="Front",
                             prologue_text= f"{self.cube_front_string}",
@@ -65,7 +78,7 @@ class Game(object):
                             formatter=self.menu_format,
                         )
         
-        self.cube_faces_menu = consolemenu.ConsoleMenu(
+        self.cube_faces_menu = ConsoleMenu(
                             title=f"Cube {self.current_cube_index}",
                             subtitle="Current Face: Front (Choose a new face to view)",
                             prologue_text= f"{self.cube_front_string}",
@@ -75,7 +88,7 @@ class Game(object):
                         )
 
 
-        self.operations_menu = consolemenu.ConsoleMenu(
+        self.operations_menu = ConsoleMenu(
                             title="Operations",
                             prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
@@ -83,7 +96,7 @@ class Game(object):
                             formatter=self.menu_format,
                         )
 
-        self.rotation_menu = consolemenu.ConsoleMenu(
+        self.rotation_menu = ConsoleMenu(
                             title="Rotation Types",
                             prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
@@ -93,7 +106,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
 
-        self.row_rotation_menu = consolemenu.ConsoleMenu(
+        self.row_rotation_menu = ConsoleMenu(
                             title="Which row would you like to rotate?",
                             prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
@@ -103,7 +116,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
         
-        self.row_rotation_direction_menu = consolemenu.ConsoleMenu(
+        self.row_rotation_direction_menu = ConsoleMenu(
                     title="Which direction would you like to rotate the row?",
                     prologue_text= f"{self.cube_front_string}",
                     show_exit_option=True,
@@ -113,7 +126,7 @@ class Game(object):
                     formatter=self.menu_format
                 )
         
-        self.column_rotation_menu = consolemenu.ConsoleMenu(
+        self.column_rotation_menu = ConsoleMenu(
                             title="Which column would you like to rotate?",
                             prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
@@ -123,7 +136,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
         
-        self.column_rotation_direction_menu = consolemenu.ConsoleMenu(
+        self.column_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the column?",
                             prologue_text= f"{self.cube_front_string}",
                             show_exit_option=True,
@@ -133,7 +146,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
 
-        self.face_rotation_menu = consolemenu.ConsoleMenu(
+        self.face_rotation_menu = ConsoleMenu(
                             title="Which face would you like to rotate?",
                             show_exit_option=True,
                             exit_option_text="Back",
@@ -142,7 +155,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
 
-        self.face_rotation_direction_menu = consolemenu.ConsoleMenu(
+        self.face_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the face? (relative to the front)",
                             show_exit_option=True,
                             exit_option_text="Back",
@@ -151,7 +164,7 @@ class Game(object):
                             formatter=self.menu_format
                         )
 
-        self.reorient_menu = consolemenu.ConsoleMenu(
+        self.reorient_menu = ConsoleMenu(
                             title="Choose a new Front relative to the current front of the cube:",
                             show_exit_option=True,
                             exit_option_text="Back",
@@ -165,11 +178,11 @@ class Game(object):
 
     def attach_base_menus(self):
         # Create and append operations submenu items to operations menu
-        operations_sub_menu = consolemenu.SubmenuItem("Play", submenu=self.operations_menu, menu=self.home_menu)
+        operations_sub_menu = SubmenuItem("Play", submenu=self.operations_menu, menu=self.home_menu)
 
-        help_sub_menu = consolemenu.SubmenuItem("Help", submenu=self.help_menu, menu=self.home_menu)
+        help_sub_menu = SubmenuItem("Help", submenu=self.help_menu, menu=self.home_menu)
 
-        about_sub_menu = consolemenu.SubmenuItem("About", submenu=self.about_menu, menu=self.home_menu)
+        about_sub_menu = SubmenuItem("About", submenu=self.about_menu, menu=self.home_menu)
 
         #Append main operations to home
         self.home_menu.append_item(operations_sub_menu)
@@ -177,14 +190,14 @@ class Game(object):
         self.home_menu.append_item(about_sub_menu)
 
     def attach_operation_items(self):
-        new_cube_item = consolemenu.FunctionItem("Start a New Cube", function=self.add_new_cube, menu=self.operations_menu, should_exit=True)
+        new_cube_item = FunctionItem("Start a New Cube", function=self.add_new_cube, menu=self.operations_menu, should_exit=True)
         # 2nd
 
-        view_cube_item = consolemenu.SubmenuItem(text="View Current Cube", menu=self.operations_menu, submenu=self.cube_menu)
+        view_cube_item = SubmenuItem(text="View Current Cube", menu=self.operations_menu, submenu=self.cube_menu)
         # #3rd
-        rotate_submenu = consolemenu.SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
+        rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
         # #4th
-        randomize_cube_item = consolemenu.FunctionItem(text="Randomize Cube (Under Construction)", function=self.randomize_cube, menu=self.operations_menu, should_exit=True)
+        randomize_cube_item = FunctionItem(text="Randomize Cube (Under Construction)", function=self.randomize_cube, menu=self.operations_menu, should_exit=True)
 
         #Append operations to operations menu
         self.operations_menu.append_item(new_cube_item)
@@ -196,54 +209,54 @@ class Game(object):
         #Append row operations to rotate menu
 
 
-        rotate_row_submenu = consolemenu.SubmenuItem(text="Rotate Row", submenu=self.row_rotation_menu, menu=self.rotation_menu)
-        rotate_column_submenu = consolemenu.SubmenuItem(text="Rotate Column", submenu=self.column_rotation_menu, menu=self.rotation_menu)
-        rotate_face_submenu = consolemenu.SubmenuItem(text="Rotate Face", submenu=self.face_rotation_menu, menu=self.rotation_menu)
+        rotate_row_submenu = SubmenuItem(text="Rotate Row", submenu=self.row_rotation_menu, menu=self.rotation_menu)
+        rotate_column_submenu = SubmenuItem(text="Rotate Column", submenu=self.column_rotation_menu, menu=self.rotation_menu)
+        rotate_face_submenu = SubmenuItem(text="Rotate Face", submenu=self.face_rotation_menu, menu=self.rotation_menu)
 
         self.rotation_menu.append_item(rotate_row_submenu)
         self.rotation_menu.append_item(rotate_column_submenu)
         self.rotation_menu.append_item(rotate_face_submenu)
 
         #Add rows to row rotation menu
-        rotate_top_row_submenu = consolemenu.SubmenuItem(text="Top Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_middle_row_submenu = consolemenu.SubmenuItem(text="Middle Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_bottom_row_submenu = consolemenu.SubmenuItem(text="Bottom Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_top_row_submenu = SubmenuItem(text="Top Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_row_submenu = SubmenuItem(text="Middle Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_bottom_row_submenu = SubmenuItem(text="Bottom Row", submenu=self.row_rotation_direction_menu, menu=self.rotation_menu)
 
         self.row_rotation_menu.append_item(rotate_top_row_submenu)
         self.row_rotation_menu.append_item(rotate_middle_row_submenu)
         self.row_rotation_menu.append_item(rotate_bottom_row_submenu)
 
         #Add direction functions to row rotation direction menu
-        rotate_row_left_function_item = consolemenu.FunctionItem(text="Left",function=self.rotate_row, menu=self.row_rotation_direction_menu, should_exit=True)
-        rotate_row_right_function_item = consolemenu.FunctionItem(text="Right", function=self.rotate_row, menu=self.row_rotation_direction_menu, should_exit=True)
+        rotate_row_left_function_item = FunctionItem(text="Left",function=self.rotate_row, menu=self.row_rotation_direction_menu, should_exit=True)
+        rotate_row_right_function_item = FunctionItem(text="Right", function=self.rotate_row, menu=self.row_rotation_direction_menu, should_exit=True)
 
         self.row_rotation_direction_menu.append_item(rotate_row_left_function_item)
         self.row_rotation_direction_menu.append_item(rotate_row_right_function_item)
 
         #Add columns to column rotation menu
-        rotate_left_column_submenu = consolemenu.SubmenuItem(text="Left Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_middle_column_submenu = consolemenu.SubmenuItem(text="Middle Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_right_column_submenu = consolemenu.SubmenuItem(text="Right Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_left_column_submenu = SubmenuItem(text="Left Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_column_submenu = SubmenuItem(text="Middle Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_right_column_submenu = SubmenuItem(text="Right Column", submenu=self.column_rotation_direction_menu, menu=self.rotation_menu)
 
         self.column_rotation_menu.append_item(rotate_left_column_submenu)
         self.column_rotation_menu.append_item(rotate_middle_column_submenu)
         self.column_rotation_menu.append_item(rotate_right_column_submenu)
 
         #Add direction functions to column rotation direction menu
-        rotate_column_up_function_item = consolemenu.FunctionItem(text="Up",function=self.rotate_column, menu=self.column_rotation_direction_menu, should_exit=True)
-        rotate_column_down_function_item = consolemenu.FunctionItem(text="Down", function=self.rotate_column, menu=self.column_rotation_direction_menu, should_exit=True)
+        rotate_column_up_function_item = FunctionItem(text="Up",function=self.rotate_column, menu=self.column_rotation_direction_menu, should_exit=True)
+        rotate_column_down_function_item = FunctionItem(text="Down", function=self.rotate_column, menu=self.column_rotation_direction_menu, should_exit=True)
 
         self.column_rotation_direction_menu.append_item(rotate_column_up_function_item)
         self.column_rotation_direction_menu.append_item(rotate_column_down_function_item)
 
         #Add faces to face rotation menu
-        rotate_left_face_submenu = consolemenu.SubmenuItem(text="Left Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_right_face_submenu = consolemenu.SubmenuItem(text="Right Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_front_face_submenu = consolemenu.SubmenuItem(text="Front Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_middle_face_submenu = consolemenu.SubmenuItem(text="Middle Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_back_face_submenu = consolemenu.SubmenuItem(text="Back Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_top_face_submenu = consolemenu.SubmenuItem(text="Top Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
-        rotate_bottom_face_submenu = consolemenu.SubmenuItem(text="Bottom Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_left_face_submenu = SubmenuItem(text="Left Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_right_face_submenu = SubmenuItem(text="Right Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_front_face_submenu = SubmenuItem(text="Front Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_middle_face_submenu = SubmenuItem(text="Middle Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_back_face_submenu = SubmenuItem(text="Back Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_top_face_submenu = SubmenuItem(text="Top Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
+        rotate_bottom_face_submenu = SubmenuItem(text="Bottom Face", submenu=self.face_rotation_direction_menu, menu=self.rotation_menu)
 
         
         self.face_rotation_menu.append_item(rotate_front_face_submenu)
@@ -255,8 +268,8 @@ class Game(object):
         self.face_rotation_menu.append_item(rotate_bottom_face_submenu)
 
         #Add direction functions to face rotation direction menu
-        rotate_face_CW_function_item = consolemenu.FunctionItem(text="Left (Counter-Clockwise)",function=self.rotate_face, menu=self.face_rotation_direction_menu, should_exit=True)
-        rotate_face_CCW_function_item = consolemenu.FunctionItem(text="Right (Clock-Wise)", function=self.rotate_face, menu=self.face_rotation_direction_menu, should_exit=True)
+        rotate_face_CW_function_item = FunctionItem(text="Left (Counter-Clockwise)",function=self.rotate_face, menu=self.face_rotation_direction_menu, should_exit=True)
+        rotate_face_CCW_function_item = FunctionItem(text="Right (Clock-Wise)", function=self.rotate_face, menu=self.face_rotation_direction_menu, should_exit=True)
 
         self.face_rotation_direction_menu.append_item(rotate_face_CW_function_item)
         self.face_rotation_direction_menu.append_item(rotate_face_CCW_function_item)
@@ -267,19 +280,19 @@ class Game(object):
         #Update front face if it's not up to date
         self.cube_front_string = self.cubes[self.current_cube_index].face_to_string(0)
 
-        self.front_face_menu = consolemenu.ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=f"{self.cube_front_string}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.back_face_menu = consolemenu.ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(2)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.left_face_menu = consolemenu.ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(3)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.right_face_menu = consolemenu.ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(1)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.top_face_menu = consolemenu.ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(4)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.bottom_face_menu = consolemenu.ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(5)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.front_face_menu = ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=f"{self.cube_front_string}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.back_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(2)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.left_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(3)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.right_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(1)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.top_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(4)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.bottom_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(5)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
 
-        self.front_face_submenu = consolemenu.SubmenuItem(text="Front Face", submenu=self.front_face_menu, menu=self.cube_menu)
-        self.back_face_submenu = consolemenu.SubmenuItem(text="Back Face", submenu=self.back_face_menu, menu=self.cube_menu)
-        self.left_face_submenu = consolemenu.SubmenuItem(text="Left Face", submenu=self.left_face_menu, menu=self.cube_menu)
-        self.right_face_submenu = consolemenu.SubmenuItem(text="Right Face", submenu=self.right_face_menu, menu=self.cube_menu)
-        self.top_face_submenu = consolemenu.SubmenuItem(text="Top Face", submenu=self.top_face_menu, menu=self.cube_menu)
-        self.bottom_face_submenu = consolemenu.SubmenuItem(text="Bottom Face", submenu=self.bottom_face_menu, menu=self.cube_menu)
+        self.front_face_submenu = SubmenuItem(text="Front Face", submenu=self.front_face_menu, menu=self.cube_menu)
+        self.back_face_submenu = SubmenuItem(text="Back Face", submenu=self.back_face_menu, menu=self.cube_menu)
+        self.left_face_submenu = SubmenuItem(text="Left Face", submenu=self.left_face_menu, menu=self.cube_menu)
+        self.right_face_submenu = SubmenuItem(text="Right Face", submenu=self.right_face_menu, menu=self.cube_menu)
+        self.top_face_submenu = SubmenuItem(text="Top Face", submenu=self.top_face_menu, menu=self.cube_menu)
+        self.bottom_face_submenu = SubmenuItem(text="Bottom Face", submenu=self.bottom_face_menu, menu=self.cube_menu)
         
         self.cube_menu.append_item(self.front_face_submenu)
         self.cube_menu.append_item(self.back_face_submenu)
