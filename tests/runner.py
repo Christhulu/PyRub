@@ -33,5 +33,5 @@ successful_test_count = total_test_count - failed_test_count
 
 print("===[Test Suite Summary]===\n")
 print(f"Total Tests: {total_test_count}\n")
-print(f"Successful Tests:\n Count: {successful_test_count}/{total_test_count} \t Percentage: {successful_test_count/total_test_count*100}%\n")
-print(f"Failed Tests:\n Count: {failed_test_count}/{total_test_count} \t Percentage: {failed_test_count/total_test_count*100}%\n")
+print(f"Successful Tests:\n Count: {successful_test_count}/{total_test_count} \t Percentage: {round(successful_test_count/total_test_count*100, 2)}%\n")
+print(f"Failed Tests:\n Count: {failed_test_count}/{total_test_count} \t Percentage: {round(failed_test_count/total_test_count*100, 2)}%\n")
