@@ -28,34 +28,49 @@ class TestFace(unittest.TestCase):
     #endregion Constructor Tests
 
     #region str tests
-    def test_face_str(self):
+    def test_face_str_populated(self):
 
-        str_result = str(self.face)
-        self.assertNotEqual(str_result, "")
+        actual_result = str(self.face)
+        isEmpty = (actual_result == "")
+
+        self.assertFalse(isEmpty)
 
 
     #endregion str tests
 
     #region repr tests
-    def test_face_repr(self):
+    def test_face_repr_populated(self):
 
-        repr_result = repr(self.face)
-        self.assertNotEqual(repr_result, None)
+        actual_result = repr(self.face)
+        isEmpty = (actual_result == "")
+
+        self.assertFalse(isEmpty)
 
 
     #endregion repr tests
 
     #region To String Tests
-    def test_face_to_string(self):
-        to_string_result = self.face.face_to_string()
+    def test_face_to_string_populated(self):
+        
+        actual_result = self.face.face_to_string()
+        isEmpty = (actual_result == "")
 
-        self.assertNotEqual(to_string_result, "")
+        self.assertFalse(isEmpty)
+
+    def test_face_to_string_valid(self):
+        
+        actual_result = self.face.face_to_string()
+        expected_result = "r\tr\tr\nr\tr\tr\nr\tr\tr\n\n"
+
+        self.assertEqual(expected_result, actual_result)
 
     
     def test_flatten_face(self):
 
         expected_result = ["r", "r", "r", "r", "r", "r", "r", "r", "r"]
-        self.assertListEqual(expected_result, self.face.list_view)
+        actual_result = self.face.list_view
+
+        self.assertListEqual(expected_result, actual_result)
 
 
     #endregion To String Tests
@@ -77,46 +92,47 @@ class TestFace(unittest.TestCase):
 
     #region Get Methods
     def test_get_top_row(self):
-        expected_row = ["r", "r", "r"]
+        
+        expected_result = ["r", "r", "r"]
+        actual_result = self.face.get_row(0)
 
-        result = self.face.get_row(0)
-
-        self.assertListEqual(result, expected_row)
+        self.assertListEqual(expected_result, actual_result)
 
     def test_get_middle_row(self):
-        expected_row = ["r", "r", "r"]
 
-        result = self.face.get_row(1)
-        self.assertListEqual(result, expected_row)
+        expected_result = ["r", "r", "r"]
+        actual_result = self.face.get_row(1)
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_get_bottom_row(self):
 
-        expected_row = ["r", "r", "r"]
+        expected_result = ["r", "r", "r"]
+        actual_result = self.face.get_row(2)
 
-        result = self.face.get_row(2)
-        self.assertListEqual(result, expected_row)
+        self.assertListEqual(expected_result, actual_result)
 
     def test_get_left_column(self):
 
-        expected_column = ["r", "r", "r"]
+        expected_result = ["r", "r", "r"]
+        actual_result = self.face.get_column(0)
 
-        result = self.face.get_column(0)
-        self.assertListEqual(result, expected_column)
+        self.assertListEqual(expected_result, actual_result)
 
 
     def test_get_middle_column(self):
 
-        expected_column = ["r", "r", "r"]
+        expected_result = ["r", "r", "r"]
+        actual_result = self.face.get_column(1)
 
-        result = self.face.get_column(1)
-        self.assertListEqual(result, expected_column)
+        self.assertListEqual(expected_result, actual_result)
 
     def test_get_right_column(self):
 
-        expected_column = ["r", "r", "r"]
+        expected_result = ["r", "r", "r"]
+        actual_result = self.face.get_column(2)
 
-        result = self.face.get_column(2)
-        self.assertListEqual(result, expected_column)     
+        self.assertListEqual(expected_result, actual_result)     
 
     #endregion Get Methods
 
@@ -129,9 +145,10 @@ class TestFace(unittest.TestCase):
         
         self.face.rotate_CW()
 
-        expectedFaceList = [['r', 'r', '*'], ['r', 'r', '*'], ['r', 'r', '*']]
+        expected_result = [['r', 'r', '*'], ['r', 'r', '*'], ['r', 'r', '*']]
+        actual_result = self.face.cells
 
-        self.assertListEqual(self.face.cells, expectedFaceList)
+        self.assertListEqual(expected_result, actual_result)
 
   
 
@@ -143,9 +160,11 @@ class TestFace(unittest.TestCase):
 
         self.face.rotate_CCW()
 
-        expectedFaceList = [['*', 'r', 'r'], ['*', 'r', 'r'], ['*', 'r', 'r']]
+        expected_result= [['*', 'r', 'r'], ['*', 'r', 'r'], ['*', 'r', 'r']]
+        actual_result = self.face.cells
 
-        self.assertListEqual(self.face.cells, expectedFaceList)
+
+        self.assertListEqual(expected_result, actual_result)
 
 
     #endregion Rotate Methods

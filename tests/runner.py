@@ -31,7 +31,7 @@ total_test_count = len(face_tests) + len(cube_tests) + len(game_tests)
 failed_test_count = len(result.failures)
 successful_test_count = total_test_count - failed_test_count
 
-print("===[Test Suite Summary]===\n")
+print("\n===[Test Suite Summary]===\n")
 print(f"Total Tests: {total_test_count}\n")
 print(f"Successful Tests:\n Count: {successful_test_count}/{total_test_count} \t Percentage: {round(successful_test_count/total_test_count*100, 2)}%\n")
 print(f"Failed Tests:\n Count: {failed_test_count}/{total_test_count} \t Percentage: {round(failed_test_count/total_test_count*100, 2)}%\n")
