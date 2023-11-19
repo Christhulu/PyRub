@@ -408,7 +408,7 @@ class Game(object):
     # 4 - Top
     # 5 - Bottom
     def append_reorient_menu(self):
-        reorient_menu = consolemenu.SelectionMenu(
+        reorient_menu = SelectionMenu(
                             title="Choose a new Front relative to the current front of the cube:",
                             strings=["Right", "Back", "Left", "Top", "Bottom"],
                             show_exit_option=True,
