@@ -1,6 +1,5 @@
 # tests/runner.py
 import unittest
-from unittest.loader import getTestCaseNames
 
 import test_face
 import test_cube
@@ -24,9 +23,9 @@ runner = unittest.TextTestRunner(verbosity=3)
 result = runner.run(suite)
 
 
-face_tests = getTestCaseNames(TestFace, prefix='test_')
-cube_tests = getTestCaseNames(TestCube, prefix='test_')
-game_tests = getTestCaseNames(TestGame, prefix='test_')
+face_tests = loader.getTestCaseNames(TestFace)
+cube_tests = loader.getTestCaseNames(TestCube)
+game_tests = loader.getTestCaseNames(TestGame)
 
 total_test_count = len(face_tests) + len(cube_tests) + len(game_tests)
 failed_test_count = len(result.failures)
@@ -34,5 +33,5 @@ successful_test_count = total_test_count - failed_test_count
 
 print("===[Test Suite Summary]===\n")
 print(f"Total Tests: {total_test_count}\n")
-print(f"Successful Tests:\n Count: {successful_test_count}/{total_test_count} \t Percentage: {successful_test_count/total_test_count}%\n")
-print(f"Failed Tests:\n Count: {failed_test_count}/{total_test_count} \t Percentage: {failed_test_count/total_test_count}%\n")
+print(f"Successful Tests:\n Count: {successful_test_count}/{total_test_count} \t Percentage: {successful_test_count/total_test_count*100}%\n")
+print(f"Failed Tests:\n Count: {failed_test_count}/{total_test_count} \t Percentage: {failed_test_count/total_test_count*100}%\n")
