@@ -15,13 +15,14 @@ class Cube(object):
     
     def __init__(self):
         self.opposites:dict[str, str] = {'o': 'r', 'r':'o', 'g': 'b', 'b':'g', 'y':'w', 'w':'y'}
-        
-        self.front =  Face("o", 3)
-        self.back = Face("r", 3)
-        self.left = Face("g", 3)
-        self.right = Face("b", 3)
-        self.top = Face("y", 3)
-        self.bottom = Face("w", 3)
+        self.side_length:int = 3
+
+        self.front =  Face("o", self.side_length)
+        self.back = Face("r", self.side_length)
+        self.left = Face("g", self.side_length)
+        self.right = Face("b", self.side_length)
+        self.top = Face("y", self.side_length)
+        self.bottom = Face("w", self.side_length)
 
     #endregion Cube Constructor
 

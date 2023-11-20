@@ -26,31 +26,83 @@ class TestCube(unittest.TestCase):
 
     #region Constructor Tests
     def test_cube_created(self):
-        pass
+
+        actual_result = self.cube is not None and isinstance(self.cube, Cube)
+        expected_result = True
+
+        self.assertEqual(expected_result, actual_result)
 
     def test_cube_dimensions(self):
+        actual_result = self.cube.side_length
+        expected_result = 3
+
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_opposites_populated(self):
+
+        actual_result = len(self.cube.opposites) > 0
+        expected_result = True
+        
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_front_initialized(self):
+        #Tests that the front's face is created
+        actual_result = self.cube.front is not None and isinstance(self.cube.front, Face)
+        expected_result = True
+        
+        self.assertEqual(expected_result, actual_result)
+    
+    def test_cube_front_populated(self):
+        #Tests that the front face's cells are correctly set
+        actual_result = self.cube.front.cells
+        expected_result = [["", "", ""], ["", "", ""], ["", "", ""]]
+        
+        self.assertListEqual(actual_result, expected_result)
+
+    def test_cube_back_initialized(self):
         pass
 
-    def test_cube_opposites_set(self):
+    def test_cube_back_populated(self):
+        actual_result = self.cube.front.cells
+        expected_result = [["", "", ""], ["", "", ""], ["", "", ""]]
+        
+        self.assertListEqual(actual_result, expected_result)
+
+    def test_cube_left_initialized(self):
         pass
 
-    def test_cube_front_set(self):
+    def test_cube_left_populated(self):
+        actual_result = self.cube.front.cells
+        expected_result = [["", "", ""], ["", "", ""], ["", "", ""]]
+        
+        self.assertListEqual(actual_result, expected_result)   
+
+    def test_cube_right_initialized(self):
         pass
 
-    def test_cube_back_set(self):
+    def test_cube_right_populated(self):
+        actual_result = self.cube.right.cells
+        expected_result = [["", "", ""], ["", "", ""], ["", "", ""]]
+        
+        self.assertListEqual(actual_result, expected_result)  
+
+    def test_cube_top_initialized(self):
         pass
 
-    def test_cube_left_set(self):
+    def test_cube_top_populated(self):
+        actual_result = self.cube.top.cells
+        expected_result = [["", "", ""], ["", "", ""], ["", "", ""]]
+        
+        self.assertListEqual(actual_result, expected_result)
+
+    def test_cube_bottom_initialized(self):
         pass
 
-    def test_cube_right_set(self):
-        pass
-
-    def test_cube_top_set(self):
-        pass
-
-    def test_cube_bottom_set(self):
-        pass
+    def test_cube_bottom_populated(self):
+        actual_result = self.cube.bottom.cells
+        expected_result = [["", "", ""], ["", "", ""], ["", "", ""]]
+        
+        self.assertListEqual(actual_result, expected_result) 
 
     def test_cube_front_back_opposites(self):
         pass
