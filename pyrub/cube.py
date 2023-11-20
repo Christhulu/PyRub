@@ -27,56 +27,38 @@ class Cube(object):
     #endregion Cube Constructor
 
     #region Cube Display Methods
-   
-    def print_cube(self) -> None:
-        """
-            Prints each face with labels
-
-        """
-        print(f"Front:")
-        self.front.print_face()
-
-        print(f"Back:")
-        self.back.print_face()
-
-        print(f"Left:")
-        self.left.print_face()
-
-        print(f"Right:")
-        self.right.print_face()
-
-        print(f"Top:")
-        self.top.print_face()
-
-        print(f"Bottom:")
-        self.bottom.print_face()
 
     def cube_to_string(self) -> str:
         """
-        
+            Purpose: 
         """
-        cube = ""
+        cube = "Front:\n"
         cube += self.front.face_to_string()
         cube += "\n"
 
+        cube += "Back:\n"
         cube += self.back.face_to_string()
         cube += "\n"
 
+        cube += "Left:\n"
         cube += self.left.face_to_string()
         cube += "\n"
 
+        cube += "Right:\n"   
         cube += self.right.face_to_string()
         cube += "\n"
 
+        cube += "Top:\n"
         cube += self.top.face_to_string()
         cube += "\n"
 
+        cube += "Bottom:\n"
         cube += self.bottom.face_to_string()
         cube += "\n"
         
         return cube
 
-    #Faces: Front: 0, Right: 1, Back: 2, Left: 3, Top: 4, Bottom: 5
+    #Faces: Front: 0, Back: 1, Left: 2, Right: 3, Top: 4, Bottom: 5
     def face_to_string(self, face:int) -> str:
         """
             Purpose:
@@ -92,71 +74,15 @@ class Cube(object):
         if face == 0:
             return self.front.face_to_string()
         elif face == 1:
-            return self.right.face_to_string()
-        elif face == 2:
             return self.back.face_to_string()
-        elif face == 3:
+        elif face == 2:
             return self.left.face_to_string()
+        elif face == 3:
+            return self.right.face_to_string()
         elif face == 4:
             return self.top.face_to_string()
         else:
             return self.bottom.face_to_string()
-
-
-    def print_cube_by_rows(self) -> None:
-        """
-            Purpose:
-            This method prints the cube in row order.
-
-            Args:
-                self (Cube) - The instance of cube that is calling this method
-            
-            Return Type:
-                None
-        """
-
-        print(f"Front:")
-        self.front.print_rows()
-
-        print(f"Back:")
-        self.back.print_rows()
-
-        print(f"Left:")
-        self.left.print_rows()
-
-        print(f"Right:")
-        self.right.print_rows()
-
-        print(f"Top:")
-        self.top.print_rows()
-
-        print(f"Bottom:")
-        self.bottom.print_rows()
-
-    def print_cube_by_cols(self) -> None:
-        """
-            This method prints the cube in column order
-            Args:
-                self (Cube) - The instance of cube that is calling this method
-        """
-
-        print(f"Front:")
-        self.front.print_columns()
-
-        print(f"Back:")
-        self.back.print_columns()
-
-        print(f"Left:")
-        self.left.print_columns()
-
-        print(f"Right:")
-        self.right.print_columns()
-
-        print(f"Top:")
-        self.top.print_columns()
-
-        print(f"Bottom:")
-        self.bottom.print_columns()
 
      #endregion Cube Display Methods
 

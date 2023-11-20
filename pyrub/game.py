@@ -32,7 +32,6 @@ class Game(object):
         self.cubes:list[Cube] = [Cube()]
         #index of current cube
         self.current_cube_index = 0
-        self.current_cube_string:str = self.cubes[self.current_cube_index].cube_to_string()
         self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
         self.current_screen = Screen()
 

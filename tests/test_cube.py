@@ -161,6 +161,92 @@ class TestCube(unittest.TestCase):
 
     #region Cube Display Method Tests
 
+    def test_cube_string_initialized(self):
+        actual_result = self.cube.cube_to_string()
+
+        isEmpty = actual_result == ""
+
+        self.assertFalse(isEmpty)
+
+
+    def test_cube_string_populated(self):
+
+        actual_result = self.cube.cube_to_string()
+
+        expected_result = "Front:\n"
+        front = self.cube.front.face_to_string()
+        expected_result += front
+        expected_result += "\n"
+
+        expected_result += "Back:\n"
+        back = self.cube.back.face_to_string()
+        expected_result += back
+        expected_result += "\n"
+
+        expected_result += "Left:\n"
+        left = self.cube.left.face_to_string()
+        expected_result += left
+        expected_result += "\n"
+
+        expected_result += "Right:\n"
+        right = self.cube.right.face_to_string()
+        expected_result += right
+        expected_result += "\n"
+
+        expected_result += "Top:\n"
+        top = self.cube.top.face_to_string()
+        expected_result += top
+        expected_result += "\n"
+
+        expected_result += "Bottom:\n"
+        bottom = self.cube.bottom.face_to_string()
+        expected_result += bottom
+        expected_result += "\n"
+
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_front_to_string(self):
+
+        actual_result = self.cube.face_to_string(0)
+        expected_result = self.cube.front.face_to_string()
+
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_back_to_string(self):
+
+        actual_result = self.cube.face_to_string(1)
+        expected_result = self.cube.back.face_to_string()
+        
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_left_to_string(self):
+        
+        actual_result = self.cube.face_to_string(2)
+        expected_result = self.cube.left.face_to_string()
+    
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_right_to_string(self):
+
+        actual_result = self.cube.face_to_string(3)
+        expected_result = self.cube.right.face_to_string()
+    
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_top_to_string(self):
+
+        actual_result = self.cube.face_to_string(4)
+        expected_result = self.cube.top.face_to_string()
+
+        self.assertEqual(expected_result, actual_result)
+
+    def test_cube_bottom_to_string(self):
+
+        actual_result = self.cube.face_to_string(5)
+        expected_result = self.cube.bottom.face_to_string()
+
+        self.assertEqual(expected_result, actual_result)
+
     #endregion Cube Display Method Tests
 
     #region Cube Completeness Tests
