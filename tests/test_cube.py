@@ -67,7 +67,7 @@ class TestCube(unittest.TestCase):
         self.assertEqual(expected_result, actual_result)
 
     def test_cube_back_populated(self):
-        actual_result = self.cube.front.cells
+        actual_result = self.cube.back.cells
         expected_result = [["r", "r", "r"], ["r", "r", "r"], ["r", "r", "r"]]
         
         self.assertListEqual(actual_result, expected_result)
@@ -80,7 +80,7 @@ class TestCube(unittest.TestCase):
         self.assertEqual(expected_result, actual_result)
 
     def test_cube_left_populated(self):
-        actual_result = self.cube.front.cells
+        actual_result = self.cube.left.cells
         expected_result = [["g", "g", "g"], ["g", "g", "g"], ["g", "g", "g"]]
         
         self.assertListEqual(actual_result, expected_result)   
