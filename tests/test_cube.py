@@ -693,41 +693,400 @@ class TestCube(unittest.TestCase):
     #endregion Left Column Rotation Tests
 
     #region Middle Column Rotation Tests
+    def test_front_face_valid_after_middle_column_rotates_up(self):
+        pass
+
+    def test_back_face_valid_after_middle_column_rotates_up(self):
+        pass
+
+    def test_left_face_valid_after_middle_column_rotates_up(self):
+        pass
+
+    def test_right_face_valid_after_middle_column_rotates_up(self):
+        pass
+
+    def test_top_face_valid_after_middle_column_rotates_up(self):
+        pass
+
+    def test_bottom_face_valid_after_middle_column_rotates_up(self):
+        pass
+
+    def test_front_face_valid_after_middle_column_rotates_down(self):
+        pass
+
+    def test_back_face_valid_after_middle_column_rotates_down(self):
+        pass
+
+    def test_left_face_valid_after_middle_column_rotates_down(self):
+        pass
+
+    def test_right_face_valid_after_middle_column_rotates_down(self):
+        pass
+
+    def test_top_face_valid_after_middle_column_rotates_down(self):
+        pass
+
+    def test_bottom_face_valid_after_middle_column_rotates_down(self):
+        pass    
 
     #endregion Middle Column Rotation Tests
 
     #region Right Column Rotation Tests
+    def test_front_face_valid_after_right_column_rotates_up(self):
+        pass
+
+    def test_back_face_valid_after_right_column_rotates_up(self):
+        pass
+
+    def test_left_face_valid_after_right_column_rotates_up(self):
+        pass
+
+    def test_right_face_valid_after_right_column_rotates_up(self):
+        pass
+
+    def test_top_face_valid_after_right_column_rotates_up(self):
+        pass
+
+    def test_bottom_face_valid_after_right_column_rotates_up(self):
+        pass
+
+    def test_front_face_valid_after_right_column_rotates_down(self):
+        pass
+
+    def test_back_face_valid_after_right_column_rotates_down(self):
+        pass
+
+    def test_left_face_valid_after_right_column_rotates_down(self):
+        pass
+
+    def test_right_face_valid_after_right_column_rotates_down(self):
+        pass
+
+    def test_top_face_valid_after_right_column_rotates_down(self):
+        pass
+
+    def test_bottom_face_valid_after_right_column_rotates_down(self):
+        pass    
+
     #endregion Right Column Rotation Tests
 
     #endregion Column Operation Tests
 
     #region Face Operation Tests
+    
+    #region Front Face Rotation Tests
+    def test_front_face_valid_after_front_face_rotates_counter_clockwise(self):
+        pass
 
-    #region Top Face Rotation Tests
+    def test_back_face_valid_after_front_face_rotates_counter_clockwise(self):
+        pass
 
-    #endregion Top Face Rotation Tests
+    def test_left_face_valid_after_front_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_front_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_front_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_front_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_front_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_front_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_front_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_front_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_front_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_front_face_rotates_clockwise(self):
+        pass
+
+    #endregion Front Face Rotation Tests
+
+    #region Back Face Rotation Tests
+    def test_front_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+
+    #endregion Back Face Rotation Tests
 
     #region Left Face Rotation Tests
-    
+    def test_front_face_valid_after_left_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_left_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_left_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_left_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_left_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_left_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_left_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_left_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_left_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_left_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_left_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_left_face_rotates_clockwise(self):
+        pass    
+
+
     #endregion Left Face Rotation Tests
 
     #region Right Face Rotation Tests
+    def test_front_face_valid_after_right_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_right_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_right_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_right_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_right_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_right_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_right_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_right_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_right_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_right_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_right_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_right_face_rotates_clockwise(self):
+        pass
+
 
     #endregion Right Face Rotation Tests
 
     #region Top Face Rotation Tests
+    def test_front_face_valid_after_top_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_top_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_top_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_top_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_top_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_top_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_top_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_top_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_top_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_top_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_top_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_top_face_rotates_clockwise(self):
+        pass
+
 
     #endregion Top Face Rotation Tests
 
     #region Bottom Face Rotation Tests
+    def test_front_face_valid_after_bottom_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_bottom_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_bottom_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_bottom_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_bottom_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_bottom_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_bottom_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_bottom_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_bottom_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_bottom_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_bottom_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_bottom_face_rotates_clockwise(self):
+        pass
 
     #endregion Bottom Face Rotation Tests
 
     #region Middle Face Rotation Tests
+    def test_front_face_valid_after_middle_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_middle_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_middle_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_middle_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_middle_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_middle_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_middle_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_middle_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_middle_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_middle_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_middle_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_middle_face_rotates_clockwise(self):
+        pass
 
     #endregion Middle Face Rotation Tests
 
     #region Back Face Rotation Tests
+    def test_front_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_back_face_rotates_counter_clockwise(self):
+        pass
+
+    def test_front_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_back_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_left_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_right_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_top_face_valid_after_back_face_rotates_clockwise(self):
+        pass
+
+    def test_bottom_face_valid_after_back_face_rotates_clockwise(self):
+        pass
 
     #endregion Face Operation Tests
 
