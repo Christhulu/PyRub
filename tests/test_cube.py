@@ -694,79 +694,202 @@ class TestCube(unittest.TestCase):
 
     #region Middle Column Rotation Tests
     def test_front_face_valid_after_middle_column_rotates_up(self):
-        pass
+
+        self.cube.rotate_middle_column_up()
+
+        expected_result = [["o","w","o"],["o","w","o"],["o","w","o"]]
+        actual_result = self.cube.front.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_middle_column_rotates_up(self):
-        pass
+
+        self.cube.rotate_middle_column_up()
+
+        expected_result = [["r","y","r"],["r","y","r"],["r","y","r"]]
+        actual_result = self.cube.back.cells
+
+        self.assertListEqual(expected_result, actual_result)
+
 
     def test_left_face_valid_after_middle_column_rotates_up(self):
-        pass
+        self.cube.rotate_middle_column_up()
+
+        expected_result = [["g","g","g"],["g","g","g"],["g","g","g"]]
+        actual_result = self.cube.left.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_middle_column_rotates_up(self):
-        pass
+        self.cube.rotate_middle_column_up()
+
+        expected_result = [["b","b","b"],["b","b","b"],["b","b","b"]]
+        actual_result = self.cube.right.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_middle_column_rotates_up(self):
-        pass
+        self.cube.rotate_middle_column_up()
+
+        expected_result = [["y","o","y"],["y","o","y"],["y","o","y"]]
+        actual_result = self.cube.top.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_bottom_face_valid_after_middle_column_rotates_up(self):
-        pass
+        self.cube.rotate_middle_column_up()
+
+        expected_result = [["w","r","w"],["w","r","w"],["w","r","w"]]
+        actual_result = self.cube.bottom.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_front_face_valid_after_middle_column_rotates_down(self):
-        pass
+        self.cube.rotate_middle_column_down()
+
+        expected_result = [["o", "y", "o"],["o", "y", "o"],["o", "y", "o"]]
+        actual_result = self.cube.front.cells
+        
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_middle_column_rotates_down(self):
-        pass
+        self.cube.rotate_middle_column_down()
+
+        expected_result = [["r", "w", "r"],["r", "w", "r"],["r", "w", "r"]]
+        actual_result = self.cube.back.cells
+        
+        self.assertListEqual(expected_result, actual_result)
 
     def test_left_face_valid_after_middle_column_rotates_down(self):
-        pass
+        self.cube.rotate_middle_column_down()
+        
+        expected_result = [["g","g","g"],["g","g","g"],["g","g","g"]]
+        actual_result = self.cube.left.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_middle_column_rotates_down(self):
-        pass
+        self.cube.rotate_middle_column_down()
+
+        expected_result = [["b","b","b"],["b","b","b"],["b","b","b"]]
+        actual_result = self.cube.right.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_middle_column_rotates_down(self):
-        pass
+        self.cube.rotate_middle_column_down()
+
+        expected_result = [["y","r","y"],["y","r","y"],["y","r","y"]]
+        actual_result = self.cube.top.cells
+
+        self.assertListEqual(expected_result, actual_result)        
 
     def test_bottom_face_valid_after_middle_column_rotates_down(self):
-        pass    
+        self.cube.rotate_middle_column_down()
+
+        expected_result = [["w","o","w"],["w","o","w"],["w","o","w"]]
+        actual_result = self.cube.bottom.cells
+
+        self.assertListEqual(expected_result, actual_result)    
 
     #endregion Middle Column Rotation Tests
 
     #region Right Column Rotation Tests
     def test_front_face_valid_after_right_column_rotates_up(self):
-        pass
+        self.cube.rotate_right_column_up()
+
+        expected_result = [["o","o","w"],["o","o","w"],["o","o","w"]]
+        actual_result = self.cube.front.cells
+
+        self.assertListEqual(expected_result, actual_result)    
 
     def test_back_face_valid_after_right_column_rotates_up(self):
-        pass
+        self.cube.rotate_right_column_up()
+
+        expected_result = [["y","r","r"],["y","r","r"],["y","r","r"]]
+        actual_result = self.cube.back.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     def test_left_face_valid_after_right_column_rotates_up(self):
-        pass
+        self.cube.rotate_right_column_up()
+
+        expected_result = [["g","g","g"],["g","g","g"],["g","g","g"]]
+        actual_result = self.cube.left.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     def test_right_face_valid_after_right_column_rotates_up(self):
-        pass
+        self.cube.rotate_right_column_up()
+
+        expected_result = [["b","b","b"],["b","b","b"],["b","b","b"]]
+        actual_result = self.cube.right.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     def test_top_face_valid_after_right_column_rotates_up(self):
-        pass
+        self.cube.rotate_right_column_up()
+
+        expected_result = [["y","y","o"],["y","y","o"],["y","y","o"]]
+        actual_result = self.cube.top.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     def test_bottom_face_valid_after_right_column_rotates_up(self):
-        pass
+        self.cube.rotate_right_column_up()
+
+        expected_result = [["w","w","r"],["w","w","r"],["w","w","r"]]
+        actual_result = self.cube.bottom.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     def test_front_face_valid_after_right_column_rotates_down(self):
-        pass
+        self.cube.rotate_right_column_down()
+
+        expected_result = [["o","o","y"],["o","o","y"],["o","o","y"]]
+        actual_result = self.cube.front.cells
+
+        self.assertListEqual(expected_result, actual_result)         
 
     def test_back_face_valid_after_right_column_rotates_down(self):
-        pass
+        self.cube.rotate_right_column_down()
+
+        expected_result = [["w","r","r"],["w","r","r"],["w","r","r"]]
+        actual_result = self.cube.back.cells
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_left_face_valid_after_right_column_rotates_down(self):
-        pass
+        self.cube.rotate_right_column_down()
+
+        expected_result = [["g","g","g"],["g","g","g"],["g","g","g"]]
+        actual_result = self.cube.left.cells
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_right_face_valid_after_right_column_rotates_down(self):
-        pass
+        self.cube.rotate_right_column_down()
+
+        expected_result = [["b","b","b"],["b","b","b"],["b","b","b"]]
+        actual_result = self.cube.right.cells
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_top_face_valid_after_right_column_rotates_down(self):
-        pass
+        self.cube.rotate_right_column_down()
+
+        expected_result = [["y","y","r"],["y","y","r"],["y","y","r"]]
+        actual_result = self.cube.top.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     def test_bottom_face_valid_after_right_column_rotates_down(self):
-        pass    
+        self.cube.rotate_right_column_down()
+
+        expected_result = [["w","w","o"],["w","w","o"],["w","w","o"]]
+        actual_result = self.cube.bottom.cells
+
+        self.assertListEqual(expected_result, actual_result) 
 
     #endregion Right Column Rotation Tests
 
