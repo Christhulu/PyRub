@@ -1108,40 +1108,102 @@ class TestCube(unittest.TestCase):
 
     #region Left Face Rotation Tests
     def test_front_face_valid_after_left_face_rotates_counter_clockwise(self):
-        pass
+
+        self.cube.rotate_left_face_CCW()
+
+        expected_result = [["w","o","o"], ["w","o","o"], ["w","o","o"]]
+        actual_result = self.cube.front.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_left_face_rotates_counter_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CCW()
+
+        expected_result = [["r","r","y"], ["r","r","y"], ["r","r","y"]]
+        actual_result = self.cube.back.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_left_face_valid_after_left_face_rotates_counter_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CCW()
+
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+        actual_result = self.cube.left.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_left_face_rotates_counter_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CCW()
+
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+        actual_result = self.cube.right.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_left_face_rotates_counter_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CCW()
+
+        expected_result = [["o","y","y"], ["o","y","y"], ["o","y","y"]]
+        actual_result = self.cube.top.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_bottom_face_valid_after_left_face_rotates_counter_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CCW()
+
+        expected_result = [["r","w","w"], ["r","w","w"], ["r","w","w"]]
+        actual_result = self.cube.bottom.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_front_face_valid_after_left_face_rotates_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CW()
+
+        expected_result = [["y","o","o"], ["y","o","o"], ["y","o","o"]]
+        actual_result = self.cube.front.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_left_face_rotates_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CW()
+
+        expected_result = [["r","r","w"], ["r","r","w"], ["r","r","w"]]
+        actual_result = self.cube.back.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_left_face_valid_after_left_face_rotates_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CW()
+
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+        actual_result = self.cube.left.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_left_face_rotates_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CW()
+
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+        actual_result = self.cube.right.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_left_face_rotates_clockwise(self):
-        pass
+        self.cube.rotate_left_face_CW()
+
+        expected_result = [["r","y","y"], ["r","y","y"], ["r","y","y"]]
+        actual_result = self.cube.top.cells
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_bottom_face_valid_after_left_face_rotates_clockwise(self):
-        pass    
+        self.cube.rotate_left_face_CW()
+
+        expected_result = [["o","w","w"], ["o","w","w"], ["o","w","w"]]
+        actual_result = self.cube.bottom.cells
+
+        self.assertListEqual(expected_result, actual_result)
+  
 
 
     #endregion Left Face Rotation Tests
