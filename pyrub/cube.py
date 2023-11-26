@@ -468,7 +468,7 @@ class Cube(object):
 
 
 
-        
+
 
     def rotate_left_face_CW(self):
         """
@@ -600,27 +600,27 @@ class Cube(object):
         Args:
             self - The current face instance
         """
+        #Rotate back face counter clockwise
+        self.back.rotate_CCW()
+
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
         #Get left face's left column
-        top_top = self.top.get_row(0)
-        right_right = self.right.get_column(2)
-        bottom_bottom = self.bottom.get_row(2)
-        left_left = self.left.get_column(0)
+        top_top_row = self.top.get_row(0)
+        right_right_column = self.right.get_column(2)
+        bottom_bottom_row = self.bottom.get_row(2)
+        left_left_column = self.left.get_column(0)
 
 
-        #Replace top face's top row with right face's right column, ascending order
-        #Replace right face's right column with bottom face's bottom row, descending order
-        #Replace bottom face's bottom row with left face's left column, ascending order
-        #Replace left face's left column with top face's top row, descending order
-        self.top.replace_row_with_col(right_right, 0, True)
-        self.right.replace_col_with_row(bottom_bottom, 2, False)
-        self.bottom.replace_row_with_col(left_left, 2, True)
-        self.left.replace_col_with_row(top_top, 0, False)
-
-        #Rotate back face counter clockwise
-        self.back.rotate_CCW()
+        #Replace top face's top row with left face's left column, descending order
+        #Replace right face's right column with top face's top row, ascending order
+        #Replace bottom face's bottom row with right face's right column, descending order
+        #Replace left face's left column with top face's top row, ascending order
+        self.top.replace_row_with_col(left_left_column, 0, False)
+        self.right.replace_col_with_row(top_top_row, 2, True)
+        self.bottom.replace_row_with_col(right_right_column, 2, False)
+        self.left.replace_col_with_row(bottom_bottom_row, 0, True)
 
     def rotate_back_face_CW(self):
         """
@@ -628,26 +628,29 @@ class Cube(object):
         Args:
             self - The current face instance
         """
+
+        #Rotate back face clockwise
+        self.back.rotate_CW()
+
         #Get top face's top row
         #Get right face's right column
         #Get bottom face's bottom row
         #Get left face's left column
-        top_top = self.top.get_row(0)
-        right_right = self.right.get_column(2)
-        bottom_bottom = self.bottom.get_row(2)
-        left_left = self.left.get_column(0)
+        top_top_row = self.top.get_row(0)
+        right_right_column = self.right.get_column(2)
+        bottom_bottom_row = self.bottom.get_row(2)
+        left_left_column = self.left.get_column(0)
 
-        #Replace top face's top row with left face's left column, descending order
-        #Replace right face's right column with top face's top row, ascending order
-        #Replace bottom face's bottom row with right face's right column, descending order
-        #Replace left face's left column with bottom face's bottom row, ascending order
-        self.top.replace_row_with_col(left_left, 0, False)
-        self.right.replace_col_with_row(top_top, 2, True)
-        self.bottom.replace_row_with_col(right_right, 2, False)
-        self.left.replace_col_with_row(bottom_bottom, 0, True)
+        #Replace top face's top row with right face's right column, ascending order
+        #Replace right face's right column with bottom face's bottom row, descending order
+        #Replace bottom face's bottom row with left face's left column, ascending order
+        #Replace left face's left column with top face's top row, descending order
+        self.top.replace_row_with_col(right_right_column, 0, True)
+        self.right.replace_col_with_row(bottom_bottom_row, 2, False)
+        self.bottom.replace_row_with_col(left_left_column, 2, True)
+        self.left.replace_col_with_row(top_top_row, 0, False)
 
-        #Rotate back face clockwise
-        self.back.rotate_CW()
+
 
     #endregion Back Face Operations
 
