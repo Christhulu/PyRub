@@ -410,9 +410,25 @@ class Cube(object):
         Args:
             self - The current face instance
         """
-
         
-        pass
+        #rotate front 90 degrees counter-clockwise
+        self.front.rotate_CCW()
+        
+        #Get bottom row of top face
+        #Get right column of left face
+        #Get left column of right face
+        #Get top row of bottom face
+        top_bottom_row = self.top.get_row(2)
+        left_right_column = self.left.get_column(2)
+        right_left_column = self.right.get_column(0)
+        bottom_top_row = self.bottom.get_row(0)
+
+        #Replace columns with each other
+        self.left.replace_col_with_row(top_bottom_row, 2, False)
+        self.top.replace_row_with_col(right_left_column, 2, True)
+        self.right.replace_col_with_row(bottom_top_row, 0, False)
+        self.bottom.replace_row_with_col(left_right_column, 0, True)
+
 
     def rotate_front_face_CW(self):
         """
@@ -420,7 +436,23 @@ class Cube(object):
         Args:
             self - The current face instance
         """
-        pass
+        #rotate front 90 degrees clockwise
+        self.front.rotate_CW()
+        
+        #Get bottom row of top face
+        #Get right column of left face
+        #Get left column of right face
+        #Get top row of bottom face
+        top_bottom_row = self.top.get_row(2)
+        left_right_column = self.left.get_column(2)
+        right_left_column = self.right.get_column(0)
+        bottom_top_row = self.bottom.get_row(0)
+
+        #Replace columns with each other
+        self.left.replace_col_with_row(bottom_top_row, 2, True)
+        self.top.replace_row_with_col(left_right_column, 2, False)
+        self.right.replace_col_with_row(top_bottom_row, 0, True)
+        self.bottom.replace_row_with_col(right_left_column, 0, False)
 
     #endregion Front Face Operations
 
@@ -433,6 +465,10 @@ class Cube(object):
             self - The current face instance
         """
         self.rotate_left_column_up()
+
+
+
+        
 
     def rotate_left_face_CW(self):
         """
