@@ -1667,11 +1667,124 @@ class TestCube(unittest.TestCase):
     #endregion Rotation Tests
 
     #region Cube Helper Method Tests
-
-
+    #I'm not sure how to test a random method, will return here later
+    #TODO How do you test something like randomizing the cube?
 
     #endregion Cube Helper Method Tests
 
     #region Cube Orientation Shift Tests
+
+
+    #region Tests for Setting the Left Face as the new Front
+
+    def test_front_face_valid_after_setting_left_face_to_front(self):
+        pass
+
+    def test_back_face_valid_after_setting_left_face_to_front(self):
+        pass
+
+    def test_left_face_valid_after_setting_left_face_to_front(self):
+        pass
+
+    def test_right_face_valid_after_setting_left_face_to_front(self):
+        pass    
+
+    def test_top_face_valid_after_setting_left_face_to_front(self):
+        pass
+
+    def test_bottom_face_valid_after_setting_left_face_to_front(self):
+        pass    
+    
+    #endregion Tests for Setting the Left Face as the new Front
+
+    #region Tests for Setting the Back Face as the new Front
+
+    def test_front_face_valid_after_setting_back_face_to_front(self):
+        pass
+
+    def test_back_face_valid_after_setting_back_face_to_front(self):
+        pass
+
+    def test_left_face_valid_after_setting_back_face_to_front(self):
+        pass
+
+    def test_right_face_valid_after_setting_back_face_to_front(self):
+        pass
+
+    def test_top_face_valid_after_setting_back_face_to_front(self):
+        pass
+
+    def test_bottom_face_valid_after_setting_back_face_to_front(self):
+        pass
+
+    #endregion Tests for Setting the Back Face as the new Front
+
+    
+    #region Tests for Setting the Right Face as the new Front
+
+    def test_front_face_valid_after_setting_right_face_to_front(self):
+        pass
+
+    def test_back_face_valid_after_setting_right_face_to_front(self):
+        pass
+
+    def test_left_face_valid_after_setting_right_face_to_front(self):
+        pass
+
+    def test_right_face_valid_after_setting_right_face_to_front(self):
+        pass
+
+    def test_top_face_valid_after_setting_right_face_to_front(self):
+        pass
+
+    def test_bottom_face_valid_after_setting_right_face_to_front(self):
+        pass
+
+    #endregion Tests for Setting the Right Face as the new Front
+
+
+    #region Tests for Setting the Top Face as the new Front
+
+    def test_front_face_valid_after_setting_top_face_to_front(self):
+        pass
+
+    def test_back_face_valid_after_setting_top_face_to_front(self):
+        pass
+
+    def test_left_face_valid_after_setting_top_face_to_front(self):
+        pass
+
+    def test_right_face_valid_after_setting_top_face_to_front(self):
+        pass
+
+    def test_top_face_valid_after_setting_top_face_to_front(self):
+        pass
+
+    def test_bottom_face_valid_after_setting_top_face_to_front(self):
+        pass
+
+    #endregion Tests for Setting the Top Face as the new Front
+
+
+    #region Tests for Setting the Bottom Face as the new Front
+    def test_front_face_valid_after_setting_bottom_face_to_front(self):
+        pass
+
+    def test_back_face_valid_after_setting_bottom_face_to_front(self):
+        pass
+
+    def test_left_face_valid_after_setting_bottom_face_to_front(self):
+        pass
+
+    def test_right_face_valid_after_setting_bottom_face_to_front(self):
+        pass
+
+    def test_top_face_valid_after_setting_bottom_face_to_front(self):
+        pass
+
+    def test_bottom_face_valid_after_setting_bottom_face_to_front(self):
+        pass
+
+    #endregion Tests for Setting the Bottom Face as the new Front
 
     #endregion Cube Orientation Shift Tests
