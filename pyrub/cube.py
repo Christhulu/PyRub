@@ -245,16 +245,16 @@ class Cube(object):
     #region Bottom Row Rotations
     def rotate_bottom_row_right(self):
         #Get bottom (last) row of front, right, back, and left side
-        front_bot = self.front.get_row(2)
-        right_bot = self.right.get_row(2)
-        back_bot = self.back.get_row(2)
-        left_bot = self.left.get_row(2)
+        front_bottom_row = self.front.get_row(2)
+        right_bottom_row = self.right.get_row(2)
+        back_bottom_row = self.back.get_row(2)
+        left_bottom_row = self.left.get_row(2)
 
         #Swap all bottom row faces in order
-        self.front.replace_row_with_row(left_bot, 2, True)   # self.front.cells[2] = left_bot
-        self.right.replace_row_with_row(front_bot, 2, True)    # self.right.cells[2] = front_bot
-        self.back.replace_row_with_row(right_bot, 2, True)    # self.back.cells[2] = right_bot
-        self.left.replace_row_with_row(back_bot, 2, True)    # self.left.cells[2] = back_bot
+        self.front.replace_row_with_row(left_bottom_row, 2, True)   
+        self.right.replace_row_with_row(front_bottom_row, 2, True)    
+        self.back.replace_row_with_row(right_bottom_row, 2, True)    
+        self.left.replace_row_with_row(back_bottom_row, 2, True)
 
         #Rotate bottom face right 90 degrees clockwise
         self.bottom.rotate_CW()
@@ -267,13 +267,14 @@ class Cube(object):
         left_bot = self.left.get_row(2)
 
         #Swap all bottom row faces in order
-        self.front.replace_row_with_row(right_bot, 2, True)   # self.front.cells[2] = right_bot
-        self.right.replace_row_with_row(back_bot, 2, True)    #  self.right.cells[2] = back_bot
-        self.back.replace_row_with_row(left_bot, 2, True)    # self.back.cells[2] = left_bot
-        self.left.replace_row_with_row(front_bot, 2, True)    #  self.left.cells[2] = front_bot
+        self.front.replace_row_with_row(right_bot, 2, True)
+        self.right.replace_row_with_row(back_bot, 2, True) 
+        self.back.replace_row_with_row(left_bot, 2, True)
+        self.left.replace_row_with_row(front_bot, 2, True)  
 
         #Rotate bottom face right (90 degrees counter-clockwise)
         self.bottom.rotate_CCW()
+
     #endregion Bottom Row Rotations
     #endregion Row Operations
 
@@ -509,7 +510,9 @@ class Cube(object):
         Args:
             self - The current face instance
         """
-        pass
+        #This is just rotating the top row left
+        self.rotate_top_row_left()
+
 
     def rotate_top_face_CCW(self):
         """
@@ -517,7 +520,8 @@ class Cube(object):
         Args:
             self - The current face instance
         """
-        pass
+        #This is just rotating the top row right
+        self.rotate_top_row_right()
     
     #endregion Top Face Operations
 
@@ -528,7 +532,7 @@ class Cube(object):
         Args:
             self - The current face instance
         """
-        pass
+        self.rotate_bottom_row_right()
 
     def rotate_bottom_face_CCW(self):
         """
@@ -536,7 +540,7 @@ class Cube(object):
         Args:
             self - The current face instance
         """
-        pass
+        self.rotate_bottom_row_left()
 
     #endregion Bottom Face Operations
 
@@ -551,19 +555,19 @@ class Cube(object):
         #Get left face's middle column
         #Get bottom face's middle row
         #Get right face's middle column
-        top_mid = self.top.get_row(1)
-        left_mid = self.left.get_column(1)
-        bottom_mid = self.bottom.get_row(1)
-        right_mid = self.right.get_column(1)
+        top_mid_row = self.top.get_row(1)
+        left_mid_column = self.left.get_column(1)
+        bottom_mid_row = self.bottom.get_row(1)
+        right_mid_column = self.right.get_column(1)
 
         #Replace top middle row with right middle column, ascending order
         #Replace right middle column with bottom middle row, descending order
         #Replace bottom middle row with left middle column, ascending order
         #Replace left middle column  with top middle row, descending order
-        self.top.replace_row_with_col(right_mid, 1, True)
-        self.right.replace_col_with_row(bottom_mid, 1, False)
-        self.bottom.replace_row_with_col(left_mid, 1, True)
-        self.left.replace_col_with_row(top_mid, 1, False)
+        self.top.replace_row_with_col(right_mid_column, 1, True)
+        self.right.replace_col_with_row(bottom_mid_row, 1, False)
+        self.bottom.replace_row_with_col(left_mid_column, 1, True)
+        self.left.replace_col_with_row(top_mid_row, 1, False)
 
 
     def rotate_middle_face_CW(self):
@@ -576,20 +580,20 @@ class Cube(object):
         #Get right face's middle column
         #Get bottom face's middle row
         #Get left face's middle column
-        top_mid = self.top.get_row(1)
-        right_mid = self.right.get_column(1)
-        left_mid = self.left.get_column(1)
-        bottom_mid = self.bottom.get_row(1)
+        top_mid_row = self.top.get_row(1)
+        right_mid_column = self.right.get_column(1)
+        left_mid_column = self.left.get_column(1)
+        bottom_mid_row = self.bottom.get_row(1)
 
 
         #Replace top middle row with left middle column, descending order
         #Replace right middle column with top middle row, ascending order
         #Replace bottom middle row with right middle column, descending order
         #Replace left middle column with bottom middle row, ascending order
-        self.top.replace_row_with_col(left_mid, 1, False)
-        self.right.replace_col_with_row(top_mid, 1, True)
-        self.bottom.replace_row_with_col(right_mid, 1, False)
-        self.left.replace_col_with_row(bottom_mid, 1, True)
+        self.top.replace_row_with_col(left_mid_column, 1, False)
+        self.right.replace_col_with_row(top_mid_row, 1, True)
+        self.bottom.replace_row_with_col(right_mid_column, 1, False)
+        self.left.replace_col_with_row(bottom_mid_row, 1, True)
 
     #endregion Middle Face Operations
     
