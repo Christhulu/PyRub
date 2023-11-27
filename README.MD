@@ -13,15 +13,16 @@ Using the terminal of your choosing, run ```python pyrub```
 
 # Roadmap
 Near Term:
-* A rigorous QA testing cycle
+* A rigorous QA testing cycle (in-progress)
 * An improved graphical view of faces, and dynamically updated menus with visuals of relevant faces/columns
 * More graceful error handling
 * More UI restructuring
 * Hotkeys for quicker navigation based on frequently navigated options
 
 Long Term:
-* A random cube generator
+* A random cube generator (in-progress)
 * Saving your cube progress
 * Improvements to the how the cube and its faces area displayed (possibly with color)
 * Tracking turns taken
-* A leaderboard An optional account system
+* A leaderboard
+* An optional account system

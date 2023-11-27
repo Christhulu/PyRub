@@ -157,6 +157,15 @@ class TestCube(unittest.TestCase):
 
         self.assertTrue(opposites)
 
+    def test_cube_methods_list_populated(self):
+
+        self.cube.randomize_cube()
+
+        expected_result = 26
+        actual_result = len(self.cube.methods)
+
+        self.assertEqual(expected_result, actual_result)
+
     #endregion Constructor Tests
 
     #region Cube Display Method Tests

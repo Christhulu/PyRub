@@ -467,10 +467,6 @@ class Cube(object):
         """
         self.rotate_left_column_up()
 
-
-
-
-
     def rotate_left_face_CW(self):
         """
         This method rotates the left face of the cube clockwise.
@@ -672,18 +668,18 @@ class Cube(object):
         Args:\n
             * self: The current face instance\n
         """
-        methods = [x for x, y in self.__dict__.items() if type(y) == FunctionType and (x.startswith('rot') and not x.startswith('_'))]
+
+        #Hold a list of the methods you can do on this cube
+        self.methods = [y for x, y in Cube.__dict__.items() if type(y) == FunctionType and (x.startswith('rot') and not x.startswith('_'))]
 
         #I want there to be at least 10 operations
         min_operations = 10
-        num_operations = int(random() * 30) + min_operations
+        num_operations = int(random.random() * 30) + min_operations
 
         #This works because we're just rotating, which shouldn't require any parameters
         for i in range(num_operations):
-            func = random.choice(methods)
-            getattr(self, func)()
-
-        pass
+            func = random.choice(self.methods)
+            func(self)
 
 
     #endregion Cube Helper Methods
