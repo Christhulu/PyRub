@@ -660,6 +660,36 @@ class Cube(object):
 
     #region Cube Helper Methods
 
+
+    def set_cube_methods(self):
+        """
+        Purpose:\n
+        This method gets the list of methods for the cube from its __dict__ and groups them into a list for the cube instance.\n
+        Args:\n
+            * self: The current face instance\n
+        """
+        #Hold a list of the methods you can do on this cube
+        self.methods = [y for x, y in Cube.__dict__.items() if type(y) == FunctionType and (x.startswith('rot') and not x.startswith('_'))]
+
+    def choose_number_of_random_operations(self, min:int, max:int):
+
+        num_operations = int(random.random() * max) + min
+        return num_operations
+
+    def choose_random_operations(self, num_operations):
+        
+        op_list = [None]*num_operations
+
+        for i in range(num_operations):
+            op_list[i] = random.choice(self.methods)
+
+        return op_list
+
+    def choose_random_operation(self):
+        func = random.choice(self.methods)
+        return func
+
+
     def randomize_cube(self):
         """
         Purpose:\n
@@ -669,17 +699,13 @@ class Cube(object):
             * self: The current face instance\n
         """
 
-        #Hold a list of the methods you can do on this cube
-        self.methods = [y for x, y in Cube.__dict__.items() if type(y) == FunctionType and (x.startswith('rot') and not x.startswith('_'))]
-
-        #I want there to be at least 10 operations
-        min_operations = 10
-        num_operations = int(random.random() * 30) + min_operations
+        self.set_cube_methods()
+        num_operations = self.choose_number_of_random_operations(10, 30)
 
         #This works because we're just rotating, which shouldn't require any parameters
         for i in range(num_operations):
-            func = random.choice(self.methods)
-            func(self)
+            op = self.choose_random_operation()
+            op(self)
 
 
     #endregion Cube Helper Methods

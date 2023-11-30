@@ -159,7 +159,7 @@ class TestCube(unittest.TestCase):
 
     def test_cube_methods_list_populated(self):
 
-        self.cube.randomize_cube()
+        self.cube.set_cube_methods()
 
         expected_result = 26
         actual_result = len(self.cube.methods)
@@ -1669,6 +1669,69 @@ class TestCube(unittest.TestCase):
     #region Cube Helper Method Tests
     #I'm not sure how to test a random method, will return here later
     #TODO How do you test something like randomizing the cube?
+    def test_set_cube_methods(self):
+        self.cube.set_cube_methods()
+
+        actual_result = self.cube.methods
+        expected_result = len(actual_result) != 0
+
+        self.assertTrue(expected_result)
+        
+
+    def test_choose_random_num_operations_returns(self):
+
+        actual_result = self.cube.choose_number_of_random_operations(10, 30)
+
+        self.assertIsNotNone(actual_result)
+
+    def test_choose_random_num_operations_in_range(self):
+
+        num_operations = self.cube.choose_number_of_random_operations(10, 30)
+
+        range_check = num_operations in range(10, 31)
+        
+        self.assertTrue(range_check)        
+
+    def test_choose_random_num_operations_type(self):
+
+        num_operations = self.cube.choose_number_of_random_operations(10, 30)
+
+        self.assertIsInstance(num_operations, int)        
+
+    def test_get_random_operations(self):
+
+        #I would like to call this in a specialized set up method before this group of tests,
+        #but I don't see an option (realistically this would only get called once as a cube is instantiated)
+        self.cube.set_cube_methods()
+
+        actual_result = self.cube.choose_random_operations(15)
+        expected_result = len(actual_result) == 15
+
+        self.assertTrue(expected_result)
+
+    def test_get_random_operation_valid(self):
+        # I would like to call this in a specialized set up method before this group of tests,
+        # but I don't see an option (realistically this would only get called once
+        # as a cube is instantiated)
+        self.cube.set_cube_methods()
+
+        actual_result = self.cube.choose_random_operation()
+        self.assertIn(actual_result, self.cube.methods)
+
+    def test_run_random_operation(self):
+        
+
+        # I would like to call this in a specialized set up method before this group of tests,
+        # but I don't see an option (realistically this would only get called once
+        # as a cube is instantiated)
+        self.cube.set_cube_methods()
+
+        operation = self.cube.choose_random_operation()
+        operation(self.cube)
+
+        self.assertNoLogs(operation(self.cube))
+
+
 
     #endregion Cube Helper Method Tests
 
