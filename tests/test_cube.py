@@ -1737,48 +1737,108 @@ class TestCube(unittest.TestCase):
 
     #region Cube Orientation Shift Tests
 
-
     #region Tests for Setting the Left Face as the new Front
 
     def test_front_face_valid_after_setting_left_face_to_front(self):
-        pass
+
+        self.cube.change_front(0)
+
+        actual_result = self.cube.front.cells
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_setting_left_face_to_front(self):
-        pass
+        self.cube.change_front(0)
+
+        actual_result = self.cube.back.cells
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_left_face_valid_after_setting_left_face_to_front(self):
-        pass
+        self.cube.change_front(0)
+
+        actual_result = self.cube.left.cells
+        expected_result = [["r","r","r"], ["r","r","r"], ["r","r","r"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_setting_left_face_to_front(self):
-        pass    
+        self.cube.change_front(0)
+
+        actual_result = self.cube.right.cells
+        expected_result = [["o","o","o"], ["o","o","o"], ["o","o","o"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_setting_left_face_to_front(self):
-        pass
+        self.cube.change_front(0)
+
+        actual_result = self.cube.top.cells
+        expected_result = [["y","y","y"], ["y","y","y"], ["y","y","y"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_bottom_face_valid_after_setting_left_face_to_front(self):
-        pass    
+        self.cube.change_front(0)
+
+        actual_result = self.cube.bottom.cells
+        expected_result = [["w","w","w"], ["w","w","w"], ["w","w","w"]]
+
+        self.assertListEqual(expected_result, actual_result)
     
     #endregion Tests for Setting the Left Face as the new Front
 
     #region Tests for Setting the Back Face as the new Front
 
     def test_front_face_valid_after_setting_back_face_to_front(self):
-        pass
+        self.cube.change_front(1)
+
+        actual_result = self.cube.front.cells
+        expected_result = [["r","r","r"], ["r","r","r"], ["r","r","r"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_setting_back_face_to_front(self):
-        pass
+        self.cube.change_front(1)
+
+        actual_result = self.cube.back.cells
+        expected_result = [["o","o","o"], ["o","o","o"], ["o","o","o"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_left_face_valid_after_setting_back_face_to_front(self):
-        pass
+        self.cube.change_front(1)
+
+        actual_result = self.cube.left.cells
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_setting_back_face_to_front(self):
-        pass
+        self.cube.change_front(1)
+
+        actual_result = self.cube.right.cells
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_setting_back_face_to_front(self):
-        pass
+        self.cube.change_front(1)
+
+        actual_result = self.cube.top.cells
+        expected_result = [["y","y","y"], ["y","y","y"], ["y","y","y"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_bottom_face_valid_after_setting_back_face_to_front(self):
-        pass
+        self.cube.change_front(1)
+
+        actual_result = self.cube.bottom.cells
+        expected_result = [["w","w","w"], ["w","w","w"], ["w","w","w"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     #endregion Tests for Setting the Back Face as the new Front
 
@@ -1786,22 +1846,52 @@ class TestCube(unittest.TestCase):
     #region Tests for Setting the Right Face as the new Front
 
     def test_front_face_valid_after_setting_right_face_to_front(self):
-        pass
+        self.cube.change_front(2)
+
+        actual_result = self.cube.front.cells
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_setting_right_face_to_front(self):
-        pass
+        self.cube.change_front(2)
+
+        actual_result = self.cube.back.cells
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_left_face_valid_after_setting_right_face_to_front(self):
-        pass
+        self.cube.change_front(2)
+
+        actual_result = self.cube.left.cells
+        expected_result = [["o","o","o"], ["o","o","o"], ["o","o","o"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_right_face_valid_after_setting_right_face_to_front(self):
-        pass
+        self.cube.change_front(2)
+
+        actual_result = self.cube.right.cells
+        expected_result = [["r","r","r"], ["r","r","r"], ["r","r","r"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_top_face_valid_after_setting_right_face_to_front(self):
-        pass
+        self.cube.change_front(2)
+
+        actual_result = self.cube.top.cells
+        expected_result = [["y","y","y"], ["y","y","y"], ["y","y","y"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_bottom_face_valid_after_setting_right_face_to_front(self):
-        pass
+        self.cube.change_front(2)
+
+        actual_result = self.cube.bottom.cells
+        expected_result = [["w","w","w"], ["w","w","w"], ["w","w","w"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     #endregion Tests for Setting the Right Face as the new Front
 
@@ -1809,44 +1899,104 @@ class TestCube(unittest.TestCase):
     #region Tests for Setting the Top Face as the new Front
 
     def test_front_face_valid_after_setting_top_face_to_front(self):
-        pass
+        self.cube.change_front(3)
+
+        actual_result = self.cube.front.cells
+        expected_result = [["y","y","y"], ["y","y","y"], ["y","y","y"]]
+
+        self.assertListEqual(expected_result, actual_result)
 
     def test_back_face_valid_after_setting_top_face_to_front(self):
-        pass
+        self.cube.change_front(3)
+
+        actual_result = self.cube.back.cells
+        expected_result = [["w","w","w"], ["w","w","w"], ["w","w","w"]]
+
+        self.assertListEqual(expected_result, actual_result)        
 
     def test_left_face_valid_after_setting_top_face_to_front(self):
-        pass
+        self.cube.change_front(3)
+
+        actual_result = self.cube.left.cells
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+
+        self.assertListEqual(expected_result, actual_result)     
 
     def test_right_face_valid_after_setting_top_face_to_front(self):
-        pass
+        self.cube.change_front(3)
+
+        actual_result = self.cube.right.cells
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+
+        self.assertListEqual(expected_result, actual_result)     
 
     def test_top_face_valid_after_setting_top_face_to_front(self):
-        pass
+        self.cube.change_front(3)
+
+        actual_result = self.cube.top.cells
+        expected_result = [["r","r","r"], ["r","r","r"], ["r","r","r"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_bottom_face_valid_after_setting_top_face_to_front(self):
-        pass
+        self.cube.change_front(3)
+
+        actual_result = self.cube.bottom.cells
+        expected_result = [["o","o","o"], ["o","o","o"], ["o","o","o"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     #endregion Tests for Setting the Top Face as the new Front
 
 
     #region Tests for Setting the Bottom Face as the new Front
     def test_front_face_valid_after_setting_bottom_face_to_front(self):
-        pass
+        self.cube.change_front(4)
+
+        actual_result = self.cube.front.cells
+        expected_result = [["w","w","w"], ["w","w","w"], ["w","w","w"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_back_face_valid_after_setting_bottom_face_to_front(self):
-        pass
+        self.cube.change_front(4)
+
+        actual_result = self.cube.back.cells
+        expected_result = [["y","y","y"], ["y","y","y"], ["y","y","y"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_left_face_valid_after_setting_bottom_face_to_front(self):
-        pass
+        self.cube.change_front(4)
+
+        actual_result = self.cube.left.cells
+        expected_result = [["g","g","g"], ["g","g","g"], ["g","g","g"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_right_face_valid_after_setting_bottom_face_to_front(self):
-        pass
+        self.cube.change_front(4)
+
+        actual_result = self.cube.right.cells
+        expected_result = [["b","b","b"], ["b","b","b"], ["b","b","b"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_top_face_valid_after_setting_bottom_face_to_front(self):
-        pass
+        self.cube.change_front(4)
+
+        actual_result = self.cube.top.cells
+        expected_result = [["o","o","o"], ["o","o","o"], ["o","o","o"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     def test_bottom_face_valid_after_setting_bottom_face_to_front(self):
-        pass
+        self.cube.change_front(4)
+
+        actual_result = self.cube.bottom.cells
+        expected_result = [["r","r","r"], ["r","r","r"], ["r","r","r"]]
+
+        self.assertListEqual(expected_result, actual_result)  
 
     #endregion Tests for Setting the Bottom Face as the new Front
 
