@@ -27,7 +27,9 @@ from consolemenu.items import FunctionItem
 
 
 class Game(object):
-    #Thinking of not nesting any menus to be honest
+
+
+    #region Game Constructor and field initialization
     def __init__(self):
         self.cubes:list[Cube] = [Cube()]
         #index of current cube
@@ -35,6 +37,7 @@ class Game(object):
         self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
         self.current_screen = Screen()
 
+        #region Formatting
         self.menu_format = MenuFormatBuilder().set_border_style_type(MenuBorderStyleType.HEAVY_BORDER) \
         .set_prompt("SELECT>") \
         .set_title_align('center') \
@@ -45,6 +48,9 @@ class Game(object):
         .set_right_margin(4) \
         .show_header_bottom_border(True)
 
+        #endregion Formatting
+
+        #region Declare and connect game menus
         self.home_menu = ConsoleMenu("PyRub", "A Console Application for solving Rubik's Cubes", exit_option_text="Quit", show_exit_option=True, screen=self.current_screen, clear_screen=True)
 
         self.about_menu = ConsoleMenu(title="About",
@@ -172,6 +178,12 @@ class Game(object):
         
         self.connect_menus()
 
+        #endregion Declare and connect game menus
+
+    #endregion Game Constructor and field initialization
+
+
+    #region Helper methods for attaching menu objects to their parent menus
 
     def attach_base_menus(self):
         # Create and append operations submenu items to operations menu
@@ -310,11 +322,12 @@ class Game(object):
         self.attach_rotate_menus()
         self.attach_cube_menus()
 
+    #endregion Helper methods for attaching menu objects to their parent menus
+
     def play(self):
         self.home_menu.show()
 
-    #Cube Management
-    #Add a new cube
+    #region Cube Management
     def add_new_cube(self):
         new_cube = Cube()
         self.cubes.append(new_cube)
@@ -339,9 +352,11 @@ class Game(object):
     def randomize_cube(self) -> None:
         a = "We don't have randomize in yet"
 
+    #endregion Cube Management
 
-    #Rotations
-    #Rows
+    #region Rotation Menu Functions
+    
+    #region Row Rotation Menu Functions
     def rotate_row(self):
         
         #Get previous menu
@@ -360,6 +375,10 @@ class Game(object):
         self.row_rotation_menu.prologue_text = f"{self.cube_front_string}"
         self.row_rotation_direction_menu.prologue_text = f"{self.cube_front_string}"
 
+    #endregion Row Rotation Menu Functions
+
+    #region Column Rotation Menu Functions
+
     def rotate_column(self):
         #Get previous menu
         column_name = self.row_rotation_menu.currently_active_menu.get_title()
@@ -375,6 +394,9 @@ class Game(object):
 
         self.update_front_face_string()
 
+    #endregion Column Rotation Menu Functions
+
+    #region Face Rotation Menu Functions
     def rotate_face(self):
         #Get previous menu
         face_name = self.face_rotation_menu.currently_active_menu.get_title()
@@ -396,6 +418,11 @@ class Game(object):
         #     #Bottom Face
         self.update_front_face_string()
 
+    #endregion Face Rotation Menu Functions
+
+    #endregion Rotation Menu Functions
+
+    #region Reorient Cube Menu Functions
 
     #__ Add reorient cube menu __
     # _ Reorient Cube _
@@ -428,6 +455,11 @@ class Game(object):
     def show_reorient_menu(self):
         pass
 
+    #endregion Reorient Cube Menu Functions
+
+
+    #region Error Menu Functions
+
     # __ Add error menu __
     # _ Error Menu _ 
     # 
@@ -447,6 +479,11 @@ class Game(object):
         # error_function = FunctionItem("Error", Screen().printf("{error}: {error_message}"), should_exit=True)
         # error_function.clean_up() I don't know if I need to call this directly
 
+    #endregion Error Menu Functions
+
+
+    #region Cube Export/Import Functions
+
     # __ Export cube list __
     # _ Export Cubes Menu _ 
     # TBD: Decide how to export cube list
@@ -458,3 +495,5 @@ class Game(object):
     # TBD: Decide how to import cubes
     def import_cubes(self):
         pass
+
+    #endregion Cube Export/Import Functions
