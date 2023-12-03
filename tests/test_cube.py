@@ -262,10 +262,24 @@ class TestCube(unittest.TestCase):
     def test_cube_complete(self):
         #Maybe test it based on initially
         #Then test it based on some rotations
-        pass
+
+        actual_result = self.cube.check_solved()
+        expected_result = True
+
+        self.assertEqual(actual_result, expected_result)
 
     def test_cube_incomplete(self):
-        pass
+        
+        self.cube.set_cube_methods()
+
+        operation = self.cube.choose_random_operation()
+        operation(self.cube)
+
+
+        actual_result = self.cube.check_solved()
+        expected_result = False
+
+        self.assertEqual(actual_result, expected_result)
 
     #endregion Cube Completeness Tests
 
