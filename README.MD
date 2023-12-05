@@ -20,7 +20,7 @@ Near Term:
 * Hotkeys for quicker navigation based on frequently navigated options
 
 Long Term:
-* A random cube generator (in-progress)
+* A random cube generator (Done)
 * Saving your cube progress
 * Improvements to the how the cube and its faces area displayed (possibly with color)
 * Tracking turns taken
