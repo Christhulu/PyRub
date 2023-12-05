@@ -673,7 +673,7 @@ class Cube(object):
 
     def choose_number_of_random_operations(self, min:int, max:int):
 
-        num_operations = int(random.random() * max) + min
+        num_operations = random.randint(min, max)
         return num_operations
 
     def choose_random_operations(self, num_operations):

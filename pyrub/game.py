@@ -34,7 +34,6 @@ class Game(object):
         self.cubes:list[Cube] = [Cube()]
         #index of current cube
         self.current_cube_index = 0
-        self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
         self.current_screen = Screen()
 
         #region Formatting
@@ -73,18 +72,18 @@ class Game(object):
                         )
         
         self.cube_menu = ConsoleMenu(
-                            title=f"Cube {self.current_cube_index}",
+                            title=self.get_current_cube_title,
                             subtitle="Front",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text= self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
                         )
         
         self.cube_faces_menu = ConsoleMenu(
-                            title=f"Cube {self.current_cube_index}",
+                            title=self.get_current_cube_title,
                             subtitle="Current Face: Front (Choose a new face to view)",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text=self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -93,7 +92,7 @@ class Game(object):
 
         self.operations_menu = ConsoleMenu(
                             title="Operations",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text=self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             formatter=self.menu_format,
@@ -101,7 +100,7 @@ class Game(object):
 
         self.rotation_menu = ConsoleMenu(
                             title="Rotation Types",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text=self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -111,7 +110,7 @@ class Game(object):
 
         self.row_rotation_menu = ConsoleMenu(
                             title="Which row would you like to rotate?",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text=self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -121,7 +120,7 @@ class Game(object):
         
         self.row_rotation_direction_menu = ConsoleMenu(
                     title="Which direction would you like to rotate the row?",
-                    prologue_text= f"{self.cube_front_string}",
+                    prologue_text=self.get_front_face_prologue,
                     show_exit_option=True,
                     exit_option_text="Back",
                     screen=self.current_screen,
@@ -131,7 +130,7 @@ class Game(object):
         
         self.column_rotation_menu = ConsoleMenu(
                             title="Which column would you like to rotate?",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text=self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -141,7 +140,7 @@ class Game(object):
         
         self.column_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the column?",
-                            prologue_text= f"{self.cube_front_string}",
+                            prologue_text=self.get_front_face_prologue,
                             show_exit_option=True,
                             exit_option_text="Back",
                             screen=self.current_screen,
@@ -182,6 +181,41 @@ class Game(object):
 
     #endregion Game Constructor and field initialization
 
+    #region Dynamic Title Helper Functions
+
+    def get_current_cube_index(self):
+        return self.current_cube_index
+    
+    def get_current_cube_title(self):
+        return f"Cube: {self.current_cube_index}"
+
+    #endregion Dynamic Title Helper Functions
+
+    #region Dynamic Subtitle Helper Functions
+
+    #endregion Dynamic Subtitle Helper Functions
+
+    #region Dynamic Prologue Helper Functions
+    
+    def get_front_face_prologue(self) -> str:
+        return self.cubes[self.current_cube_index].face_to_string(0)
+
+    def get_back_face_prologue(self) -> str:
+        return self.cubes[self.current_cube_index].face_to_string(1)
+
+    def get_left_face_prologue(self) -> str:
+        return self.cubes[self.current_cube_index].face_to_string(2)
+
+    def get_right_face_prologue(self) -> str:
+        return self.cubes[self.current_cube_index].face_to_string(3)
+
+    def get_top_face_prologue(self) -> str:
+        return self.cubes[self.current_cube_index].face_to_string(4)
+
+    def get_bottom_face_prologue(self) -> str:
+        return self.cubes[self.current_cube_index].face_to_string(5)
+
+    #endregion Dynamic Prologue Helper Functions
 
     #region Helper methods for attaching menu objects to their parent menus
 
@@ -206,7 +240,7 @@ class Game(object):
         # #3rd
         rotate_submenu = SubmenuItem(text="Rotate a row, column, or face", menu=self.operations_menu, submenu=self.rotation_menu)
         # #4th
-        randomize_cube_item = FunctionItem(text="Randomize Cube (Under Construction)", function=self.randomize_cube, menu=self.operations_menu, should_exit=True)
+        randomize_cube_item = FunctionItem(text="Randomize Cube", function=self.randomize_cube, menu=self.operations_menu, should_exit=True)
 
         #Append operations to operations menu
         self.operations_menu.append_item(new_cube_item)
@@ -289,12 +323,20 @@ class Game(object):
         #Update front face if it's not up to date
         self.cube_front_string = self.cubes[self.current_cube_index].face_to_string(0)
 
-        self.front_face_menu = ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=f"{self.cube_front_string}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.back_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(2)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.left_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(3)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.right_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(1)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.top_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(4)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
-        self.bottom_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(5)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        # self.front_face_menu = ConsoleMenu(title=f"Cube {self.current_cube_index}", subtitle="Front", prologue_text=f"{self.cube_front_string}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        # self.back_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Back", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(2)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        # self.left_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Left", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(3)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        # self.right_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Right", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(1)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        # self.top_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Top", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(4)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        # self.bottom_face_menu = ConsoleMenu(title=f"Cube: {self.current_cube_index}", subtitle="Bottom", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(5)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+
+        self.front_face_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Front", prologue_text=f"{self.cube_front_string}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.back_face_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Back", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(2)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.left_face_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Left", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(3)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.right_face_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Right", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(1)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.top_face_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Top", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(4)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+        self.bottom_face_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Bottom", prologue_text=f"{self.cubes[self.current_cube_index].face_to_string(5)}", formatter=self.menu_format, show_exit_option=True, exit_option_text="Back", clear_screen=True)
+
 
         self.front_face_submenu = SubmenuItem(text="Front Face", submenu=self.front_face_menu, menu=self.cube_menu)
         self.back_face_submenu = SubmenuItem(text="Back Face", submenu=self.back_face_menu, menu=self.cube_menu)
@@ -324,8 +366,12 @@ class Game(object):
 
     #endregion Helper methods for attaching menu objects to their parent menus
 
+    #region Game Setup
+
     def play(self):
         self.home_menu.show()
+
+    #endregion Game Setup
 
     #region Cube Management
     def add_new_cube(self):
@@ -342,15 +388,12 @@ class Game(object):
     def get_cube_string(self) ->str:
         cube = self.cubes[self.current_cube_index].cube_to_string()
         return cube
-    
-    def get_face_string(self) ->str:
-        pass
 
     def update_front_face_string(self) -> None:
         self.cube_front_string:str = self.cubes[self.current_cube_index].face_to_string(0)
     
     def randomize_cube(self) -> None:
-        a = "We don't have randomize in yet"
+        self.cubes[self.current_cube_index].randomize_cube()
 
     #endregion Cube Management
 
