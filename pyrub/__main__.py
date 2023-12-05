@@ -1,7 +1,7 @@
 import sys
-from cube import Cube
-from face import Face
-from game import Game
+from pyrub.cube import Cube
+from pyrub.face import Face
+from pyrub.game import Game
 
 
 # MIT LICENSE FOR CONSOLE-MENU
