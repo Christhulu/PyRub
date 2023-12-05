@@ -725,9 +725,9 @@ class Cube(object):
         """
         match index:
             case 0:
-                self.set_left_to_front()
-            case 1:
                 self.set_back_to_front()
+            case 1:
+                self.set_left_to_front()
             case 2:
                 self.set_right_to_front()
             case 3:

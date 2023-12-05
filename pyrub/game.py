@@ -159,7 +159,7 @@ class Game(object):
         self.face_rotation_menu = ConsoleMenu(
                             title="Which face would you like to rotate?",
                             show_exit_option=True,
-                            exit_option_text="Back",
+                            exit_option_text="(Back)",
                             screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
@@ -168,7 +168,7 @@ class Game(object):
         self.face_rotation_direction_menu = ConsoleMenu(
                             title="Which direction would you like to rotate the face? (relative to the front)",
                             show_exit_option=True,
-                            exit_option_text="Back",
+                            exit_option_text="(Back)",
                             screen=self.current_screen,
                             clear_screen=True,
                             formatter=self.menu_format
@@ -351,7 +351,44 @@ class Game(object):
 
     #Attach the menus for changing which face is the front
     def attach_orientation_menus(self):
-        pass
+
+        #Add faces to view
+        self.front_face_orientation_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Front", prologue_text=self.get_front_face_prologue, formatter=self.menu_format, show_exit_option=True, exit_option_text="(Back)", clear_screen=True)
+        self.back_face_orientation_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Back", prologue_text=self.get_back_face_prologue, formatter=self.menu_format, show_exit_option=True, exit_option_text="(Back)", clear_screen=True)
+        self.left_face_orientation_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Left", prologue_text=self.get_left_face_prologue, formatter=self.menu_format, show_exit_option=True, exit_option_text="(Back)", clear_screen=True)
+        self.right_face_orientation_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Right", prologue_text=self.get_right_face_prologue, formatter=self.menu_format, show_exit_option=True, exit_option_text="(Back)", clear_screen=True)
+        self.top_face_orientation_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Top", prologue_text=self.get_top_face_prologue, formatter=self.menu_format, show_exit_option=True, exit_option_text="(Back)", clear_screen=True)
+        self.bottom_face_orientation_menu = ConsoleMenu(title=self.get_current_cube_title, subtitle="Bottom", prologue_text=self.get_bottom_face_prologue, formatter=self.menu_format, show_exit_option=True, exit_option_text="(Back)", clear_screen=True)
+
+        #Add face submenus to orientation menu
+        self.front_face_orientation_submenu = SubmenuItem(text="Front Face", submenu=self.front_face_orientation_menu, menu=self.orientation_menu)
+        self.back_face_orientation_submenu = SubmenuItem(text="Back Face", submenu=self.back_face_orientation_menu, menu=self.orientation_menu)
+        self.left_face_orientation_submenu = SubmenuItem(text="Left Face", submenu=self.left_face_orientation_menu, menu=self.orientation_menu)
+        self.right_face_orientation_submenu = SubmenuItem(text="Right Face", submenu=self.right_face_orientation_menu, menu=self.orientation_menu)
+        self.top_face_orientation_submenu = SubmenuItem(text="Top Face", submenu=self.top_face_orientation_menu, menu=self.orientation_menu)
+        self.bottom_face_orientation_submenu = SubmenuItem(text="Bottom Face", submenu=self.bottom_face_orientation_menu, menu=self.orientation_menu)
+        
+        #Append to orientation menu
+        self.orientation_menu.append_item(self.front_face_orientation_submenu)
+        self.orientation_menu.append_item(self.back_face_orientation_submenu)
+        self.orientation_menu.append_item(self.left_face_orientation_submenu)
+        self.orientation_menu.append_item(self.right_face_orientation_submenu)
+        self.orientation_menu.append_item(self.top_face_orientation_submenu)
+        self.orientation_menu.append_item(self.bottom_face_orientation_submenu)
+
+        #Add functions to set new faces to front
+        reorient_cube_back_function_item = FunctionItem(text="Set this face as the new front face", function=self.reorient_cube, menu=self.front_face_orientation_submenu, should_exit=True)
+        reorient_cube_left_function_item = FunctionItem(text="Set this face as the new front face", function=self.reorient_cube, menu=self.front_face_orientation_submenu, should_exit=True)
+        reorient_cube_right_function_item = FunctionItem(text="Set this face as the new front face", function=self.reorient_cube, menu=self.front_face_orientation_submenu, should_exit=True)
+        reorient_cube_top_function_item = FunctionItem(text="Set this face as the new front face", function=self.reorient_cube, menu=self.front_face_orientation_submenu, should_exit=True)
+        reorient_cube_bottom_function_item = FunctionItem(text="Set this face as the new front face", function=self.reorient_cube, menu=self.front_face_orientation_submenu, should_exit=True)
+
+
+        self.back_face_orientation_menu.append_item(reorient_cube_back_function_item)
+        self.left_face_orientation_menu.append_item(reorient_cube_left_function_item)
+        self.right_face_orientation_menu.append_item(reorient_cube_right_function_item)
+        self.top_face_orientation_menu.append_item(reorient_cube_top_function_item)
+        self.bottom_face_orientation_menu.append_item(reorient_cube_bottom_function_item)
 
     def get_submenu(self)->ConsoleMenu:
         return self.front_face_menu
@@ -363,6 +400,7 @@ class Game(object):
         self.attach_operation_items()
         self.attach_rotate_menus()
         self.attach_cube_menus()
+        self.attach_orientation_menus()
 
     #endregion Helper methods for attaching menu objects to their parent menus
 
@@ -400,8 +438,8 @@ class Game(object):
     def rotate_row(self):
         
         #Get previous menu
-        row_name = self.row_rotation_menu.currently_active_menu.get_title()
-        row_direction = self.row_rotation_direction_menu.currently_active_menu.get_title()
+        row_name = self.row_rotation_menu.selected_item.get_text()
+        row_direction = self.row_rotation_direction_menu.selected_item.get_text()
 
         #Define these explicitly in case row name or row direction aren't defined yet
         if row_name == "Top Row":
@@ -420,8 +458,8 @@ class Game(object):
 
     def rotate_column(self):
         #Get previous menu
-        column_name = self.row_rotation_menu.currently_active_menu.get_title()
-        column_direction = self.row_rotation_direction_menu.currently_active_menu.get_title()
+        column_name = self.row_rotation_menu.selected_item.get_text()
+        column_direction = self.row_rotation_direction_menu.selected_item.get_text()
 
         #Define these explicitly in case column name or column direction aren't defined yet
         if column_name == "Left Column":
@@ -436,22 +474,24 @@ class Game(object):
     #region Face Rotation Menu Functions
     def rotate_face(self):
         #Get previous menu
-        face_name = self.face_rotation_menu.currently_active_menu.subtitle
-        face_direction = self.face_rotation_direction_menu.currently_active_menu.get_title()
+        face_name = self.face_rotation_menu.selected_item.get_text()
+        face_direction = self.face_rotation_direction_menu.selected_item.get_text()
 
         #There are some more things I need to do in terms of being able to rotate any face
-        if face_name == "Front Face":
-            self.cubes[self.current_cube_index].rotate_front_face_CCW() if face_direction.startswith("Left") else self.cubes[self.current_cube_index].rotate_front_face_CW()
-        elif face_name == "Back Face":
-            self.cubes[self.current_cube_index].rotate_back_face_CCW() if face_direction.startswith("Left") else self.cubes[self.current_cube_index].rotate_back_face_CW()
-        elif face_name == "Left Face":
-            self.cubes[self.current_cube_index].rotate_left_face_CCW() if face_direction.startswith("Left") else self.cubes[self.current_cube_index].rotate_left_face_CW()
-        elif face_name == "Right Face":
-            self.cubes[self.current_cube_index].rotate_right_face_CCW() if face_direction.startswith("Left") else self.cubes[self.current_cube_index].rotate_right_face_CW()
-        elif face_name == "Top Face":
-            self.cubes[self.current_cube_index].rotate_top_face_CCW() if face_direction.startswith("Left") else self.cubes[self.current_cube_index].rotate_top_face_CW()
+        if face_name.startswith("(") or face_direction.startswith("("):
+            return
+        elif face_name.startswith("F"):
+            self.cubes[self.current_cube_index].rotate_front_face_CCW() if face_direction.startswith("L") else self.cubes[self.current_cube_index].rotate_front_face_CW()
+        elif face_name.startswith("Ba"):
+            self.cubes[self.current_cube_index].rotate_back_face_CCW() if face_direction.startswith("L") else self.cubes[self.current_cube_index].rotate_back_face_CW()
+        elif face_name.startswith("L"):
+            self.cubes[self.current_cube_index].rotate_left_face_CCW() if face_direction.startswith("L") else self.cubes[self.current_cube_index].rotate_left_face_CW()
+        elif face_name.startswith("R"):
+            self.cubes[self.current_cube_index].rotate_right_face_CCW() if face_direction.startswith("L") else self.cubes[self.current_cube_index].rotate_right_face_CW()
+        elif face_name.startswith("T"):
+            self.cubes[self.current_cube_index].rotate_top_face_CCW() if face_direction.startswith("L") else self.cubes[self.current_cube_index].rotate_top_face_CW()
         else:
-            self.cubes[self.current_cube_index].rotate_bottom_face_CCW() if face_direction.startswith("Left") else self.cubes[self.current_cube_index].rotate_bottom_face_CW()
+            self.cubes[self.current_cube_index].rotate_bottom_face_CCW() if face_direction.startswith("L") else self.cubes[self.current_cube_index].rotate_bottom_face_CW()
             #Bottom Face
         
         #I think it should auto update front face, let's see
@@ -461,37 +501,23 @@ class Game(object):
     #endregion Rotation Menu Functions
 
     #region Reorient Cube Menu Functions
+    def reorient_cube(self):
+        #Get previous menu
+        last_option = self.orientation_menu.selected_item.get_text()
 
-    #__ Add reorient cube menu __
-    # _ Reorient Cube _
-    # Message: Choose a new Front relative to the current front of the cube:
-    # 0 - Front
-    # 1 - Right
-    # 2 - Back
-    # 3 - Left
-    # 4 - Top
-    # 5 - Bottom
-    def append_reorient_menu(self):
-        reorient_menu = SelectionMenu(
-                            title="Choose a new Front relative to the current front of the cube:",
-                            strings=["Right", "Back", "Left", "Top", "Bottom"],
-                            show_exit_option=True,
-                            exit_option_text="Back",
-                            clear_screen=True
-                        )
-        pass
-
-    #__ Add reorient cube menu __
-    # _ Reorient Cube _
-    # Message: Choose a new Front relative to the current front of the cube:
-    # 0 - Front
-    # 1 - Right
-    # 2 - Back
-    # 3 - Left
-    # 4 - Top
-    # 5 - Bottom
-    def show_reorient_menu(self):
-        pass
+        #There are some more things I need to do in terms of being able to rotate any face
+        if last_option.startswith("F") or last_option.startswith("("):
+            return
+        elif last_option.startswith('Ba'):
+           self.cubes[self.current_cube_index].change_front(0)
+        elif last_option.startswith('L'):
+            self.cubes[self.current_cube_index].change_front(1)
+        elif last_option.startswith('R'):
+            self.cubes[self.current_cube_index].change_front(2)
+        elif last_option.startswith('T'):
+            self.cubes[self.current_cube_index].change_front(3)
+        else:
+            self.cubes[self.current_cube_index].change_front(4)
 
     #endregion Reorient Cube Menu Functions
 
