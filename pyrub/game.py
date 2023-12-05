@@ -98,14 +98,13 @@ class Game(object):
                             formatter=self.menu_format,
                         )
         
-        self.orientation_menu = ConsoleMenu(
-                            title="Cube Orientation Menu",
-                            subtitle="Choose a different face as the front"
-                            prologue_text=self.get_front_face_prologue,
-                            show_exit_option=True,
-                            exit_option_text="Back",
-                            formatter=self.menu_format,
-                        )
+        self.orientation_menu = ConsoleMenu(title="Cube Orientation Menu",
+                                            subtitle="Choose a different face as the front",
+                                            prologue_text=self.get_front_face_prologue,
+                                            show_exit_option=True,
+                                            exit_option_text="Back",
+                                            formatter=self.menu_format
+                                            )
 
         self.rotation_menu = ConsoleMenu(
                             title="Rotation Types",
